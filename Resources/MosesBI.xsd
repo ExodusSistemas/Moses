@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MosesBusinessItems" targetNamespace="http://tempuri.org/MosesBI.xsd" elementFormDefault="qualified" xmlns="http://tempuri.org/MosesBI.xsd" xmlns:mstns="http://tempuri.org/MosesBI.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="mosesItems">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="items">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="properties" maxOccurs="1">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="add" minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:sequence>
+															</xs:sequence>
+															<xs:attribute name="name" type="xs:string" use="required" />
+															<xs:attribute name="dbName" type="xs:string" use="required" />
+															<xs:attribute name="type" type="xs:string" default="false" use="required" />
+															<xs:attribute name="isKey" type="xs:boolean" use="optional" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="id" type="xs:string" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="namespace" type="xs:string" use="required" />
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="location" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

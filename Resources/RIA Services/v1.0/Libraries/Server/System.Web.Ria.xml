@@ -1,0 +1,1781 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Web.Ria</name>
+    </assembly>
+    <members>
+        <member name="T:System.Web.Ria.Services.DomainServiceFault">
+            <summary>
+            Message type used to communicate exception results between server and client.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceFault.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceFault.GetValidationErrors">
+            <summary>
+            Get the validation errors 
+            </summary>
+            <returns>
+            Collection of validation errors as <see cref="T:System.Collections.IEnumerable"/>.
+            </returns>
+        </member>
+        <member name="P:System.Web.Ria.Services.DomainServiceFault.ErrorCode">
+            <summary>
+            Gets or sets the custom code for the error.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.DomainServiceFault.ErrorMessage">
+            <summary>
+            Gets or sets the message giving details on the error.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.DomainServiceFault.IsDomainException">
+            <summary>
+            Gets or sets a value indicating whether the error was a <see cref="T:System.Web.DomainServices.DomainException"/>. 
+            If the value is true, it indicates that the error should be reconstructed on the 
+            client as the equivalent exception type.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.DomainServiceFault.StackTrace">
+            <summary>
+            Gets or sets the stack trace for the error.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.DomainServiceFault.OperationErrors">
+            <summary>
+            Gets or sets the validation errors that occurred during this request.
+            </summary>
+            <remarks>This is only used when a request invokes a single method, such as an invoke operation.</remarks>
+        </member>
+        <member name="T:System.Web.Ria.Services.QueryResult">
+            <summary>
+            Message type used to communicate query results between server and client.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryResult.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryResult.GetRootResults">
+            <summary>
+            Gets the root results.
+            </summary>
+            <returns>The root results.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryResult.GetIncludedResults">
+            <summary>
+            Gets the included results.
+            </summary>
+            <returns>The included results.</returns>
+        </member>
+        <member name="P:System.Web.Ria.Services.QueryResult.TotalCount">
+            <summary>
+            Gets or sets the total number of rows for the original query without any paging applied to it.
+            If the value is -1, the server did not support total-counts. If it's -2, the total-count 
+            is the same as the number of entities in the result-set.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.QueryResult.ResultCount">
+            <summary>
+            Gets or sets the total number of rows returned as a result of the query.
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.Services.QueryResult`1">
+            <summary>
+            Message type used to communicate query results between server and client.
+            </summary>
+            <typeparam name="T">The data type.</typeparam>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryResult`1.#ctor">
+            <summary>
+            Public constructor
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryResult`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Constructs a result with the specified collection of result items.
+            </summary>
+            <param name="results">The results</param>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryResult`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Int32,System.Int32)">
+            <summary>
+            Constructs a result with the specified collection of query result items.
+            </summary>
+            <param name="results">The query results.</param>
+            <param name="resultCount">The total number of rows returned as a result of the query.</param>
+            <param name="totalCount">The total number of rows based on the input query, but without 
+            any paging applied to it.</param>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryResult`1.GetRootResults">
+            <summary>
+            Gets the root results.
+            </summary>
+            <returns>The root results.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryResult`1.GetIncludedResults">
+            <summary>
+            Gets the included results.
+            </summary>
+            <returns>The included results.</returns>
+        </member>
+        <member name="P:System.Web.Ria.Services.QueryResult`1.RootResults">
+            <summary>
+            Returns the top-level query results.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.QueryResult`1.IncludedResults">
+            <summary>
+            Returns the included query results.
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.Services.ServiceQuery">
+            <summary>
+            Represents an <see cref="T:System.Linq.IQueryable"/>.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.ServiceQuery.QueryParts">
+            <summary>
+            Gets or sets a list of query parts.
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.Services.ServiceQueryPart">
+            <summary>
+            Represents a single query operator to be applied to a query
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.ServiceQueryPart.#ctor">
+            <summary>
+            Public constructor
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.ServiceQueryPart.#ctor(System.String,System.String)">
+            <summary>
+            Public constructor
+            </summary>
+            <param name="queryOperator">The query operator</param>
+            <param name="expression">The query expression</param>
+        </member>
+        <member name="M:System.Web.Ria.Services.ServiceQueryPart.ToString">
+            <summary>
+            Returns a string representation of this <see cref="T:System.Web.Ria.Services.ServiceQueryPart"/>
+            </summary>
+            <returns>The string representation of this <see cref="T:System.Web.Ria.Services.ServiceQueryPart"/></returns>
+        </member>
+        <member name="P:System.Web.Ria.Services.ServiceQueryPart.QueryOperator">
+            <summary>
+            Gets or sets the query operator. Must be one of the supported operators : "where", "orderby", "skip", or "take".
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.ServiceQueryPart.Expression">
+            <summary>
+            Gets or sets the query expression.
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.Services.SoapQueryHeader">
+            <summary>
+            Provides a SOAP query header that can represent an <see cref="T:System.Linq.IQueryable"/>.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.SoapQueryHeader.#ctor(System.Linq.IQueryable)">
+            <summary>
+            Public constructor
+            </summary>
+            <param name="queryable">The <see cref="T:System.Linq.IQueryable"/> to represent.</param>
+        </member>
+        <member name="M:System.Web.Ria.Services.SoapQueryHeader.OnWriteHeaderContents(System.Xml.XmlDictionaryWriter,System.ServiceModel.Channels.MessageVersion)">
+            <summary>
+            Called when the header content is serialized using the specified XML writer.
+            </summary>
+            <param name="writer">An <see cref="T:System.Xml.XmlDictionaryWriter"/>.</param>
+            <param name="messageVersion">Contains information related to the version of SOAP associated with a message 
+            and its exchange.</param>
+        </member>
+        <member name="P:System.Web.Ria.Services.SoapQueryHeader.Name">
+            <summary>
+            Gets the name of the message header.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.SoapQueryHeader.Namespace">
+            <summary>
+            Gets the namespace of the message header.
+            </summary>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.IsPropertyReadOnly(System.ComponentModel.PropertyDescriptor)">
+            <summary>
+            Returns true if the specified property is read-only by virtue of having
+            an appropriately configured ReadOnlyAttribute or EditableAttribute applied.
+            </summary>
+            <param name="property">The property to check for editability.</param>
+            <returns>True if the specified property is read-only, false otherwise.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.IsPropertyReadOnly(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns true if the specified property is read-only by virtue of having
+            an appropriately configured <see cref="T:System.ComponentModel.DataAnnotations.EditableAttribute"/> applied.
+            </summary>
+            <param name="property">The property to check for editability.</param>
+            <returns><c>true</c> if the specified property is read-only; <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.IsNullableType(System.Type)">
+            <summary>
+            Returns <c>true</c> if the given type is a <see cref="T:System.Nullable"/>
+            </summary>
+            <param name="type">The type to test</param>
+            <returns><c>true</c> if the given type is a nullable type</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.GetNonNullableType(System.Type)">
+            <summary>
+            If the given type is <see cref="T:System.Nullable"/>, returns the element type,
+            otherwise simply returns the input type
+            </summary>
+            <param name="type">The type to test that may or may not be Nullable</param>
+            <returns>Either the input type or, if it was Nullable, its element type</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.IsPredefinedType(System.Type)">
+            <summary>
+            Returns <c>true</c> if the given type is a primitive type or one
+            of our standard acceptable simple types, such as <see cref="T:System.String"/>,
+            <see cref="T:System.Guid"/>, or one of our standard generic types whose generic
+            argument is primitive or simple (e.g. Nullable, IEnumerable, IDictionary&lt;TKey,TValue&gt;).
+            </summary>
+            <param name="type">The type to test</param>
+            <returns><c>true</c> if the type is a primitive or standard acceptable types</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.IsPredefinedListType(System.Type)">
+            <summary>
+            Returns <c>true</c> if the given type is <see cref="T:System.Collections.Generic.IEnumerable`1"/> or an <see cref="T:System.Collections.IList"/> type, 
+            and is either an interface, an array, or has a default constructor.
+            </summary>
+            <param name="type">The type to test</param>
+            <returns><c>true</c> if the type is a primitive or standard acceptable types</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.IsPredefinedDictionaryType(System.Type)">
+            <summary>
+            Returns <c>true</c> if <paramref name="type"/> implements <see cref="T:System.Collections.Generic.IDictionary`2"/> and
+            its generic type arguments are acceptable predefined simple types.
+            </summary>
+            <param name="type">The type to test.</param>
+            <returns><c>true</c> if the type is a <see cref="T:System.Collections.Generic.IDictionary`2"/> with supported generic type arguments.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.GetDictionaryGenericArgumentTypes(System.Type)">
+            <summary>
+            Returns an array of types that represent the generic type arguments used in <paramref name="type"/>'s
+            implementation of <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </summary>
+            <param name="type">The type to examine.</param>
+            <returns>An array of types that represent the generic type arguments used in <paramref name="type"/>'s
+            implementation of <see cref="T:System.Collections.Generic.IDictionary`2"/>. Returns null if <paramref name="type"/> does 
+            not implement <see cref="T:System.Collections.Generic.IDictionary`2"/>.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.IsPredefinedSimpleType(System.Type)">
+            <summary>
+            Returns <c>true</c> if the given type is either primitive or one of our
+            standard acceptable simple types, such as <see cref="T:System.String"/>,
+            <see cref="T:System.Guid"/>, etc
+            </summary>
+            <param name="type">The type to test</param>
+            <returns><c>true</c> if the type is a primitive or standard acceptable types</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.GetElementType(System.Type)">
+            <summary>
+            Returns the underlying element type starting from a given type.
+            </summary>
+            <remarks>
+            Simple types simply return the input type.
+            If the given type is an array, this method returns the array's
+            element type.
+            If the type is a generic type of <see cref="T:System.Collections.IEnumerable"/>, 
+            or <see cref="T:System.Nullable"/>, this method returns the element
+            type of the generic parameter
+            </remarks>
+            <param name="type"><see cref="T:System.Type"/> to examine.</param>
+            <returns>The underlying element type starting from the given type</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.GetClientType(System.Type)">
+            <summary>
+            Gets the type that should be used on the client for the specified type.
+            </summary>
+            <param name="t">The type to get the client type for.</param>
+            <returns>The client type.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.GetClientValue(System.Type,System.Object)">
+            <summary>
+            Gets a value that can be used by the client.
+            </summary>
+            <param name="targetType">The type used by the client.</param>
+            <param name="value">The value on the server.</param>
+            <returns>A value that can be used by the client.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.GetServerValue(System.Type,System.Object)">
+            <summary>
+            Gets a value that can be used by the server.
+            </summary>
+            <param name="targetType">The type used by the server.</param>
+            <param name="value">The value from the client.</param>
+            <returns>A value that can be used by the server.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.IsByVal(System.Web.DomainServices.DomainOperationParameter)">
+            <summary>
+            Checks whether a parameter expects a value to be passed by-value.
+            </summary>
+            <param name="parameter">The parameter to check.</param>
+            <returns>True if the parameter expects a by-value value.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.IsSerializableDataMember(System.ComponentModel.PropertyDescriptor,System.Boolean)">
+            <summary>
+            Returns true if the specified property is a data member that should be serialized
+            </summary>
+            <param name="propertyDescriptor">The property to inspect</param>
+            <param name="isEntity">True if the specified property is defined on an Entity</param>
+            <returns>true if the specified property is a data member that should be serialized</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.GetSerializableProperties(System.Type,System.Boolean)">
+            <summary>
+            Returns the set of serializable properties for the specified Type.
+            </summary>
+            <param name="type">The Type to get properties for.</param>
+            <param name="isEntity">True if the specified property is defined on an Entity</param>
+            <returns>The set of serializable properties.</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.DefinitionIsAssignableFrom(System.Type,System.Type)">
+            <summary>
+            Determines whether the generic type definition is assignable from the derived type.
+            </summary>
+            <remarks>
+            This behaves just like <see cref="M:System.Type.IsAssignableFrom(System.Type)"/> except that it determines
+            whether any generic type that can be made from the <paramref name="genericTypeDefinition"/>
+            is assignable from <paramref name="derivedType"/>.
+            </remarks>
+            <param name="genericTypeDefinition">The generic type definition</param>
+            <param name="derivedType">The type to determine assignability from</param>
+            <returns>Whether the type definition is assignable from the derived type</returns>
+        </member>
+        <member name="M:System.Web.DomainServices.Utility.DefinitionIsAssignableFrom(System.Type,System.Type,System.Type@)">
+            <summary>
+            Determines whether the generic type definition is assignable from the derived type.
+            </summary>
+            <remarks>
+            This behaves just like <see cref="M:System.Type.IsAssignableFrom(System.Type)"/> except that it determines
+            whether any generic type that can be made from the <paramref name="genericTypeDefinition"/>
+            is assignable from <paramref name="derivedType"/>.
+            </remarks>
+            <param name="genericTypeDefinition">The generic type definition</param>
+            <param name="derivedType">The type to determine assignability from</param>
+            <param name="genericType">The generic base class or interface implemented by the derived
+            type that can be made from the <paramref name="genericTypeDefinition"/>. This value is
+            null when the method return false.
+            </param>
+            <returns>Whether the type definition is assignable from the derived type</returns>
+        </member>
+        <member name="T:System.Web.DomainServices.UriEqualityComparer">
+            <summary>
+            This class is for comparing Uris correctly
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.ApplicationServices.AuthenticationBase`1">
+            <summary>
+            <see cref="T:System.Web.DomainServices.DomainService"/> that encapsulates the authentication domain. A domain service
+            extending this one will be used to populate the user on both the client and server.
+            </summary>
+            <remarks>
+            <c>System.Windows.Ria.ApplicationServices.WebAuthenticationService</c> is designed
+            to interact with a domain service extending this class. To add an authentication service
+            to an application simply extend this or a derived provider.
+            <para>
+            <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.UpdateUser(`0)"/> is designed as an update method, and will be invoked via
+            <c>SubmitChanges</c> on the client. This has a couple implications. First,
+            invoking <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.UpdateUser(`0)"/> via <c>AuthenticationService.SetUser</c> will submit all 
+            changes that have occurred in the provider and may invoke other update methods.
+            Second, invoking other update methods on the provider from the client will submit
+            all changes and may invoke <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.UpdateUser(`0)"/>.
+            </para>
+            <para>
+            By default, this provider relies on the ASP.NET providers for
+            <c>Membership, Roles, and Profile</c> and will reflect the customizations made in
+            each.
+            </para>
+            </remarks>
+            <typeparam name="T">The type of user data to be provided</typeparam>
+        </member>
+        <member name="T:System.Web.Ria.ApplicationServices.IAuthentication`1">
+            <summary>
+            An interface for <see cref="T:System.Web.DomainServices.DomainService"/>s that encapsulates the authentication domain.
+            A domain service implementing this interface will be used to populate the user on both 
+            the client and server.
+            </summary>
+            <remarks>
+            <c>System.Windows.Ria.ApplicationServices.WebAuthenticationService</c> is designed
+            to interact with a domain service implementing this interface.
+            <para>
+            <see cref="M:System.Web.Ria.ApplicationServices.IAuthentication`1.UpdateUser(`0)"/> is designed as an update method, and will be invoked via
+            <c>SubmitChanges</c> on the client. This has a couple implications. First,
+            invoking <see cref="M:System.Web.Ria.ApplicationServices.IAuthentication`1.UpdateUser(`0)"/> via <c>AuthenticationService.SetUser</c> will submit all 
+            changes that have occurred in the provider and may invoke any or all update methods
+            declared on the Domain Service depending on the entities that have been updated.
+            Second, invoking other update methods on the provider from the client will submit
+            all changes and may invoke <see cref="M:System.Web.Ria.ApplicationServices.IAuthentication`1.UpdateUser(`0)"/>.
+            </para>
+            </remarks>
+            <typeparam name="T">The type of user data to be provided</typeparam>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.IAuthentication`1.Login(System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Authenticates and returns the identity with the specified name and password.
+            </summary>
+            <remarks>
+            This method will return a single user if the 
+            authentication was successful. If the user could not be authenticated, null
+            will be returned.
+            </remarks>
+            <param name="userName">The userName associated with the identity to authenticate</param>
+            <param name="password">The password associated with the identity to authenticate</param>
+            <param name="isPersistent">Whether the authentication should persist between sessions</param>
+            <param name="customData">Optional implementation-specific data</param>
+            <returns>A single user or null if authentication failed</returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.IAuthentication`1.Logout">
+            <summary>
+            Logs an authenticated identity out.
+            </summary>
+            <remarks>
+            This method will return a single, anonymous user.
+            </remarks>
+            <returns>A single, default user.</returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.IAuthentication`1.GetUser">
+            <summary>
+            Selects the user data for the authenticated identity.
+            </summary>
+            <remarks>
+            This method will return a single user. If the user is not
+            authenticated, an anonymous user will be returned.
+            </remarks>
+            <returns>An enumerable with a single user.</returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.IAuthentication`1.UpdateUser(`0)">
+            <summary>
+            Updates the user data for the authenticated identity.
+            </summary>
+            <param name="user">The updated user data</param>
+            <exception cref="T:System.Security.SecurityException"> is thrown if the authenticated 
+            identity does not have the correct permissions to update the user.
+            </exception>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.#ctor">
+            <summary>
+            Initializes a new instance of the AuthenticationBase class.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetProfile(`0)">
+            <summary>
+            Gets the profile settings for the current user from the <see cref="T:System.Web.Profile.ProfileBase"/>
+            and sets them into the specified <paramref name="user"/>.
+            </summary>
+            <remarks>
+            The <paramref name="user"/> is updated from the profile using the following algorithm.
+            <para>
+            For every property in <paramref name="user"/>:
+             if (the property can be set and is in the profile)
+              then set the property value using the value in the profile specified by the alias
+            </para>
+            </remarks>
+            <param name="user">The user to update with the profile settings</param>
+            <exception cref="T:System.Runtime.Serialization.InvalidDataContractException"> is thrown if a property in 
+            <paramref name="user"/> that meets the specified conditions does not have a
+            corresponding profile value.
+            </exception>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.UpdateProfile(`0)">
+            <summary>
+            Writes the profile settings for the current user to the <see cref="T:System.Web.Profile.ProfileBase"/>
+            using the specified <paramref name="user"/>.
+            </summary>
+            <remarks>
+            The profile is updated from the <paramref name="user"/> using the following algorithm.
+            <para>
+            For every property in <paramref name="user"/>:
+             if (the property can be read and is in the profile)
+              then use the property value to set the value in the profile specified by the alias
+            </para>
+            </remarks>
+            <param name="user">The user to update the profile settings with</param>
+            <exception cref="T:System.Runtime.Serialization.InvalidDataContractException"> is thrown if a property in 
+            <paramref name="user"/> that meets the specified conditions does not have a
+            corresponding profile value.
+            </exception>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.CheckAuthenticationMode">
+            <summary>
+            Checks that the ASP.NET authentication mode is forms and throws if it is
+            not.
+            </summary>
+            <exception cref="T:System.InvalidOperationException"> is thrown if the ASP.NET 
+            authentication mode is not <see cref="F:System.Web.Configuration.AuthenticationMode.Forms"/>.
+            </exception>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetProfileUsage(System.Reflection.PropertyInfo)">
+            <summary>
+            Gets the <see cref="T:System.Web.Ria.ApplicationServices.ProfileUsageAttribute"/> for the specified property.
+            </summary>
+            <param name="propertyInfo">The property to get the attribute for</param>
+            <returns>The attribute or null if one does not exist</returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.IsInProfile(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns a value indicating whether the specified property has a backing member in
+            the ASP.NET profile.
+            </summary>
+            <param name="propertyInfo">The property to make the determination for</param>
+            <returns>Whether the property is in the profile</returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetProfileAlias(System.Reflection.PropertyInfo)">
+            <summary>
+            Gets the profile alias for the specified property.
+            </summary>
+            <remarks>
+            This is either:
+            <para>
+            1) <see cref="P:System.Web.Ria.ApplicationServices.ProfileUsageAttribute.Alias"/> when the property is marked with the attribute.
+            2) <see cref="P:System.Reflection.MemberInfo.Name"/> for the specified property.
+            </para>
+            </remarks>
+            <param name="propertyInfo">The property to get the profile alias for</param>
+            <returns>The profile alias for the specified property</returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.IsReadOnly(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns a value indicating whether the specified property is read-only.
+            </summary>
+            <remarks>
+            This method determines read only state by checking for appropriately configured
+            <see cref="T:System.ComponentModel.DataAnnotations.EditableAttribute"/>s.
+            </remarks>
+            <param name="propertyInfo">The property to determine whether it is read-only</param>
+            <returns><c>true</c> if the property is marked read-only; <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetPrincipal">
+            <summary>
+            Gets the current principal from <see cref="T:System.Web.HttpContext"/> or returns
+            a default value.
+            </summary>
+            <returns>The current principal</returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetProfileBase(System.String)">
+            <summary>
+            Gets the profile for the current identity from <see cref="T:System.Web.HttpContext"/> or returns
+            a profile base for the specified user.
+            </summary>
+            <param name="userName">The name for the user to get the profile for</param>
+            <returns>The current profile</returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetRoles(System.String)">
+            <summary>
+            Gets the roles for the specified identity from <see cref="T:System.Web.Security.Roles"/> or returns
+            a default enumerable.
+            </summary>
+            <param name="userName">The userName associated with the identity to get the
+            roles for</param>
+            <returns>The roles for the specified identity</returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.Login(System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            Authenticates and returns the identity with the specified name and password.
+            </summary>
+            <remarks>
+            This method will return a single user if the 
+            authentication was successful. If the user could not be authenticated, null
+            will be returned.
+            <para>
+            By default, this method can be only used for forms authentication and leverages
+            ASP.NET <see cref="T:System.Web.Security.Membership"/> and <see cref="T:System.Web.Security.FormsAuthentication"/>.
+            </para>
+            </remarks>
+            <param name="userName">The userName associated with the identity to authenticate</param>
+            <param name="password">The password associated with the identity to authenticate</param>
+            <param name="isPersistent">Whether the authentication should persist between sessions</param>
+            <param name="customData">Optional implementation-specific data. It is unused by this base class.</param>
+            <returns>A single user or null if authentication failed</returns>
+            <exception cref="T:System.InvalidOperationException"> is thrown if the ASP.NET 
+            authentication mode is not <see cref="F:System.Web.Configuration.AuthenticationMode.Forms"/>.
+            </exception>
+            <seealso cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetUser"/>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.Logout">
+            <summary>
+            Logs an authenticated identity out.
+            </summary>
+            <remarks>
+            This method will return a single, anonymous user.
+            <para>
+            By default, this method can only be used for forms authentication and leverages
+            ASP.NET <see cref="T:System.Web.Security.FormsAuthentication"/>.
+            </para>
+            </remarks>
+            <returns>A single, default user.</returns>
+            <exception cref="T:System.InvalidOperationException"> is thrown if the ASP.NET 
+            authentication mode is not <see cref="F:System.Web.Configuration.AuthenticationMode.Forms"/>.
+            </exception>
+            <seealso cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetUser"/>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetUser">
+            <summary>
+            Selects the user data for the authenticated identity.
+            </summary>
+            <remarks>
+            This method will return an enumerable containing a single user. If the user is not
+            authenticated, an anonymous user will be returned.
+            <para>
+            By default, the user is populated with data from <see cref="T:System.Web.HttpContext"/>,
+            <see cref="T:System.Web.Security.Roles"/>, and <see cref="T:System.Web.Profile.ProfileBase"/>.
+            </para>
+            <para>
+            In updating the user from the profile, the provider copies the corresponding
+            profile value into each property in <typeparamref name="T"/>. This behavior 
+            can be tailored by marking specified properties with the
+            <see cref="T:System.Web.Ria.ApplicationServices.ProfileUsageAttribute"/>.
+            </para>
+            </remarks>
+            <returns>An enumerable with a single user.</returns>
+            <seealso cref="T:System.Web.Ria.ApplicationServices.ProfileUsageAttribute"/>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.UpdateUser(`0)">
+            <summary>
+            Updates the user data for the authenticated identity.
+            </summary>
+            <remarks>
+            By default, the user is persisted to the <see cref="T:System.Web.Profile.ProfileBase"/>.
+            <para>
+            In writing the user to the profile, the provider copies each property in 
+            <typeparamref name="T"/> into the corresponding value in the profile. This behavior
+            can be tailored by marking specified properties with the 
+            <see cref="T:System.Web.Ria.ApplicationServices.ProfileUsageAttribute"/>.
+            </para>
+            </remarks>
+            <param name="user">The updated user data</param>
+            <exception cref="T:System.Security.SecurityException"> is thrown if the authenticated 
+            identity does not have the correct permissions to update the user.
+            </exception>
+            <seealso cref="T:System.Web.Ria.ApplicationServices.ProfileUsageAttribute"/>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.ValidateUser(System.String,System.String)">
+            <summary>
+            Verifies that the supplied user name and password are valid.
+            </summary>
+            <remarks>
+            This methods is invoked from <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.Login(System.String,System.String,System.Boolean,System.String)"/>. By default, it delegates to
+            <see cref="M:System.Web.Security.Membership.ValidateUser(System.String,System.String)"/>. The base implementation does not need
+            to be invoked when this method is overridden.
+            </remarks>
+            <param name="userName">The name of the user to be validated</param>
+            <param name="password">The password for the specified user</param>
+            <returns>A value indicating whether the user is valid</returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.IssueAuthenticationToken(System.Security.Principal.IPrincipal,System.Boolean)">
+            <summary>
+            Issues a token for the authenticated principal.
+            </summary>
+            <remarks>
+            This methods is invoked from <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.Login(System.String,System.String,System.Boolean,System.String)"/> when the user is authenticated.
+            By default, the method will issue a token by leveraging the cookie support
+            in <see cref="T:System.Web.Security.FormsAuthentication"/>. The base implementation does not need to
+            be invoked when this method is overridden.
+            </remarks>
+            <param name="principal">The authenticated principal</param>
+            <param name="isPersistent">Whether the token should persist between sessions</param>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.ClearAuthenticationToken">
+            <summary>
+            Clears any issued authentication token.
+            </summary>
+            <remarks>
+            This methods is invoked from <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.Logout"/>. By default, the method will
+            clear tokens by leveraging the cookie support in <see cref="T:System.Web.Security.FormsAuthentication"/>.
+            The base implementation does not need to be invoked when this method is overridden.
+            </remarks>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetUserCore(System.Security.Principal.IPrincipal)">
+            <summary>
+            Gets the user for the specified principal.
+            </summary>
+            <remarks>
+            This method will return a single user. If the user is not
+            authenticated, an anonymous user will be returned.
+            </remarks>
+            <param name="principal">The principal to get the user for</param>
+            <returns>A single user.</returns>
+            <exception cref="T:System.InvalidOperationException"> is thrown if 
+            <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetAuthenticatedUser(System.Security.Principal.IPrincipal)"/> or <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetAnonymousUser"/>
+            returns null.
+            </exception>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetAuthenticatedUser(System.Security.Principal.IPrincipal)">
+            <summary>
+            Gets the user for the authenticated principal.
+            </summary>
+            <remarks>
+            This method is invoked from <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.Login(System.String,System.String,System.Boolean,System.String)"/> and <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetUser"/> for
+            authenticated users. By default, the user is populated with data from 
+            <paramref name="principal"/>, <see cref="T:System.Web.Security.Roles"/>, and <see cref="T:System.Web.Profile.ProfileBase"/>.
+            The base implementation does not need to be invoked when this method is overridden.
+            </remarks>
+            <param name="principal">The principal to get the user for</param>
+            <returns>The user for the authenticated principal. This should never be null.
+            </returns>
+            <seealso cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetUser"/>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetAnonymousUser">
+            <summary>
+            Gets an anonymous user.
+            </summary>
+            <remarks>
+            This method is invoked from <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.Logout"/> and <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetUser"/> for
+            anonymous users. By default, the user is populated with data from 
+            <see cref="T:System.Web.Security.Roles"/>, and <see cref="T:System.Web.Profile.ProfileBase"/>.
+            The base implementation does not need to be invoked when this method is overridden.
+            </remarks>
+            <returns>The anonymous user. This should never be null.
+            </returns>
+            <seealso cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetUser"/>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetUserImpl(System.Security.Principal.IPrincipal)">
+            <summary>
+            Gets the user for the specified principal.
+            </summary>
+            <remarks>
+            The user is populated with data from <paramref name="principal"/>,
+            <see cref="T:System.Web.Security.Roles"/>, and <see cref="T:System.Web.Profile.ProfileBase"/>.
+            </remarks>
+            <param name="principal">The principal to get the user for</param>
+            <returns>The user for the specified principal</returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.CreateUser">
+            <summary>
+            Creates a new instance of <typeparamref name="T"/> and initializes it
+            with default values. 
+            </summary>
+            <remarks>
+            This method is invoked from <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetAuthenticatedUser(System.Security.Principal.IPrincipal)"/> and
+            <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.GetAnonymousUser"/>. By default, it returns an instance
+            created with the default constructor. The base implementation does not
+            need to be invoked when this method is overridden.
+            </remarks>
+            <returns>A new instance of <typeparamref name="T"/></returns>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.UpdateUserCore(`0)">
+            <summary>
+            Updates the user data for the authenticated identity.
+            </summary>
+            <remarks>
+            This method is invoked from <see cref="M:System.Web.Ria.ApplicationServices.AuthenticationBase`1.UpdateUser(`0)"/> after the identity of the
+            current principal has been verified. It is responsible for persisting the 
+            updated user data. By default, this method will persist the user using
+            <see cref="T:System.Web.Profile.ProfileBase"/>. The base implementation does not need to be invoked 
+            when this method is overridden.
+            </remarks>
+            <param name="user">The updated user data</param>
+        </member>
+        <member name="T:System.Web.Ria.ApplicationServices.AuthenticationServiceAttribute">
+            <summary>
+            Attribute that marks a DomainService as an authentication service.
+            </summary>
+            <remarks>
+            This attribute is used to associate the <see cref="T:System.Web.Ria.ApplicationServices.AuthenticationCodeProcessor"/> with
+            an implementation of the <see cref="T:System.Web.Ria.ApplicationServices.IAuthentication`1"/> interface.
+            </remarks>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationServiceAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Web.Ria.ApplicationServices.AuthenticationServiceAttribute"/> class.
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.ApplicationServices.IUser">
+            <summary>
+            Interface for an authenticated identity.
+            </summary>
+            <remarks>
+            This class is designed for use with the <see cref="T:System.Web.Ria.ApplicationServices.IAuthentication`1"/> interface.
+            It provides properties to support serialization of principal values in an entity class
+            generated by the data framework in <see cref="N:System.Web.Ria.Data"/>.
+            </remarks>
+        </member>
+        <member name="P:System.Web.Ria.ApplicationServices.IUser.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <remarks>
+            <see cref="P:System.Web.Ria.ApplicationServices.IUser.Name"/> may be null or empty to support anonymous users.
+            </remarks>
+        </member>
+        <member name="P:System.Web.Ria.ApplicationServices.IUser.Roles">
+            <summary>
+            Gets or sets the roles the user is a member of.
+            </summary>
+            <remarks>
+            <see cref="P:System.Web.Ria.ApplicationServices.IUser.Roles"/> may not be null and should return an empty
+            enumerable if there are no roles for the user.
+            </remarks>
+        </member>
+        <member name="T:System.Web.Ria.ApplicationServices.AuthenticationCodeProcessor">
+            <summary>
+            <see cref="T:System.Web.DomainServices.CodeProcessor"/> implementation that sets the base class of both the
+            context and entity types generated by a provider implementing
+            <see cref="T:System.Web.Ria.ApplicationServices.IAuthentication`1"/>.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationCodeProcessor.#ctor(System.CodeDom.Compiler.CodeDomProvider)">
+            <summary>
+            Initializes an instance of the AuthenticationCodeProcessor class.
+            </summary>
+            <param name="codeDomProvider">The <see cref="T:System.CodeDom.Compiler.CodeDomProvider"/> used during <see cref="T:System.Web.DomainServices.DomainService"/> code generation.</param>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationCodeProcessor.ProcessGeneratedCode(System.Web.DomainServices.DomainServiceDescription,System.CodeDom.CodeCompileUnit,System.Collections.Generic.IDictionary{System.Type,System.CodeDom.CodeTypeDeclaration})">
+            <summary>
+            See <see cref="M:System.Web.DomainServices.CodeProcessor.ProcessGeneratedCode(System.Web.DomainServices.DomainServiceDescription,System.CodeDom.CodeCompileUnit,System.Collections.Generic.IDictionary{System.Type,System.CodeDom.CodeTypeDeclaration})"/>.
+            </summary>
+            <param name="domainServiceDescription">The domainServiceDescription</param>
+            <param name="codeCompileUnit">The codeCompileUnit</param>
+            <param name="typeMapping">The typeMapping</param>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.AuthenticationCodeProcessor.GetDocComments(System.String)">
+            <summary>
+            Takes a multi-line comment defined in a resource file and correctly formats it as a doc comment
+            for use in code-dom.
+            </summary>
+            <param name="resourceComment">The comment to format as a doc comment. This cannot be null.</param>
+            <returns>A collection of comment statements that matches the input resource</returns>
+        </member>
+        <member name="T:System.Web.Ria.ApplicationServices.ProfileUsageAttribute">
+            <summary>
+            Attribute that describes how a property is backed in an ASP.NET profile. It can 
+            be used with custom Entities defined for use with the framework available in 
+            <see cref="N:System.Web.Ria.Data"/>.
+            </summary>
+            <remarks>
+            This attribute is used by the <see cref="T:System.Web.Ria.ApplicationServices.AuthenticationBase`1"/> to determine
+            how it should read from or write to the ASP.NET profile that backs the data.
+            If a property is in the profile with the same name, then this attribute does not
+            need to be used. If a property is not in the profile then <see cref="P:System.Web.Ria.ApplicationServices.ProfileUsageAttribute.IsExcluded"/>
+            should be set to true. If a property has been named differently than the profile
+            value that backs it then <see cref="P:System.Web.Ria.ApplicationServices.ProfileUsageAttribute.Alias"/> should be set to the name of the 
+            backing value in the profile.
+            </remarks>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.ProfileUsageAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Web.Ria.ApplicationServices.ProfileUsageAttribute"/> class
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.ApplicationServices.ProfileUsageAttribute.Alias">
+            <summary>
+            Gets or sets the name of the member backing the property in an ASP.NET profile.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.ApplicationServices.ProfileUsageAttribute.IsExcluded">
+            <summary>
+            Gets or sets a value indicating whether the property is backed by a profile member
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.ApplicationServices.UserBase">
+            <summary>
+            Representation of an authenticated identity.
+            </summary>
+            <remarks>
+            This class is designed for use with the <see cref="T:System.Web.Ria.ApplicationServices.AuthenticationBase`1"/>.
+            It provides properties to support serialization of principal values in entity class
+            generated by the data framework in <see cref="N:System.Web.Ria.Data"/>. It also presents
+            those values via the <see cref="T:System.Security.Principal.IPrincipal"/> and <see cref="T:System.Security.Principal.IIdentity"/> interfaces 
+            for use in shared validation scenarios.
+            </remarks>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.UserBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Web.Ria.ApplicationServices.UserBase"/> class.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.ApplicationServices.UserBase.IsInRole(System.String)">
+            <summary>
+            Determines whether the current principal belongs to the specified role.
+            </summary>
+            <remarks>
+            Returns whether the specified role is contained in <see cref="P:System.Web.Ria.ApplicationServices.UserBase.Roles"/>.
+            This implementation is case sensitive.  See <see cref="M:System.Security.Principal.IPrincipal.IsInRole(System.String)"/>.
+            </remarks>
+            <param name="role">The name of the role for which to check membership.</param>
+            <returns>True if the current principal is a member of the specified role; otherwise, false.</returns>
+        </member>
+        <member name="P:System.Web.Ria.ApplicationServices.UserBase.IsAuthenticated">
+            <summary>
+            Gets a value indicating whether the identity is authenticated. See
+            <see cref="P:System.Security.Principal.IIdentity.IsAuthenticated"/>.
+            </summary>
+            <remarks>
+            This value is true if <see cref="P:System.Web.Ria.ApplicationServices.UserBase.Name"/> is not <c>null</c> or empty. This is the
+            same implementation as <see cref="P:System.Security.Principal.GenericIdentity.IsAuthenticated"/>.
+            </remarks>
+        </member>
+        <member name="P:System.Web.Ria.ApplicationServices.UserBase.Name">
+            <summary>
+            Gets or sets the name. See <see cref="P:System.Security.Principal.IIdentity.Name"/>.
+            </summary>
+            <remarks>
+            The value is <c>null</c> by default, but must be set to a non-<c>null</c> value
+            before it is serialized.
+            </remarks>
+        </member>
+        <member name="P:System.Web.Ria.ApplicationServices.UserBase.Roles">
+            <summary>
+            Gets or sets the roles the user is a member of.
+            </summary>
+            <remarks>
+            This value may be <c>null</c>. The value is <c>null</c> by default.
+            </remarks>
+        </member>
+        <member name="P:System.Web.Ria.ApplicationServices.UserBase.System#Security#Principal#IPrincipal#Identity">
+            <summary>
+            Gets the identity. See <see cref="P:System.Security.Principal.IPrincipal.Identity"/>.
+            </summary>
+            <remarks>
+            This value is never <c>null</c>.
+            </remarks>
+        </member>
+        <member name="P:System.Web.Ria.ApplicationServices.UserBase.System#Security#Principal#IIdentity#AuthenticationType">
+            <summary>
+            Gets the authentication type. See <see cref="P:System.Security.Principal.IIdentity.AuthenticationType"/>.
+            </summary>
+            <remarks>
+            The value is an empty string by default.
+            </remarks>
+        </member>
+        <member name="T:System.Web.Ria.Services.DomainServiceWebHttpBehavior">
+            <summary>
+            A REST endpoint behavior which injects a message inspector that parses query headers.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceWebHttpBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)">
+            <summary>
+            Implements a modification or extension of the service across an endpoint.
+            </summary>
+            <param name="endpoint">The endpoint that exposes the contract.</param>
+            <param name="endpointDispatcher">The endpoint dispatcher to be modified or extended.</param>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceWebHttpBehavior.GetQueryStringConverter(System.ServiceModel.Description.OperationDescription)">
+            <summary>
+            Gets the query string converter.
+            </summary>
+            <param name="operationDescription">The service operation.</param>
+            <returns>A <see cref="T:System.ServiceModel.Dispatcher.QueryStringConverter"/> instance.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceWebHttpBehavior.AddServerErrorHandlers(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)">
+            <summary>
+            Adds server-side error handlers.
+            </summary>
+            <param name="endpoint">The endpoint for which error handlers are added.</param>
+            <param name="endpointDispatcher">The dispatcher to which error handlers are added.</param>
+        </member>
+        <member name="T:System.Web.Ria.Services.SoapQueryBehavior">
+            <summary>
+            A SOAP endpoint behavior which injects a message inspector that parses query headers.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.SoapQueryBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)">
+            <summary>
+            Implement to pass data at runtime to bindings to support custom behavior.
+            </summary>
+            <param name="endpoint">The endpoint to modify.</param>
+            <param name="bindingParameters">The objects that binding elements require to support the behavior.</param>
+        </member>
+        <member name="M:System.Web.Ria.Services.SoapQueryBehavior.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)">
+            <summary>
+            Implements a modification or extension of the client across an endpoint.
+            </summary>
+            <param name="endpoint">The endpoint that is to be customized.</param>
+            <param name="clientRuntime">The client runtime to be customized.</param>
+        </member>
+        <member name="M:System.Web.Ria.Services.SoapQueryBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)">
+            <summary>
+            Implements a modification or extension of the service across an endpoint.
+            </summary>
+            <param name="endpoint">The endpoint that exposes the contract.</param>
+            <param name="endpointDispatcher">The endpoint dispatcher to be modified or extended.</param>
+        </member>
+        <member name="M:System.Web.Ria.Services.SoapQueryBehavior.Validate(System.ServiceModel.Description.ServiceEndpoint)">
+            <summary>
+            Implement to confirm that the endpoint meets some intended criteria.
+            </summary>
+            <param name="endpoint">The endpoint to validate.</param>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryOperationBehavior`1.QueryOperationInvoker.FlattenGraph(System.Collections.IEnumerable,System.Collections.Generic.List{`0},System.Collections.Generic.List{System.Object},System.Collections.Generic.HashSet{System.Object},System.Web.DomainServices.DomainServiceDescription)">
+            <summary>
+            Traverse the result object graph, flattening into a single list. Note that this
+            flattening must maintain relative ordering for the top level elements, since the client might 
+            have passed an order expression.
+            </summary>
+            <param name="list">The list of entities to add to the results.</param>
+            <param name="rootResults">The root entities.</param>
+            <param name="includedResults">The included entities.</param>
+            <param name="visited">Map used for the lifetime of the flattening to ensure that each entity
+            is added to the results only once.</param>
+            <param name="domainServiceDescription">description for the DomainService.</param>
+            <returns>The <paramref name="list"/> length.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryOperationBehavior`1.QueryOperationInvoker.ClearOutputCachingPolicy">
+            <summary>
+            Clears the output cache policy.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryOperationBehavior`1.QueryOperationInvoker.SetOutputCachingPolicy(System.Web.DomainServices.DomainOperationEntry)">
+            <summary>
+            Sets the output cache policy for the specified domain operation entry.
+            </summary>
+            <param name="domainOperationEntry">The domain operation entry we need to define the cache policy for.</param>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryOperationBehavior`1.QueryOperationInvoker.GetCacheLocation(System.Web.UI.OutputCacheLocation)">
+            <summary>
+            Converts the specified <see cref="T:System.Web.UI.OutputCacheLocation"/> enum value to a <see cref="N:System.Web.DomainServices"/> enum value.
+            </summary>
+            <param name="outputCacheLocation">The <see cref="T:System.Web.UI.OutputCacheLocation"/>.</param>
+            <returns>The equivalent <see cref="T:System.Web.DomainServices.OutputCacheLocation"/> value.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryOperationBehavior`1.QueryOperationInvoker.GetCacheability(System.Web.DomainServices.OutputCacheLocation)">
+            <summary>
+            Converts the specified <see cref="T:System.Web.DomainServices.OutputCacheLocation"/> enum value to a <see cref="T:System.Web.HttpCacheability"/> enum value.
+            </summary>
+            <param name="outputCacheLocation">The <see cref="T:System.Web.DomainServices.OutputCacheLocation"/>.</param>
+            <returns>The equivalent <see cref="T:System.Web.HttpCacheability"/> value.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryOperationBehavior`1.QueryOperationInvoker.GetOutputCacheInformation(System.Web.DomainServices.DomainOperationEntry)">
+            <summary>
+            Gets cache information for the specified domain operation entry.
+            </summary>
+            <param name="method">The domain operation entry to get cache information for.</param>
+            <returns>Cache information.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.QueryOperationBehavior`1.QueryOperationInvoker.SupportsCaching(System.Web.HttpContext,System.Web.DomainServices.DomainOperationEntry)">
+            <summary>
+            Determines whether caching is supported for the current request to the specified domain operation entry.
+            </summary>
+            <param name="context">The context for the request.</param>
+            <param name="domainOperationEntry">The requested domain operation entry, if any.</param>
+            <returns>True if caching is supported.</returns>
+        </member>
+        <member name="T:System.Web.Ria.Services.ChangeSetProcessor">
+            <summary>
+            Class used to process a changeset.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.ChangeSetProcessor.Process(System.Web.DomainServices.DomainService,System.Collections.Generic.IEnumerable{System.Web.DomainServices.ChangeSetEntry})">
+            <summary>
+            Process the specified change set operations and return the results.
+            </summary>
+            <param name="domainService">The domain service that will process the changeset.</param>
+            <param name="changeSetEntries">The change set entries to be processed.</param>
+            <returns>Collection of results from the submit operation.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.ChangeSetProcessor.GetSubmitResults(System.Web.DomainServices.ChangeSet,System.Collections.Generic.Dictionary{System.Int32,System.Collections.Generic.Dictionary{System.ComponentModel.PropertyDescriptor,System.Object}})">
+            <summary>
+            Examine the list of operations after the service has finished, and determine which need
+            to be sent back to the client
+            </summary>
+            <param name="changeSet">The change set processed</param>
+            <param name="prevStateMap">The previous state for all entities in the change set</param>
+            <returns>The results list</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.ChangeSetProcessor.HasMemberChanges(System.Object,System.Collections.Generic.IDictionary{System.ComponentModel.PropertyDescriptor,System.Object})">
+            <summary>
+            Returns true if one or more of the specified object's data members have changed value
+            </summary>
+            <param name="obj">The current object state</param>
+            <param name="prevState">The previous state</param>
+            <returns>True if there were changes, false otherwise</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.ChangeSetProcessor.ExtractState(System.Object)">
+            <summary>
+            Returns a dictionary containing current state for all data members
+            </summary>
+            <param name="obj">The object to extract state for</param>
+            <returns>The state map</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.ChangeSetProcessor.SetAssociationMember(System.Object,System.ComponentModel.PropertyDescriptor,System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Adds the specified associated entities to the specified association member for the specified entity.
+            </summary>
+            <param name="entity">The entity</param>
+            <param name="associationProperty">The association member (singleton or collection)</param>
+            <param name="associatedEntities">Collection of associated entities</param>
+        </member>
+        <member name="M:System.Web.Ria.Services.ChangeSetProcessor.CreateChangeSet(System.Collections.Generic.IEnumerable{System.Web.DomainServices.ChangeSetEntry})">
+            <summary>
+            Create and initialize a ChangeSet from the specified entries.
+            </summary>
+            <param name="changeSetEntries">The changeset operations</param>
+            <returns>The changeset.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.ChangeSetProcessor.CaptureEntityState(System.Web.DomainServices.ChangeSet)">
+            <summary>
+            Takes a snapshot of the current state of all entities in the specified changeset.
+            </summary>
+            <param name="changeSet">The changeset.</param>
+            <returns>Map from changeset ID to state map for each entity.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.ChangeSetProcessor.SetEntityAssociations(System.Collections.Generic.IEnumerable{System.Web.DomainServices.ChangeSetEntry})">
+            <summary>
+            Reestablish associations based on Id lists by adding the referenced entities
+            to their association members
+            </summary>
+            <param name="changeSetEntries">The changeset operations</param>
+        </member>
+        <member name="M:System.Web.Ria.Services.ServiceUtility.ContainsEndpointAtAddress(System.ServiceModel.Description.ServiceDescription,System.String)">
+            <summary>
+            Determines whether the WCF <see cref="T:System.ServiceModel.Description.ServiceDescription"/> contains any endpoints that
+            end with the <paramref name="relativeAddress"/>.
+            </summary>
+            <param name="serviceDesc">The service to examine the endpoints of</param>
+            <param name="relativeAddress">The relative address to compare to the endpoint addresses</param>
+            <returns>Whether the service contains any endpoints that end with the <paramref name="relativeAddress"/>.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.ServiceUtility.CreateFaultException(System.Collections.Generic.IEnumerable{System.ComponentModel.DataAnnotations.ValidationResult})">
+            <summary>
+            Based on custom error settings, restrict the level of information
+            returned in each error.
+            </summary>
+            <param name="validationErrors">The collection of errors to process.</param>
+            <returns>An exception representing the validation errors.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.ServiceUtility.CreateFaultException(System.Exception)">
+            <summary>
+            Transforms the specified exception as appropriate into a fault message that can be sent
+            back to the client.
+            </summary>
+            <param name="e">The exception that was caught.</param>
+            <returns>The exception to return.</returns>
+        </member>
+        <member name="P:System.Web.Ria.Services.ServiceUtility.AuthenticationScheme">
+            <summary>
+            Gets the default authentication scheme supported by the server
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.ServiceUtility.CredentialType">
+            <summary>
+            Gets the default credential type supported by the server
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.Services.ServiceUtility.WebServiceHostInspector">
+            <summary>
+            Uses the WCF <see cref="T:System.ServiceModel.Web.WebServiceHost"/> to get the default authentication scheme
+            and credential type for services on the current server.
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.Services.DomainServiceHostFactory">
+            <summary>
+            Factory that provides instances of <see cref="T:System.Web.Ria.Services.DomainServiceHost"/> in managed 
+            hosting environments where the host instance is created dynamically in response 
+            to incoming messages.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceHostFactory.CreateServiceHost(System.Type,System.Uri[])">
+            <summary>
+            Creates a <see cref="T:System.ServiceModel.ServiceHost"/> for a specified type of service 
+            with a specific base address.
+            </summary>
+            <param name="serviceType">Specifies the type of service to host.</param>
+            <param name="baseAddresses">
+            The <see cref="T:System.Array"/> of type <see cref="T:System.Uri"/> that contains the base 
+            addresses for the service hosted.</param>
+            <returns>
+            A <see cref="T:System.ServiceModel.ServiceHost"/> for the type of service specified with 
+            a specific base address.
+            </returns>
+        </member>
+        <member name="T:System.Web.Ria.Services.DomainServiceHost">
+            <summary>
+            Provides a host for domain services.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceHost.#ctor(System.Type,System.Uri[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Web.Ria.Services.DomainServiceHost"/> class with
+            the type of service and its base addresses specified.
+            </summary>
+            <param name="domainServiceType">The type of the <see cref="T:System.Web.DomainServices.DomainService"/> to host.</param>
+            <param name="baseAddresses">
+            An array of type <see cref="T:System.Uri"/> that contains the base addresses for 
+            the hosted service.
+            </param>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceHost.GetService(System.Type)">
+            <summary>
+            Gets a service.
+            </summary>
+            <param name="serviceType">The type of service to get.</param>
+            <returns>The service.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceHost.CreateDescription(System.Collections.Generic.IDictionary{System.String,System.ServiceModel.Description.ContractDescription}@)">
+            <summary>
+            Creates a description of the service hosted.
+            </summary>
+            <param name="implementedContracts">
+            The <see cref="T:System.Collections.Generic.IDictionary`2"/> with key pairs of
+            type (string, <see cref="T:System.ServiceModel.Description.ContractDescription"/>) that contains the 
+            keyed-contracts of the hosted service that have been implemented.
+            </param>
+            <returns>A <see cref="T:System.ServiceModel.Description.ServiceDescription"/> of the hosted service.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceHost.ApplyConfiguration">
+            <summary>
+            Loads the service description information from the configuration file and 
+            applies it to the runtime being constructed.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceHost.AddDefaultBehaviors">
+            <summary>
+            Adds the default service and contract behaviors for a domain service.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceHost.AddEndpoints">
+            <summary>
+            Creates the endpoints for a domain service.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceHost.AddSoapWithBinaryEndpoint(System.Uri)">
+            <summary>
+            Adds a SOAP with binary XML endpoint.
+            </summary>
+            <param name="baseAddress">The base address to add the endpoint to</param>
+            <returns>The endpoint that was added.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceHost.AddSoapWithXmlEndpoint(System.Uri)">
+            <summary>
+            Adds a SOAP with XML endpoint.
+            </summary>
+            <param name="baseAddress">The base address to add the endpoint to</param>
+            <returns>The endpoint that was added.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceHost.AddRestWithJsonEndpoint(System.Uri)">
+            <summary>
+            Adds a REST with JSON endpoint.
+            </summary>
+            <param name="baseAddress">The base address to add the endpoint to</param>
+            <returns>The endpoint that was added.</returns>
+        </member>
+        <member name="T:System.Web.Ria.EnableClientAccessAttribute">
+            <summary>
+            Attribute used to mark a <see cref="T:System.Web.DomainServices.DomainService"/> as 
+            accessible to clients.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.EnableClientAccessAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Web.Ria.EnableClientAccessAttribute"/> class.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.EnableClientAccessAttribute.RequiresSecureEndpoint">
+            <summary>
+            Gets or sets a value indicating whether the <see cref="T:System.Web.DomainServices.DomainService"/>
+            may only be accessed using a secure endpoint.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.EnableClientAccessAttribute.ServiceName">
+            <summary>
+            Gets or sets the name that should be used by services representing this 
+            <see cref="T:System.Web.DomainServices.DomainService"/>. If this value is null, 
+            consumers should using type name of the <see cref="T:System.Web.DomainServices.DomainService"/>.
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.Services.Resource">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.Resource.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.Resource.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.Resource.DomainService_AssociationCollectionPropertyIsNull">
+            <summary>
+              Looks up a localized string similar to One or more associated objects were passed for collection property &apos;{1}&apos; on type &apos;{0}&apos;, but the target collection is null..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.Resource.DomainService_InvalidCollectionMember">
+            <summary>
+              Looks up a localized string similar to Association collection member &apos;{0}&apos; does not implement IList and does not have an Add method..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.Resource.DomainService_InvalidSqlDependencyFormat">
+            <summary>
+              Looks up a localized string similar to Incorrect SQL cache dependency syntax. The correct syntax is: &lt;databaseEntry&gt;:&lt;tableName&gt;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.Resource.DomainService_ResourceNotFound">
+            <summary>
+              Looks up a localized string similar to The specified resource was not found.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.Resource.DomainService_SecureRequestRequired">
+            <summary>
+              Looks up a localized string similar to Requests made to the service for &apos;{0}&apos; need to be made using a secure connection..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.Resource.FailedToConvertValue">
+            <summary>
+              Looks up a localized string similar to Failed to convert value of type &apos;{0}&apos; to type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.Resource.IncorrectParameterType">
+            <summary>
+              Looks up a localized string similar to Incorrect parameter type &apos;{0}&apos; for parameter &apos;{1}&apos;. Expected type is &apos;{2}&apos;..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.Resource.NoDefaultAuthScheme">
+            <summary>
+              Looks up a localized string similar to Unable to determine the authentication scheme to use with the default endpoint bindings..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Services.Resource.Query_InvalidOperator">
+            <summary>
+              Looks up a localized string similar to Invalid query operator &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="T:System.Linq.Dynamic.DefaultQueryResolver">
+            <summary>
+            Default query resolver
+            </summary>
+        </member>
+        <member name="T:System.Linq.Dynamic.QueryResolver">
+            <summary>
+            Defines a set of methods that can participate in query deserialization.
+            </summary>
+        </member>
+        <member name="M:System.Linq.Dynamic.QueryResolver.ResolveMember(System.Type,System.String,System.Linq.Expressions.Expression)">
+            <summary>
+            Called to attempt to resolve unresolved member references during query deserialization.
+            </summary>
+            <param name="type">The Type the member is expected on.</param>
+            <param name="member">The member name.</param>
+            <param name="instance">The instance to form the MemberExpression on.</param>
+            <returns>A MemberExpression if the member can be resolved, null otherwise.</returns>
+        </member>
+        <member name="M:System.Linq.Dynamic.DefaultQueryResolver.ResolveMember(System.Type,System.String,System.Linq.Expressions.Expression)">
+            <summary>
+            Called to attempt to resolve unresolved member references during query deserialization.
+            </summary>
+            <param name="type">The Type the member is expected on.</param>
+            <param name="member">The member name.</param>
+            <param name="instance">The instance to form the MemberExpression on.</param>
+            <returns>A MemberExpression if the member can be resolved, null otherwise.</returns>
+        </member>
+        <member name="T:System.Linq.Dynamic.QueryDeserializer">
+            <summary>
+            Used to deserialize a set of string based query operations into expressions and
+            compose them over a specified query.
+            </summary>
+        </member>
+        <member name="T:System.Linq.Dynamic.QueryDeserializer.PostProcessor">
+            <summary>
+            Any expression tree transformations required after query parsing and composition
+            are performed externally to the actual query parser.
+            </summary>
+        </member>
+        <member name="T:System.Linq.Dynamic.Resource">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.AmbiguousConstructorInvocation">
+            <summary>
+              Looks up a localized string similar to Ambiguous invocation of &apos;{0}&apos; constructor.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.AmbiguousIndexerInvocation">
+            <summary>
+              Looks up a localized string similar to Ambiguous invocation of indexer in type &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.AmbiguousMethodInvocation">
+            <summary>
+              Looks up a localized string similar to Ambiguous invocation of method &apos;{0}&apos; in type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.ArgsIncompatibleWithLambda">
+            <summary>
+              Looks up a localized string similar to Argument list incompatible with lambda expression.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.BothTypesConvertToOther">
+            <summary>
+              Looks up a localized string similar to Both of the types &apos;{0}&apos; and &apos;{1}&apos; convert to the other.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.CannotConvertValue">
+            <summary>
+              Looks up a localized string similar to A value of type &apos;{0}&apos; cannot be converted to type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.CannotIndexMultiDimArray">
+            <summary>
+              Looks up a localized string similar to Indexing of multi-dimensional arrays is not supported.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.CloseBracketOrCommaExpected">
+            <summary>
+              Looks up a localized string similar to &apos;]&apos; or &apos;,&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.CloseParenOrCommaExpected">
+            <summary>
+              Looks up a localized string similar to &apos;)&apos; or &apos;,&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.CloseParenOrOperatorExpected">
+            <summary>
+              Looks up a localized string similar to &apos;)&apos; or operator expected.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.ColonExpected">
+            <summary>
+              Looks up a localized string similar to &apos;:&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.DigitExpected">
+            <summary>
+              Looks up a localized string similar to Digit expected.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.DotOrOpenParenExpected">
+            <summary>
+              Looks up a localized string similar to &apos;.&apos; or &apos;(&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.DuplicateIdentifier">
+            <summary>
+              Looks up a localized string similar to The identifier &apos;{0}&apos; was defined more than once.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.ExpressionExpected">
+            <summary>
+              Looks up a localized string similar to Expression expected.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.ExpressionTypeMismatch">
+            <summary>
+              Looks up a localized string similar to Expression of type &apos;{0}&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.FailedToConvertValue">
+            <summary>
+              Looks up a localized string similar to Failed to convert value of type &apos;{0}&apos; to type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.FirstExprMustBeBool">
+            <summary>
+              Looks up a localized string similar to The first expression must be of type &apos;Boolean&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.IdentifierExpected">
+            <summary>
+              Looks up a localized string similar to Identifier expected.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.IifRequiresThreeArgs">
+            <summary>
+              Looks up a localized string similar to The &apos;iif&apos; function requires three arguments.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.IncompatibleOperand">
+            <summary>
+              Looks up a localized string similar to Operator &apos;{0}&apos; incompatible with operand type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.IncompatibleOperands">
+            <summary>
+              Looks up a localized string similar to Operator &apos;{0}&apos; incompatible with operand types &apos;{1}&apos; and &apos;{2}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.InvalidCharacter">
+            <summary>
+              Looks up a localized string similar to Syntax error &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.InvalidCharacterLiteral">
+            <summary>
+              Looks up a localized string similar to Character literal must contain exactly one character.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.InvalidIndex">
+            <summary>
+              Looks up a localized string similar to Array index must be an integer expression.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.InvalidIntegerLiteral">
+            <summary>
+              Looks up a localized string similar to Invalid integer literal &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.InvalidRealLiteral">
+            <summary>
+              Looks up a localized string similar to Invalid real literal &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.MethodIsVoid">
+            <summary>
+              Looks up a localized string similar to Method &apos;{0}&apos; in type &apos;{1}&apos; does not return a value.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.MethodsAreInaccessible">
+            <summary>
+              Looks up a localized string similar to Methods on type &apos;{0}&apos; are not accessible.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.MissingAsClause">
+            <summary>
+              Looks up a localized string similar to Expression is missing a try-cast clause.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.NeitherTypeConvertsToOther">
+            <summary>
+              Looks up a localized string similar to Neither of the types &apos;{0}&apos; and &apos;{1}&apos; converts to the other.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.NoApplicableAggregate">
+            <summary>
+              Looks up a localized string similar to No applicable aggregate method &apos;{0}&apos; exists.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.NoApplicableIndexer">
+            <summary>
+              Looks up a localized string similar to No applicable indexer exists in type &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.NoApplicableMethod">
+            <summary>
+              Looks up a localized string similar to No applicable method &apos;{0}&apos; exists in type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.NoItInScope">
+            <summary>
+              Looks up a localized string similar to No &apos;it&apos; is in scope.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.NoMatchingConstructor">
+            <summary>
+              Looks up a localized string similar to No matching constructor in type &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.OpenBracketExpected">
+            <summary>
+              Looks up a localized string similar to &apos;[&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.OpenParenExpected">
+            <summary>
+              Looks up a localized string similar to &apos;(&apos; expected.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.ParseExceptionFormat">
+            <summary>
+              Looks up a localized string similar to {0} (at index {1}).
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.PostProcessor_InvalidMemberAccess">
+            <summary>
+              Looks up a localized string similar to Member &apos;{0}&apos; in type &apos;{1}&apos; does not exist or is not exposed..
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.SyntaxError">
+            <summary>
+              Looks up a localized string similar to Syntax error.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.TokenExpected">
+            <summary>
+              Looks up a localized string similar to {0} expected.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.TypeHasNoNullableForm">
+            <summary>
+              Looks up a localized string similar to Type &apos;{0}&apos; has no nullable form.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.UnknownIdentifier">
+            <summary>
+              Looks up a localized string similar to Unknown identifier &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.UnknownPropertyOrField">
+            <summary>
+              Looks up a localized string similar to No property or field &apos;{0}&apos; exists in type &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:System.Linq.Dynamic.Resource.UnterminatedStringLiteral">
+            <summary>
+              Looks up a localized string similar to Unterminated string literal.
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_AssemblyLoadFailed">
+            <summary>
+              Looks up a localized string similar to Assembly {0} or one of its referenced assemblies could not be loaded..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_CommentIsAuth">
+             <summary>
+               Looks up a localized string similar to &lt;summary&gt;
+            Gets a value indicating whether the identity is authenticated.
+            &lt;/summary&gt;
+            &lt;remarks&gt;
+            This value is &lt;c&gt;true&lt;/c&gt; if &lt;see cref=&quot;Name&quot;/&gt; is not &lt;c&gt;null&lt;/c&gt; or empty.
+            &lt;/remarks&gt;.
+             </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_CommentIsInRole">
+             <summary>
+               Looks up a localized string similar to &lt;summary&gt;
+            Return whether the principal is in the role.
+            &lt;/summary&gt;
+            &lt;remarks&gt;
+            Returns whether the specified role is contained in the roles.
+            This implementation is case sensitive.
+            &lt;/remarks&gt;
+            &lt;param name=&quot;role&quot;&gt;The name of the role for which to check membership.&lt;/param&gt;
+            &lt;returns&gt;Whether the principal is in the role.&lt;/returns&gt;.
+             </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_CreateUserCannotBeNull">
+            <summary>
+              Looks up a localized string similar to The user returned from {0}.CreateUser() cannot be null..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_GetUserCannotBeNull">
+            <summary>
+              Looks up a localized string similar to The user returned from {0}.GetUser(IIdentity) or {0}.GetAnonymousUser() cannot be null..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_LoginLogoutOnlyForForms">
+            <summary>
+              Looks up a localized string similar to Login and Logout can only be invoked for Forms authentication..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_MustBeIAuth">
+            <summary>
+              Looks up a localized string similar to The AuthenticationServiceAttribute can only be applied to DomainServices that implement the IAuthentication&lt;&gt; interface..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_MustBeIUser">
+            <summary>
+              Looks up a localized string similar to The {0} type must not implement IUser explicitly..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_ProfileAliasCannotBeNull">
+            <summary>
+              Looks up a localized string similar to Alias property cannot be null..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_ProfilePropertyDoesNotExist">
+            <summary>
+              Looks up a localized string similar to A profile property does not exist for {0}..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_ProfilePropertyReadOnly">
+            <summary>
+              Looks up a localized string similar to The profile property is ReadOnly for {0}..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_ProfilePropertyTypeMismatch">
+            <summary>
+              Looks up a localized string similar to The profile property type of {0} is different from the property type..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_ProviderMustExtendAB">
+            <summary>
+              Looks up a localized string similar to DomainService must extend AuthenticationBase of T..
+            </summary>
+        </member>
+        <member name="P:System.Web.Ria.Resources.ApplicationServices_TypeLoadFailed">
+            <summary>
+              Looks up a localized string similar to Failed to load one or more types from assembly {0} : {1}..
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.Services.DataContractSurrogateGenerator">
+            <summary>
+            Takes care of generating CLR types based on the virtual shape of an entity type. E.g. for EF we may be 
+            adding virtual FK properties via TypeDescriptor. Because WCF doesn't know about TypeDescriptor, it won't 
+            see these virtual FK properties. This is why we generate CLR types that contain first-class FK properties.
+            At serialization/deserialization time, we will copy back and forth values between the surrogate types 
+            and the real entity types. This happens in <see cref="T:System.Web.Ria.Services.DomainServiceSerializationSurrogate"/>.
+            </summary>
+        </member>
+        <member name="M:System.Web.Ria.Services.DataContractSurrogateGenerator.GetSurrogateType(System.Collections.Generic.HashSet{System.Type},System.Type)">
+            <summary>
+            Emits a surrogate type for the specified type.
+            </summary>
+            <param name="knownEntityTypes">The known set of entity types.</param>
+            <param name="type">The original type.</param>
+            <returns>The surrogate type.</returns>
+        </member>
+        <member name="M:System.Web.Ria.Services.DomainServiceSerializationSurrogate.#ctor(System.Web.DomainServices.DomainServiceDescription,System.Collections.Generic.HashSet{System.Type},System.Collections.Generic.Dictionary{System.String,System.Type})">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="description">A description of the <see cref="T:System.Web.DomainServices.DomainService"/> this type creates surrogates for.</param>
+            <param name="entityTypes">
+            The set of known entity types. This object is passed in externally for efficiency reasons. Its contents 
+            won't change; the set is owned by this type.
+            </param>
+            <param name="entityTypeNames">
+            A map of entity type names to entity types. This object is passed in externally for efficiency reasons. Its contents 
+            won't change; the set is owned by this type.
+            </param>
+        </member>
+        <member name="T:System.Web.Ria.Services.DomainServiceHttpModule">
+            <summary>
+            Represents a module which takes care of registering the <see cref="T:System.Web.Ria.Services.DomainServiceVirtualPathProvider"/>.
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.Services.DomainServiceVirtualPathProvider">
+            <summary>
+            Takes care of generating a service file when a physical one doesn't exist.
+            </summary>
+        </member>
+        <member name="T:System.Web.Ria.Services.DomainServiceVirtualPathProvider.DomainServiceCacheDependency">
+            <summary>
+            This is a no-op cache dependency.
+            </summary>
+        </member>
+    </members>
+</doc>
