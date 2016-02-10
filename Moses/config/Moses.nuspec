@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Moses</id>
+    <version>0.0.0.0</version>
+    <title>Moses</title>
+    <authors>Olavo Rocha Neto</authors>
+    <owners></owners>
+    <description>
+      Framework com agregador de diversas ferramentas para criação do modelo de desenvolvimento da Exodus Sistemas. Parte do Exodus Finanças. 
+    </description>
+    <releaseNotes>
+    </releaseNotes>
+    <summary>
+      Framework de Desenvolvimento de Aplicações Web da Exodus
+    </summary>
+    <language>pt-BR</language>
+    <projectUrl>https://nuget.org/packages/Moses</projectUrl>
+    <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
+    <copyright>Copyright  2016</copyright>
+    <dependencies>
+        <group targetFramework="net40">
+          
+        </group>
+        <group targetFramework="net46">
+
+        </group>
+    </dependencies>
+    <references></references>
+    <tags></tags>
+  </metadata>
+  <files>
+    <file src="lib\" target="lib" />
+    <file src="tools\" target="tools" />
+    <file src="content\" target="content" />
+  </files>
+</package>
