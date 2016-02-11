@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{2468150F-C396-4A3E-8CAC-583B92285158}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		Prebuild.ps1 = Prebuild.ps1
 	EndProjectSection
 EndProject
 Global
