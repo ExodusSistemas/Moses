@@ -1,0 +1,22 @@
+{
+  "profiles": {
+    "Debug": {
+      "commandLineArgs": "set NODE_ENV=$(ConfigurationName)",
+      "workingDirectory": "../artifacts/bin/",
+      "environmentVariables": {
+        "packageTarget": "Moses/Debug/",
+        "outputPath": "Moses/Debug/"
+      },
+      "sdkVersion": "net46"
+    },
+    "Release": {
+      "commandLineArgs": "set NODE_ENV=$(ConfigurationName)",
+      "workingDirectory": "../artifacts/bin/",
+      "environmentVariables": {
+        "packageTarget": "Moses/Release/",
+        "outputPath": "Moses/Release/"
+      },
+      "sdkVersion": "net46"
+    }
+  }
+}
