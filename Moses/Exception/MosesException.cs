@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Moses.Management;
 
 namespace Moses
 {
@@ -20,15 +19,7 @@ namespace Moses
         public MosesException(string message, System.Exception innerException)
             : base(message, innerException)
         {
-            if (MosesConfiguration.Default != null)
-            {
-                //envia um relatório de erros para a Exodus
-                if (MosesConfiguration.Default.EventProvider != null)
-                {
-                    MosesEventArgs args = new MosesEventArgs(this, MosesEventType.ExceptionNotification);
-                    new MosesEvent("MosesDataProviderException", args).Raise();
-                }
-            }
+            
         }
 
 

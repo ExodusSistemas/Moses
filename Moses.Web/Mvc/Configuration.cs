@@ -25,9 +25,9 @@ namespace Moses.Web
             ApplicationExceptionType = typeof(MosesApplicationException);
         }
 
-        public static void Setup(System.Net.Http.Formatting.MediaTypeFormatterCollection mediaTypeFormatterCollection, System.Web.Mvc.ValueProviderFactoryCollection valueProviderFactoryCollection, System.Web.Mvc.ModelBinderDictionary modelBinderDictionary)
+        public static void Setup(IApplicationConfiguration app,  System.Net.Http.Formatting.MediaTypeFormatterCollection mediaTypeFormatterCollection, System.Web.Mvc.ValueProviderFactoryCollection valueProviderFactoryCollection, System.Web.Mvc.ModelBinderDictionary modelBinderDictionary)
         {
-
+            ApplicationConfiguration = app;
             mediaTypeFormatterCollection.RemoveAt(0);//remove o Json
             MediaTypeFormatter t = new JsonNetFormatter();
             mediaTypeFormatterCollection.Insert(0, t );
@@ -100,6 +100,8 @@ namespace Moses.Web
 
         public static Type ApplicationExceptionType { get; set; }
 
+        public static IApplicationConfiguration ApplicationConfiguration { get; set; }
+
         #region User Initializer
 
         private static Func<HttpContextBase, HttpSessionStateBase, IUser> _configuratioUserInitializeTask = null;
@@ -155,5 +157,6 @@ namespace Moses.Web
         #endregion
 
         
+
     }
 }

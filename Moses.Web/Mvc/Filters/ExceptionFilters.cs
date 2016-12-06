@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data.Linq;
 using System.Text;
-using System.Data.Linq.Mapping;
 using Moses.Web.Mvc;
 using Moses.Web.Mvc.Patterns;
 
@@ -62,23 +60,23 @@ namespace Moses.Web
             
 #endif
 
-                if (filterContext.Exception is ChangeConflictException)
-                {
-                    StringBuilder builder = new StringBuilder();
-                    builder.AppendLine();
-
-                    ChangeConflictException cce = filterContext.Exception as ChangeConflictException;
-
-                    error += " (Optimistic concurrency error.)";
-
-                    error += "[";
-                    foreach (var i in cce.Data)
-                    {
-                        error += i.ToString() + ",";
-                    }
-                    error += "]";
-
-                }
+                //if (filterContext.Exception is ChangeConflictException)
+                //{
+                //    StringBuilder builder = new StringBuilder();
+                //    builder.AppendLine();
+                //
+                //    ChangeConflictException cce = filterContext.Exception as ChangeConflictException;
+                //
+                //    error += " (Optimistic concurrency error.)";
+                //
+                //    error += "[";
+                //    foreach (var i in cce.Data)
+                //    {
+                //        error += i.ToString() + ",";
+                //    }
+                //    error += "]";
+                //
+                //}
 
 
                 error += ": " + filterContext.Exception.Message;
