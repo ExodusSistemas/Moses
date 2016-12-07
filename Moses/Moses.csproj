@@ -101,17 +101,12 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq">
@@ -159,6 +154,7 @@
     <Compile Include="Exception\MosesMaintenanceException.cs" />
     <Compile Include="Exception\MosesApplicationException.cs" />
     <Compile Include="Exception\MosesRuntimeException.cs" />
+    <Compile Include="Exception\MosesSecurityException.cs" />
     <Compile Include="Extensions\EnumHelper.cs" />
     <Compile Include="Extensions\FormatHelper.cs" />
     <Compile Include="Extensions\OfxHelper.cs" />
@@ -206,10 +202,7 @@
     <None Include="key.snk" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Binding\" />
-    <Folder Include="Configuration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>

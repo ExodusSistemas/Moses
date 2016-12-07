@@ -36,8 +36,9 @@ namespace Moses.Web
             else
             {
 #if DEBUG
-                
-                try{
+
+                try
+                {
 
                     MembershipContext exceptionContext = new MembershipContext(filterContext.HttpContext);
 
@@ -53,30 +54,15 @@ namespace Moses.Web
                     if (filterContext.Exception != null && !(filterContext.Exception.GetType() == Configuration.ApplicationExceptionType))
                         Moses.Web.ApplicationMail.CreateErrorMail(HttpContext.Current.Request.Url.ToString(), filterContext.Exception, exceptionContext.User.Name, exceptionContext.Contract.Name, HttpContext.Current.Request.UrlReferrer.AbsoluteUri).SendMail();
                 }
-                catch{
+                catch
+                {
                 }
 
                 isDebug = "false";
-            
+
 #endif
 
-                //if (filterContext.Exception is ChangeConflictException)
-                //{
-                //    StringBuilder builder = new StringBuilder();
-                //    builder.AppendLine();
-                //
-                //    ChangeConflictException cce = filterContext.Exception as ChangeConflictException;
-                //
-                //    error += " (Optimistic concurrency error.)";
-                //
-                //    error += "[";
-                //    foreach (var i in cce.Data)
-                //    {
-                //        error += i.ToString() + ",";
-                //    }
-                //    error += "]";
-                //
-                //}
+
 
 
                 error += ": " + filterContext.Exception.Message;
@@ -94,7 +80,7 @@ namespace Moses.Web
             {
                 if (_channel == AjaxExceptionChannelOptions.Json)
                 {
-                    filterContext.Result = new JsonNetResult() { Data = ResponseViewModel.ApplyFail(error, expired: expired), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    filterContext.Result = new JsonNetResult() { Data = ResponseViewModel.ApplyFail(/*filterContext.Exception.StackTrace + "|" +*/ error, expired: expired), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                 }
                 else
                 {

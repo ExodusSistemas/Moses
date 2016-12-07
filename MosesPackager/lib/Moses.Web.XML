@@ -4,14 +4,259 @@
         <name>Moses.Web</name>
     </assembly>
     <members>
-        <member name="T:Moses.Web.Controls.MosesTextBox">
+        <member name="M:Moses.Web.HttpHelpers.ResolveUrl(System.String)">
             <summary>
-            MosesTextBox para simplificar a validação de dados.
+            Returns a site relative HTTP path from a partial path starting out with a ~.
+            Same syntax that ASP.Net internally supports but this method can be used
+            outside of the Page framework.
+            
+            Works like Control.ResolveUrl including support for ~ syntax
+            but returns an absolute URL.
+            </summary>
+            <param name="originalUrl">Any Url including those starting with ~</param>
+            <returns>relative url</returns>
+        </member>
+        <member name="M:Moses.Web.HttpHelpers.ResolveServerUrl(System.String,System.Boolean)">
+            <summary>
+            This method returns a fully qualified absolute server Url which includes
+            the protocol, server, port in addition to the server relative Url.
+            
+            Works like Control.ResolveUrl including support for ~ syntax
+            but returns an absolute URL.
+            </summary>
+            <param name="ServerUrl">Any Url, either App relative or fully qualified</param>
+            <param name="forceHttps">if true forces the url to use https</param>
+            <returns></returns>
+        </member>
+        <member name="M:Moses.Web.HttpHelpers.ResolveServerUrl(System.String)">
+            <summary>
+            This method returns a fully qualified absolute server Url which includes
+            the protocol, server, port in addition to the server relative Url.
+            
+            It work like Page.ResolveUrl, but adds these to the beginning.
+            This method is useful for generating Urls for AJAX methods
+            </summary>
+            <param name="ServerUrl">Any Url, either App relative or fully qualified</param>
+            <returns></returns>
+        </member>
+        <member name="T:Moses.Web.Mvc.Patterns.IChildEntity`3">
+            <summary>
+            Interface for define a Child Entity
+            </summary>
+            <typeparam name="K">Type of the identifier</typeparam>
+            <typeparam name="TEntityParent">Parent Entity Type</typeparam>
+            <typeparam name="J">Parent Entity Id Type</typeparam>
+        </member>
+        <member name="T:Moses.Web.Mvc.Patterns.IGridUnitOfWork`3">
+            <summary>
+            Grid Unit of Work ready-to-use interface
+            </summary>
+            <typeparam name="TEntity">Entity of the UnitOfWork</typeparam>
+            <typeparam name="TType">Type of the Entity Identifier</typeparam>
+        </member>
+        <member name="T:Moses.Web.Mvc.Patterns.IChildGridUnitOfWork`5">
+            <summary>
+            Federated Grid Unit of Work ready-to-use interface
+            </summary>
+            <typeparam name="TEntityMaster">Entity of the UnitOfWork</typeparam>
+            <typeparam name="KMaster">Type of the Entity Identifier</typeparam>
+        </member>
+        <member name="M:Moses.Web.Mvc.Patterns.UnitOfWork`3.InitializeRepository">
+            <summary>
+            Initializes the repository 
+            </summary>
+            <remarks>
+            </remarks>
+        </member>
+        <member name="P:Moses.Web.Mvc.Patterns.UnitOfWork`3.Table">
+            <summary>
+            Data Source for UnitOfWork
             </summary>
         </member>
-        <member name="P:Moses.Web.Controls.MosesTextBox.IntValue">
+        <member name="M:Moses.Web.Mvc.Patterns.UnitOfWork`3.InitializeEntity">
             <summary>
-            Get. Faz o Parse para Int32. Caso tenha sucesso retornará o valor convertido senão retornará 0 (zero).
+            Initializes Entity Scope. 
+            </summary>
+            <remarks>
+            Set default Entity values on basic abstract implementation
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:Moses.Web.Mvc.Patterns.UnitOfWork`2">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEntity">Entity for the unit of work to Handle</typeparam>
+        </member>
+        <member name="T:Moses.Web.Mvc.Patterns.MosesRequestType">
+            <summary>
+            Representa o Tipo de Requisição no padrão do Moses
+            </summary>
+        </member>
+        <member name="M:Moses.Web.Mvc.Patterns.WebViewPageHelper.Route(System.Web.Mvc.UrlHelper,System.String,System.String,System.Object)">
+            <summary>
+            Defines a type of action specific to work with module trespassing
+            </summary>
+            <param name="container"></param>
+            <param name="ation"></param>
+            <param name="controller"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Moses.Web.Mvc.Patterns.WebViewPageHelper.FreshRoute(System.Web.Mvc.UrlHelper,System.String,System.String,System.Object)">
+            <summary>
+            Executes a Fresh Route, reloading the AppContainer
+            </summary>
+            <param name="container"></param>
+            <param name="action"></param>
+            <param name="controller"></param>
+            <param name="routeValues"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Moses.Web.Mvc.JsonNetResult.ExecuteResult(System.Web.Mvc.ControllerContext)">
+            <summary>
+            este eh um x
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:Moses.Web.Mvc.Html.MosesRouteValuesHelpers">
+            <summary>
+            Classe RouteValuesHelpers
+            </summary>
+            <remarks>
+            Enxerto de código estático vindo direto dos fontes do MVC. Necessário para o GenerateUrl
+            </remarks>
+        </member>
+        <member name="M:Moses.Web.PostData.GetPostData">
+            <summary>
+            Returns the parameters array formatted for multi-part/form data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Moses.Web.CloudConvert.#ctor(System.String)">
+            <param name="apikey">The API key which can be found here: https://cloudconvert.org/user/profile</param>
+        </member>
+        <member name="M:Moses.Web.CloudConvert.GetProcessURL(System.String,System.String)">
+            <summary>
+            Creates a new Process ID.
+            </summary>
+            <param name="inputFormat">Current format of the file.</param>
+            <param name="outputFormat">Output format, to which the file should be converted.</param>
+            <returns>The URL to upload a file, check the status of a conversion and download the converted file.</returns>
+        </member>
+        <member name="M:Moses.Web.CloudConvert.UploadFile(System.String,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Uploads a file for conversion.
+            </summary>
+            <param name="processUrl">The URL to upload a file which you get using the GetProcessURL method.</param>
+            <param name="filePath">Path to the file which will be converted.</param>
+            <param name="outputFormat">Output format, to which the file should be converted.</param>
+            <param name="email">E-mail address which is notified after the conversion is finished.</param>
+            <param name="options">Conversion type specific options.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Moses.Web.CloudConvert.GetStatus(System.String)">
+            <summary>
+            Gets the status of a conversion.
+            </summary>
+            <param name="processUrl">The URL to upload a file which you get using the GetProcessURL method.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Moses.Web.CloudConvert.CancelConversion(System.String)">
+            <summary>
+            Cancels a running conversion
+            </summary>
+            <param name="processUrl">The URL to upload a file which you get using the GetProcessURL method.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Moses.Web.CloudConvert.DeleteConversion(System.String)">
+            <summary>
+            Deletes a finished or an aborted conversion (This is irreversible).
+            </summary>
+            <param name="processUrl">The URL to upload a file which you get using the GetProcessURL method.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Moses.Web.CloudConvert.ListProcesses">
+            <summary>
+            Lists all the running conversions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Moses.Web.ConversionStatus">
+            <summary>
+            The class for deserializing the conversion status.
+            </summary>
+        </member>
+        <member name="T:Moses.Web.ListRC">
+            <summary>
+            The class for deserializing the list of running processes.
+            </summary>
+        </member>
+        <member name="M:Moses.Web.Extensions.ExcludeEntityKeyHelper.FilterEntities(System.Collections.Generic.IList{Newtonsoft.Json.Serialization.JsonProperty})">
+            <summary>
+            Exclui da lista todas as variáveis que representam entidades associadas
+            </summary>
+            <param name="properties"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Moses.Web.Extensions.JqGridDataHelper.ToJqGridData``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Object)">
+            <summary>
+            Converts a queryable expression into a format suitable for the JqGrid component, when
+            serialized to JSON. Use this method when returning data that the JqGrid component will
+            fetch via AJAX. Take the result of this method, and then serialize to JSON. This method
+            will also apply paging to the data.
+            </summary>
+            <typeparam name="T">The type of the element in baseList. Note that this type should be
+            an anonymous type or a simple, named type with no possibility of a cycle in the object
+            graph. The default JSON serializer will throw an exception if the object graph it is
+            serializing contains cycles.</typeparam>
+            <param name="baseList">The list of records to display in the grid.</param>
+            <param name="currentPage">A 1-based index indicating which page the grid is about to display.</param>
+            <param name="rowsPerPage">The maximum number of rows which the grid can display at the moment.</param>
+            <param name="orderBy">A string expression containing a column name and an optional ASC or
+            DESC. You can, separate multiple column names as with SQL.</param>
+            <param name="searchQuery">The value which the user typed into the search box, if any. Can be
+            null/empty.</param>
+            <param name="searchColumns">An array of strings containing the names of properties in the
+            element type of baseList which should be considered when searching the data for searchQuery.</param>
+            <param name="userData">Arbitrary data to be returned to the grid along with the row data. Leave
+            null if not using. Must be serializable to JSON!</param>
+            <returns>A structure containing all of the fields required by the JqGrid. You can then call
+            a JSON serializer, passing this result.</returns>
+        </member>
+        <member name="P:Moses.Web.Extensions.JqGridData.Total">
+            <summary>
+            The number of pages which should be displayed in the paging controls at the bottom of the grid.
+            </summary>
+        </member>
+        <member name="P:Moses.Web.Extensions.JqGridData.Page">
+            <summary>
+            The current page number which should be highlighted in the paging controls at the bottom of the grid.
+            </summary>
+        </member>
+        <member name="P:Moses.Web.Extensions.JqGridData.Records">
+            <summary>
+            The total number of records in the entire data set, not just the portion returned in Rows.
+            </summary>
+        </member>
+        <member name="P:Moses.Web.Extensions.JqGridData.Rows">
+            <summary>
+            The data that will actually be displayed in the grid.
+            </summary>
+        </member>
+        <member name="P:Moses.Web.Extensions.JqGridData.UserData">
+            <summary>
+            Arbitrary data to be returned to the grid along with the row data. Leave null if not using. Must be serializable to JSON!
+            </summary>
+        </member>
+        <member name="M:Moses.Web.Management.MosesWebEventProvider.ProcessEvent(System.Web.Management.WebBaseEvent)">
+            <summary>
+            Escreve no XML o evento disparado pela aplicação
+            </summary>
+            <param name="raisedEvent"></param>
+        </member>
+        <member name="T:Moses.Web.Inspector">
+            <summary>
+            Entidade que inspeciona o acesso dos usuários a páginas e loga no banco de dados para realização de estatísticas
             </summary>
         </member>
         <member name="T:Moses.Web.Controls.FontWarpFactor">
@@ -286,198 +531,6 @@
             <param name="graphics1">The graphics1.</param>
             <param name="rect">The rect.</param>
         </member>
-        <member name="M:Moses.Web.HttpHelpers.ResolveUrl(System.String)">
-            <summary>
-            Returns a site relative HTTP path from a partial path starting out with a ~.
-            Same syntax that ASP.Net internally supports but this method can be used
-            outside of the Page framework.
-            
-            Works like Control.ResolveUrl including support for ~ syntax
-            but returns an absolute URL.
-            </summary>
-            <param name="originalUrl">Any Url including those starting with ~</param>
-            <returns>relative url</returns>
-        </member>
-        <member name="M:Moses.Web.HttpHelpers.ResolveServerUrl(System.String,System.Boolean)">
-            <summary>
-            This method returns a fully qualified absolute server Url which includes
-            the protocol, server, port in addition to the server relative Url.
-            
-            Works like Control.ResolveUrl including support for ~ syntax
-            but returns an absolute URL.
-            </summary>
-            <param name="ServerUrl">Any Url, either App relative or fully qualified</param>
-            <param name="forceHttps">if true forces the url to use https</param>
-            <returns></returns>
-        </member>
-        <member name="M:Moses.Web.HttpHelpers.ResolveServerUrl(System.String)">
-            <summary>
-            This method returns a fully qualified absolute server Url which includes
-            the protocol, server, port in addition to the server relative Url.
-            
-            It work like Page.ResolveUrl, but adds these to the beginning.
-            This method is useful for generating Urls for AJAX methods
-            </summary>
-            <param name="ServerUrl">Any Url, either App relative or fully qualified</param>
-            <returns></returns>
-        </member>
-        <member name="M:Moses.Web.PostData.GetPostData">
-            <summary>
-            Returns the parameters array formatted for multi-part/form data
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Moses.Web.CloudConvert.#ctor(System.String)">
-            <param name="apikey">The API key which can be found here: https://cloudconvert.org/user/profile</param>
-        </member>
-        <member name="M:Moses.Web.CloudConvert.GetProcessURL(System.String,System.String)">
-            <summary>
-            Creates a new Process ID.
-            </summary>
-            <param name="inputFormat">Current format of the file.</param>
-            <param name="outputFormat">Output format, to which the file should be converted.</param>
-            <returns>The URL to upload a file, check the status of a conversion and download the converted file.</returns>
-        </member>
-        <member name="M:Moses.Web.CloudConvert.UploadFile(System.String,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Uploads a file for conversion.
-            </summary>
-            <param name="processUrl">The URL to upload a file which you get using the GetProcessURL method.</param>
-            <param name="filePath">Path to the file which will be converted.</param>
-            <param name="outputFormat">Output format, to which the file should be converted.</param>
-            <param name="email">E-mail address which is notified after the conversion is finished.</param>
-            <param name="options">Conversion type specific options.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Moses.Web.CloudConvert.GetStatus(System.String)">
-            <summary>
-            Gets the status of a conversion.
-            </summary>
-            <param name="processUrl">The URL to upload a file which you get using the GetProcessURL method.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Moses.Web.CloudConvert.CancelConversion(System.String)">
-            <summary>
-            Cancels a running conversion
-            </summary>
-            <param name="processUrl">The URL to upload a file which you get using the GetProcessURL method.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Moses.Web.CloudConvert.DeleteConversion(System.String)">
-            <summary>
-            Deletes a finished or an aborted conversion (This is irreversible).
-            </summary>
-            <param name="processUrl">The URL to upload a file which you get using the GetProcessURL method.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Moses.Web.CloudConvert.ListProcesses">
-            <summary>
-            Lists all the running conversions.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Moses.Web.ConversionStatus">
-            <summary>
-            The class for deserializing the conversion status.
-            </summary>
-        </member>
-        <member name="T:Moses.Web.ListRC">
-            <summary>
-            The class for deserializing the list of running processes.
-            </summary>
-        </member>
-        <member name="M:Moses.Web.Extensions.ExcludeEntityKeyHelper.FilterEntities(System.Collections.Generic.IList{Newtonsoft.Json.Serialization.JsonProperty})">
-            <summary>
-            Exclui da lista todas as variáveis que representam entidades associadas
-            </summary>
-            <param name="properties"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Moses.Web.Extensions.JqGridDataHelper.ToJqGridData``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Object)">
-            <summary>
-            Converts a queryable expression into a format suitable for the JqGrid component, when
-            serialized to JSON. Use this method when returning data that the JqGrid component will
-            fetch via AJAX. Take the result of this method, and then serialize to JSON. This method
-            will also apply paging to the data.
-            </summary>
-            <typeparam name="T">The type of the element in baseList. Note that this type should be
-            an anonymous type or a simple, named type with no possibility of a cycle in the object
-            graph. The default JSON serializer will throw an exception if the object graph it is
-            serializing contains cycles.</typeparam>
-            <param name="baseList">The list of records to display in the grid.</param>
-            <param name="currentPage">A 1-based index indicating which page the grid is about to display.</param>
-            <param name="rowsPerPage">The maximum number of rows which the grid can display at the moment.</param>
-            <param name="orderBy">A string expression containing a column name and an optional ASC or
-            DESC. You can, separate multiple column names as with SQL.</param>
-            <param name="searchQuery">The value which the user typed into the search box, if any. Can be
-            null/empty.</param>
-            <param name="searchColumns">An array of strings containing the names of properties in the
-            element type of baseList which should be considered when searching the data for searchQuery.</param>
-            <param name="userData">Arbitrary data to be returned to the grid along with the row data. Leave
-            null if not using. Must be serializable to JSON!</param>
-            <returns>A structure containing all of the fields required by the JqGrid. You can then call
-            a JSON serializer, passing this result.</returns>
-        </member>
-        <member name="P:Moses.Web.Extensions.JqGridData.Total">
-            <summary>
-            The number of pages which should be displayed in the paging controls at the bottom of the grid.
-            </summary>
-        </member>
-        <member name="P:Moses.Web.Extensions.JqGridData.Page">
-            <summary>
-            The current page number which should be highlighted in the paging controls at the bottom of the grid.
-            </summary>
-        </member>
-        <member name="P:Moses.Web.Extensions.JqGridData.Records">
-            <summary>
-            The total number of records in the entire data set, not just the portion returned in Rows.
-            </summary>
-        </member>
-        <member name="P:Moses.Web.Extensions.JqGridData.Rows">
-            <summary>
-            The data that will actually be displayed in the grid.
-            </summary>
-        </member>
-        <member name="P:Moses.Web.Extensions.JqGridData.UserData">
-            <summary>
-            Arbitrary data to be returned to the grid along with the row data. Leave null if not using. Must be serializable to JSON!
-            </summary>
-        </member>
-        <member name="M:Moses.Web.Management.MosesWebEventProvider.ProcessEvent(System.Web.Management.WebBaseEvent)">
-            <summary>
-            Escreve no XML o evento disparado pela aplicação
-            </summary>
-            <param name="raisedEvent"></param>
-        </member>
-        <member name="T:Moses.Web.MembershipManager">
-            <summary>
-            Classe que existe apenas para marcar a interface IMembershipManager
-            </summary>
-        </member>
-        <member name="T:Moses.Web.Inspector">
-            <summary>
-            Entidade que inspeciona o acesso dos usuários a páginas e loga no banco de dados para realização de estatísticas
-            </summary>
-        </member>
-        <member name="M:Moses.Web.Mvc.JsonNetResult.ExecuteResult(System.Web.Mvc.ControllerContext)">
-            <summary>
-            este eh um x
-            </summary>
-            <param name="context"></param>
-        </member>
-        <member name="T:Moses.Web.Mvc.Html.MosesRouteValuesHelpers">
-            <summary>
-            Classe RouteValuesHelpers
-            </summary>
-            <remarks>
-            Enxerto de código estático vindo direto dos fontes do MVC. Necessário para o GenerateUrl
-            </remarks>
-        </member>
-        <member name="T:Moses.Web.Mvc.Patterns.MosesRequestType">
-            <summary>
-            Representa o Tipo de Requisição no padrão do Moses
-            </summary>
-        </member>
         <member name="T:Moses.Web.Handlers.CaptchaImageHandler">
             <summary>
             Captcha image stream HttpModule. Retrieves CAPTCHA objects from cache, renders them to memory, 
@@ -525,51 +578,6 @@
             Gets or sets the field.
             </summary>
             <value>The field.</value>
-        </member>
-        <member name="T:Moses.Web.Performance.ECMAScriptPacker">
-            <summary>
-            Packs a javascript file into a smaller area, removing unnecessary characters from the output.
-            </summary>
-        </member>
-        <member name="T:Moses.Web.Performance.ECMAScriptPacker.PackerEncoding">
-            <summary>
-            The encoding level to use. See http://dean.edwards.name/packer/usage/ for more info.
-            </summary>
-        </member>
-        <member name="P:Moses.Web.Performance.ECMAScriptPacker.Encoding">
-            <summary>
-            The encoding level for this instance
-            </summary>
-        </member>
-        <member name="P:Moses.Web.Performance.ECMAScriptPacker.FastDecode">
-            <summary>
-            Adds a subroutine to the output to speed up decoding
-            </summary>
-        </member>
-        <member name="P:Moses.Web.Performance.ECMAScriptPacker.SpecialChars">
-            <summary>
-            Replaces special characters
-            </summary>
-        </member>
-        <member name="P:Moses.Web.Performance.ECMAScriptPacker.Enabled">
-            <summary>
-            Packer enabled
-            </summary>
-        </member>
-        <member name="M:Moses.Web.Performance.ECMAScriptPacker.#ctor(Moses.Web.Performance.ECMAScriptPacker.PackerEncoding,System.Boolean,System.Boolean)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="encoding">The encoding level for this instance</param>
-            <param name="fastDecode">Adds a subroutine to the output to speed up decoding</param>
-            <param name="specialChars">Replaces special characters</param>
-        </member>
-        <member name="M:Moses.Web.Performance.ECMAScriptPacker.Pack(System.String)">
-            <summary>
-            Packs the script
-            </summary>
-            <param name="script">the script to pack</param>
-            <returns>the packed script</returns>
         </member>
         <member name="T:Moses.Web.Performance.ParseMaster">
             <summary>
@@ -636,6 +644,79 @@
             <summary>
             Replacement function for complicated lookups (e.g. Hello $3 $2)
             </summary>
+        </member>
+        <member name="T:Moses.Extensions.JQGrid`1">
+            <summary>
+            Extensão do JQGrid 
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:Moses.Extensions.ColumnBuilder">
+            <summary>
+            Contém implementações básicas do Moses
+            </summary>
+        </member>
+        <member name="T:Moses.Membership.MembershipManager">
+            <summary>
+            Classe que existe apenas para marcar a interface IMembershipManager
+            </summary>
+        </member>
+        <member name="P:Moses.Membership.IMembershipContext.ModuleName">
+            <summary>
+            Defines the module name for multi module system access
+            </summary>
+        </member>
+        <member name="M:Moses.Membership.IMembershipContext.HasFeature(System.String,System.String)">
+            <summary>
+            Defines if a feature is available for the current Membership Context : Ex. ("Contrato", "Read")
+            </summary>
+            <param name="featureSet">Name of the Controller Witch the feature belongs</param>
+            <param name="name">Name of the feature. (Ex. "Modify")</param>
+            <returns></returns>
+        </member>
+        <member name="P:Moses.Security.FeatureSetAttribute.GroupLevel">
+            <summary>
+            Determina o Nível do Grupo de Acordo com as definições em RoleGroupOptions.
+            </summary>
+        </member>
+        <member name="M:Moses.Security.FeatureAttribute.#ctor(Moses.Security.FeatureOptions)">
+            <summary>
+            Açucar Sintático
+            </summary>
+            <param name="description"></param>
+        </member>
+        <member name="P:Moses.Security.FeatureAttribute.Mode">
+            <summary>
+            Permite acesso de escrita ao criador do registro mesmo que a feature permita somente leitura em outras circunstâncias.
+            </summary>
+        </member>
+        <member name="P:Moses.Security.FeatureAttribute.GroupLevel">
+            <summary>
+            Determina o Nível do Grupo de Acordo com as definições em RoleGroupOptions.
+            </summary>
+        </member>
+        <member name="T:Moses.Security.FeatureOptions">
+            <summary>
+            Define Frequent Fast-Use Features for functionality configuration
+            </summary>
+        </member>
+        <member name="T:Moses.Security.FeatureModeOptions">
+            <summary>
+            Restraint options from the available features based on pre-defined aspects
+            </summary>
+        </member>
+        <member name="M:Moses.Serialization.JsonNetResult.ExecuteResult(System.Web.Mvc.ControllerContext)">
+            <summary>
+            este eh um x
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Moses.Serialization.ExcludeEntityKeyHelper.FilterEntities(System.Collections.Generic.IList{Newtonsoft.Json.Serialization.JsonProperty})">
+            <summary>
+            Exclui da lista todas as variáveis que representam entidades associadas
+            </summary>
+            <param name="properties"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>
