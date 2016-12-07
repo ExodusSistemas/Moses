@@ -1,21 +1,19 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System;
 using System.Resources;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Moses")]
+[assembly: AssemblyTitle("Moses.Web")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Exodus")]
-[assembly: AssemblyProduct("Moses")]
-[assembly: AssemblyCopyright("Copyright © N/A 2008")]
+[assembly: AssemblyCompany("N/A")]
+[assembly: AssemblyProduct("Moses.Web")]
+[assembly: AssemblyCopyright("Copyright © N/A 2006")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -23,11 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4d78e02b-09dc-4deb-a7e1-b778be0fbd81")]
-
-//CLS Compliant
-[assembly: CLSCompliant(false)]
-
+[assembly: Guid("502b5acc-69bf-419c-a362-650c8ea03bc2")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -38,6 +32,8 @@ using System.Resources;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("3.1.0.3")]
-[assembly: AssemblyFileVersion("3.1.0.3")]
+[assembly: AssemblyVersion("3.1.0.2")]
+[assembly: AssemblyFileVersion("3.1.0.2")]
 [assembly: NeutralResourcesLanguageAttribute("pt-BR")]
+
+
