@@ -29,11 +29,7 @@ var options = {
 };
 
 gulp.task('build', function (done) {
-    if (!fs.existsSync("./tools"))
-        fs.mkdirSync("./tools", () => {});
-    if (!fs.existsSync("./content"))
-        fs.mkdirSync("./content", () => {});
-     
+    EnsureFolders();
     del("./lib/*")
 
     var stream = gulp.src("../Moses.Web/Moses.Web.csproj").pipe(
@@ -65,6 +61,7 @@ gulp.task('nuget-download', function (done) {
 });
 
 gulp.task('nuget-pack',['nuget-download'], function () {
+    EnsureFolders();
     var stream = nuget.pack(options);
     var projectVersion = GetProjectVersion();
     return gulp.src(options.basePath + '/Package.nuspec')
@@ -110,4 +107,11 @@ function GetProjectVersion(){
     if (version == null)
         throw Error('Version not found on Nuspec file');
     return version;
+}
+
+function EnsureFolders(){
+    if (!fs.existsSync("./tools"))
+        fs.mkdirSync("./tools", () => {});
+    if (!fs.existsSync("./content"))
+        fs.mkdirSync("./content", () => {});
 }
