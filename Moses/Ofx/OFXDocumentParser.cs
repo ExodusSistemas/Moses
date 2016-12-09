@@ -167,7 +167,7 @@ namespace Moses.Ofx
 
       /// <summary>
       /// Checks account type of supplied file
-      /// </summaryof
+      /// </summary>
       /// <param name="file">OFX file want to check</param>
       /// <returns>Account type for account supplied in ofx file</returns>
       private AccountType GetAccountType(string file)

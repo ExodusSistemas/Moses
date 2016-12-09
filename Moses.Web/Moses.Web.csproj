@@ -44,7 +44,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -55,11 +55,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\MosesPackager\lib\</OutputPath>
+    <OutputPath>..\Nuget\lib\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\Moses.Web.XML</DocumentationFile>
+    <DocumentationFile>..\Nuget\lib\Moses.Web.XML</DocumentationFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -270,11 +270,10 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Matthew 2.2\Financas\css\Financas2.less">
-      <Link>Financas2.less</Link>
-    </None>
     <None Include="app.config" />
     <None Include="key.snk" />
+    <None Include="Nuget\NuGet.config" />
+    <None Include="Nuget\Package.nuspec" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -308,6 +307,7 @@
     <None Include="Resources\Trirand.Web.Mvc\key.snk" />
     <None Include="Resources\Trirand.Web.Mvc.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

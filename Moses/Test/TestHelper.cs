@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
-
 namespace Moses.Test
 {
     /// <summary>
     /// Helper de Métodos de Testes
     /// </summary>
-    /// <seealso cref="http://manfred-ramoser.blogspot.com/"/>
+    /// <remarks>
+    /// See http://manfred-ramoser.blogspot.com
+    /// </remarks>
     public static class TestHelper
     {
         public static object FillAttributesWithRandomValues(this object obj)

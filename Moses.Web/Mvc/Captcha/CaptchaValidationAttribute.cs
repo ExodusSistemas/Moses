@@ -31,17 +31,17 @@ namespace Moses.Web
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
 	public sealed class CaptchaValidationAttribute : Attribute
 	{
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CaptchaCheckAttribute"/> class.
-		/// </summary>
-		public CaptchaValidationAttribute() 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CaptchaValidationAttribute"/> class.
+        /// </summary>
+        public CaptchaValidationAttribute() 
 			: this("captcha") { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CaptchaCheckAttribute"/> class.
-		/// </summary>
-		/// <param name="field">The field.</param>
-		public CaptchaValidationAttribute(string field)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CaptchaValidationAttribute"/> class.
+        /// </summary>
+        /// <param name="field">The field.</param>
+        public CaptchaValidationAttribute(string field)
 		{
 			Field = field;
 		}
