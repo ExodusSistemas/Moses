@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "delete": "^0.3.2",
+    "fs": "^0.0.1-security",
+    "gulp": "3.9.1",
+    "gulp-nuget": "1.0.3",
+    "request": "2.79.0",
+    "xml-query": "^1.4.0",
+    "xml-reader": "^2.4.3"
+  },
+  "devDependencies": {
+    "gulp-msbuild": "^0.4.3"
+  }
+}
