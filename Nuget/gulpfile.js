@@ -29,6 +29,11 @@ var options = {
 };
 
 gulp.task('build', function (done) {
+    if (!fs.existsSync("./tools"))
+        fs.mkdirSync("./tools", () => {});
+    if (!fs.existsSync("./content"))
+        fs.mkdirSync("./content", () => {});
+     
     del("./lib/*")
 
     var stream = gulp.src("../Moses.Web/Moses.Web.csproj").pipe(
