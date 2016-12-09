@@ -27,7 +27,7 @@ var options = {
     tool: true,
 };
 
-gulp.task('build', function (done) {
+gulp.task('build', function () {
     EnsureFolders();
     del("./lib/*")
 
@@ -46,14 +46,16 @@ gulp.task('build', function (done) {
     return stream;
 });
 
-gulp.task('nuget-version', function (done) {
+gulp.task('nuget-version', function () {
     GetProjectVersion();
 });
 
-gulp.task('nuget-download', function (done) {
+gulp.task('nuget-download', function () {
     if (fs.existsSync(options.nuget)) {
-        return done();
+        console.log('Nuget already exists');
+        return 0;
     }
+    
     var stream = request.get('http://nuget.org/nuget.exe')
         .pipe(fs.createWriteStream(options.nuget))
         .on('close', done);
@@ -61,7 +63,7 @@ gulp.task('nuget-download', function (done) {
     return stream;
 });
 
-gulp.task('nuget-pack', ['nuget-download'], function () {
+gulp.task('nuget-pack',  function () {
     EnsureFolders();
     var stream = nuget.pack(options);
     var projectVersion = GetProjectVersion();
@@ -70,7 +72,7 @@ gulp.task('nuget-pack', ['nuget-download'], function () {
       .pipe(gulp.dest(options.basePath + '/Packages'));
 });
 
-gulp.task('nuget-push', ['nuget-download'], function (apiKey) {
+gulp.task('nuget-push',  function (apiKey) {
     console.log('Publishing Moses...');
     var projectVersion = GetProjectVersion();
     var finish = false;
