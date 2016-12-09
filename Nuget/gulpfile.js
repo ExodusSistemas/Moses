@@ -3,7 +3,7 @@ This file in the main entry point for defining Gulp tasks and using Gulp plugins
 Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 */
 
-var gulp = require('gulp');
+var gulp = require('gulp-param')(require('gulp'), process.argv);;
 var fs = require("fs");
 var request = require("request");
 var nuget = require('gulp-nuget');
@@ -14,7 +14,6 @@ var options = {
     nuget: './nuget.exe', //./nuget.exe 
     source: 'https://www.nuget.org/',
     timeout: '300',
-    configFile: './NuGet.config',
     outputDirectory: './Packages/', //./gulp-nuget/ 
     basePath: './',
     properties: 'configuration=release',
@@ -55,12 +54,14 @@ gulp.task('nuget-download', function (done) {
     if (fs.existsSync(options.nuget)) {
         return done();
     }
-    request.get('http://nuget.org/nuget.exe')
+    var stream = request.get('http://nuget.org/nuget.exe')
         .pipe(fs.createWriteStream(options.nuget))
         .on('close', done);
+
+    return stream;
 });
 
-gulp.task('nuget-pack',['nuget-download'], function () {
+gulp.task('nuget-pack', ['build','nuget-download'], function () {
     EnsureFolders();
     var stream = nuget.pack(options);
     var projectVersion = GetProjectVersion();
@@ -69,21 +70,27 @@ gulp.task('nuget-pack',['nuget-download'], function () {
       .pipe(gulp.dest(options.basePath + '/Packages'));
 });
 
-gulp.task('nuget-push', ['nuget-download'],function () {
+gulp.task('nuget-push', function (apiKey) {
     console.log('Publishing Moses...');
+    var projectVersion = GetProjectVersion();
     var finish = false;
     var print = function(data){
         console.log(data);
         finish = true;
     }
-    var stream = gulp.src('./Packages/Moses.3.6.0.4.nupkg')
+
+    if (apiKey == null)
+        throw Erro("Api Key is null (invalid)");
+
+    options.apiKey = apiKey;
+    var stream = gulp.src('./Packages/Moses.'+ projectVersion +'.nupkg')
     .pipe(nuget.push(options));
 
     return stream;    
 });
 
-gulp.task('nuget-deploy', ['build','nuget-download','nuget-pack', 'nuget-push'] , function(){
-
+gulp.task('nuget-deploy', ['nuget-push'] , function(apiKey){
+    
 });
 
 

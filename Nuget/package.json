@@ -7,6 +7,7 @@
     "fs": "^0.0.1-security",
     "gulp": "3.9.1",
     "gulp-nuget": "1.0.3",
+    "gulp-param": "^1.0.3",
     "request": "2.79.0",
     "xml-query": "^1.4.0",
     "xml-reader": "^2.4.3"
