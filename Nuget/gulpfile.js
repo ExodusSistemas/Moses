@@ -61,7 +61,7 @@ gulp.task('nuget-download', function (done) {
     return stream;
 });
 
-gulp.task('nuget-pack', ['build','nuget-download'], function () {
+gulp.task('nuget-pack', ['nuget-download'], function () {
     EnsureFolders();
     var stream = nuget.pack(options);
     var projectVersion = GetProjectVersion();
@@ -70,7 +70,7 @@ gulp.task('nuget-pack', ['build','nuget-download'], function () {
       .pipe(gulp.dest(options.basePath + '/Packages'));
 });
 
-gulp.task('nuget-push', function (apiKey) {
+gulp.task('nuget-push', ['nuget-download'], function (apiKey) {
     console.log('Publishing Moses...');
     var projectVersion = GetProjectVersion();
     var finish = false;
