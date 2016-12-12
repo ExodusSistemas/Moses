@@ -314,7 +314,41 @@ namespace Moses.Web.Mvc.Html
             return builder.ToString();
 
         }
- 
+
+            public static string CaptchaImage(this HtmlHelper helper, int height, int width, out string captcha_guid)
+            {
+                Moses.Web.Controls.CaptchaImage image = new Moses.Web.Controls.CaptchaImage
+                {
+                    Height = height,
+                    Width = width,
+                };
+
+                HttpRuntime.Cache.Add(
+                    image.UniqueId,
+                    image,
+                    null,
+                    DateTime.Now.AddSeconds(Moses.Web.Controls.CaptchaImage.CacheTimeOut),
+                    Cache.NoSlidingExpiration,
+                    CacheItemPriority.NotRemovable,
+                    null);
+
+                StringBuilder stringBuilder = new StringBuilder(256);
+                stringBuilder.Append("<input type=\"hidden\" name=\"captcha-guid\" value=\"");
+                stringBuilder.Append(image.UniqueId);
+                stringBuilder.Append("\" />");
+                stringBuilder.AppendLine();
+                stringBuilder.Append("<img src=\"");
+                stringBuilder.Append("/captcha.ashx?guid=" + image.UniqueId);
+                stringBuilder.Append("\" alt=\"CAPTCHA\" width=\"");
+                stringBuilder.Append(width);
+                stringBuilder.Append("\" height=\"");
+                stringBuilder.Append(height);
+                stringBuilder.Append("\" />");
+
+                captcha_guid = image.UniqueId;
+
+                return stringBuilder.ToString();
+            }
 
         private static void AddAttributesToRender(this StringBuilder builder, MaskTypes maskType,  bool validateInput, string validateMessage)
         {
