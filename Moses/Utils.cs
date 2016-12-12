@@ -38,6 +38,11 @@ namespace Moses
 			}
 		}
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="TipoMenssagem"></param>
+        /// <returns></returns>
         public static DialogResult EmitMessage(MessageTypeOptions TipoMenssagem)
 		{
 			switch (TipoMenssagem)
@@ -63,23 +68,23 @@ namespace Moses
 			}
 		}
 
-//		public static void MessageInformation(bool msgDefault, string message, string caption)
-//		{
-//			if (msgDefault) 
-//			{
-//				MessageBox.Show("Base de dados atualizada","Informacao",MessageBoxButtons.OK,MessageBoxIcon.Information);
-//			}
-//			else
-//			{
-//				MessageBox.Show(message,"Informacao",MessageBoxButtons.OK,MessageBoxIcon.Information);
-//			}
-//			
-//		}
+        //		public static void MessageInformation(bool msgDefault, string message, string caption)
+        //		{
+        //			if (msgDefault) 
+        //			{
+        //				MessageBox.Show("Base de dados atualizada","Informacao",MessageBoxButtons.OK,MessageBoxIcon.Information);
+        //			}
+        //			else
+        //			{
+        //				MessageBox.Show(message,"Informacao",MessageBoxButtons.OK,MessageBoxIcon.Information);
+        //			}
+        //			
+        //		}
 
         /// <summary>
         /// Determina se a sequência é um número inteiro
         /// </summary>
-        /// <param name="InNumber"></param>
+        /// <param name="sequence"></param>
         /// <returns></returns>
         public static bool IsNumber(this string sequence)
         {
@@ -101,6 +106,11 @@ namespace Moses
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sequence"></param>
+        /// <returns></returns>
         public static bool IsNullOrEmpty(this string sequence)
         {
             return string.IsNullOrEmpty(sequence);
@@ -109,7 +119,7 @@ namespace Moses
         /// <summary>
         /// Determina se a sequência é um número
         /// </summary>
-        /// <param name="InNumber"></param>
+        /// <param name="sequence"></param>
         /// <returns></returns>
         public static bool IsDecimal(this string sequence)
         {
@@ -174,6 +184,12 @@ namespace Moses
             return builder.ToString();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="csvString"></param>
+        /// <param name="isRowOneHeader"></param>
+        /// <returns></returns>
         public static DataTable CsvToDataTable(string csvString, bool isRowOneHeader)
         {
 
@@ -246,6 +262,13 @@ namespace Moses
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="csvString"></param>
+        /// <param name="isRowOneHeader"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
         public static DataTable CsvToDataTable(string csvString, bool isRowOneHeader, char separator)
         {
             DataTable csvDataTable = new DataTable();

@@ -111,7 +111,7 @@ namespace Moses.Web.Mvc.Patterns
             }
             catch (Exception ex)
             {
-                return Fail("Falha ao excluir o(s) " + EntityTitle + "(s)");
+                return Fail("Falha ao excluir o(s) " + EntityTitle + "(s):" + ex.Message);
             }
         }
 
