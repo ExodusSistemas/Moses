@@ -11,6 +11,7 @@ using System.Web.SessionState;
 using System.Web.UI.WebControls;
 using System.Web.Caching;
 using Moses.Web;
+using Moses.Membership;
 
 namespace Moses.Web.Mvc.Patterns
 {
@@ -155,7 +156,6 @@ namespace Moses.Web.Mvc.Patterns
             }
             
             public MembershipContext MembershipContext { get; set; }
-            public IMembershipManager Membership { get; set; }
 
             protected override JsonResult Json(object data, string contentType, Encoding contentEncoding)
             {

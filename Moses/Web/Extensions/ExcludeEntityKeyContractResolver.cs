@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Text;
 
@@ -37,11 +36,11 @@ namespace Moses.Web.Extensions
                 var memberInfos = property.DeclaringType.GetMember(property.PropertyName);
                 if (memberInfos.Length == 1)
                 {
-                    AssociationAttribute attr = memberInfos[0].GetCustomAttributes(typeof(AssociationAttribute), false).FirstOrDefault() as AssociationAttribute;
-
-                    if (attr != null)
-                        if (attr.IsForeignKey == true)
-                            output.Remove(property);
+                    //AssociationAttribute attr = memberInfos[0].GetCustomAttributes(typeof(AssociationAttribute), false).FirstOrDefault() as AssociationAttribute;
+                    //
+                    //if (attr != null)
+                    //    if (attr.IsForeignKey == true)
+                    //        output.Remove(property);
                 }
                 
             }

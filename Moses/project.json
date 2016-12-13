@@ -1,10 +1,14 @@
 {
-  "version": "3.5.0.2",
+  "version": "3.7.0.0",
   "description": "Moses",
   "authors": [ "olavo" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "packOptions": {
+    "tags": [
+      
+    ],
+    "projectUrl": "",
+    "licenseUrl": ""
+  },
   "frameworks": {
     "net46": {
       "dependencies": {
@@ -12,30 +16,30 @@
         "System.Net.Http.Formatting.Extension": "5.2.3",
         "System.Net.Http": "4.0.0",
         "Microsoft.CSharp": "4.0.0",
-        "System.Collections": "4.0.0",
+        "System.Collections": "4.0.10",
         "System.Linq": "4.0.0",
-        "System.Runtime": "4.0.0",
-        "System.Threading": "4.0.0",
+        "System.Runtime": "4.0.20",
+        "System.Threading": "4.0.10",
         "Microsoft.AspNet.WebApi.Client": "5.2.3",
         "Microsoft.AspNet.WebPages": "3.2.3",
         "Microsoft.AspNet.WebApi.Core": "5.2.3",
         "Microsoft.AspNet.WebApi.WebHost": "5.2.3",
+        "EntityFramework": "6.1.3",
         "Microsoft.AspNet.Mvc": "5.2.3",
         "Trirand.Web.Mvc": "1.0.0-*"
       },
       "frameworkAssemblies": {
         "Microsoft.CSharp": "4.0.0",
-        "System.Collections": "4.0.0",
+        "System.Collections": "4.0.10",
         "System.Linq": "4.0.0",
-        "System.Runtime": "4.0.0",
-        "System.Threading": "4.0.0",
+        "System.Runtime": "4.0.20",
+        "System.Threading": "4.0.10",
         "System.ComponentModel.DataAnnotations": "4.0.0.0",
         "System.Xml.Serialization": "4.0.0.0",
         "System.Xml.Linq": "4.0.0.0",
         "System.Data": "4.0.0.0",
         "System.Data.Entity": "4.0.0.0",
         "System.Data.Linq": "4.0.0.0",
-        "System.Configuration": "4.0.0.0",
         "System": "4.0.0.0",
         "System.Xml": "4.0.0.0",
         "System.Web": "4.0.0.0",
@@ -45,24 +49,29 @@
     }
   },
   "dependencies": {
+    "Microsoft.AspNet.Identity.Owin": "2.2.1",
+    "Microsoft.Owin": "3.0.1",
+    "Microsoft.Owin.Host.SystemWeb": "3.0.1",
     "Newtonsoft.Json": "8.0.2"
   },
-  "content": [
-    "config/**",
-    "config/Package.nuspec",
-    "**/Trirand.Web.Mvc.dll"
-  ],
-  "contentFiles": [
-    "config/lib/Trirand.Web.Mvc.dll"
-  ],
+  "publishOptions": {
+    "include": [
+      "config/**",
+      "config/Package.nuspec",
+      "**/Trirand.Web.Mvc.dll"
+    ],
+    "copyToOutput":[
+      "config/lib/Trirand.Web.Mvc.dll"
+    ]
+  },
   "configurations": {
     "Debug": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [ "DEBUG", "TRACE" ]
       }
     },
     "Release": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [ "RELEASE" ],
         "optimize": true
       }
