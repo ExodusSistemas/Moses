@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Moses.Management;
 
 namespace Moses
 {
@@ -20,7 +20,10 @@ namespace Moses
         public MosesException(string message, System.Exception innerException)
             : base(message, innerException)
         {
-            
+            if (MosesConfiguration.Default != null)
+            {
+                
+            }
         }
 
 

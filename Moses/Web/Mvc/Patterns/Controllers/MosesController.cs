@@ -11,7 +11,6 @@ using System.Web.SessionState;
 using System.Web.UI.WebControls;
 using System.Web.Caching;
 using Moses.Web;
-using Moses.Membership;
 
 namespace Moses.Web.Mvc.Patterns
 {

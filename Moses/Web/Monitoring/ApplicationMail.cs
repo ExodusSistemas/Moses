@@ -85,15 +85,15 @@ namespace Moses.Web
                 MailMessage message = new MailMessage();
                 message.To.Add(to);
 
-                message.From = new MailAddress(Configuration.ApplicationConfiguration.SystemEmail, Configuration.ApplicationConfiguration.SystemEmailSenderName);
-                message.Subject = Configuration.ApplicationConfiguration.SystemEmailSenderNotificationTag + titulo;
+                message.From = new MailAddress("system@exodusfinancas.com.br", "Exodus Finanças");
+                message.Subject = @"[Exodus Finanças - Notificação] " + titulo;
                 message.IsBodyHtml = true;
                 message.Body = emailBody;
 
                 if (replyTo != null)
                 {
                     message.ReplyToList.Add(new MailAddress(replyTo));
-                    message.ReplyToList.Add(new MailAddress(Configuration.ApplicationConfiguration.SupportEmail));
+                    message.ReplyToList.Add(new MailAddress("suporte@exodus.eti.br"));
                 }
 
                 return message;
@@ -109,8 +109,8 @@ namespace Moses.Web
                 MailMessage message = new MailMessage();
                 message.To.Add(to);
 
-                message.From = new MailAddress(Configuration.ApplicationConfiguration.SystemEmail, Configuration.ApplicationConfiguration.SystemEmailSenderName);
-                message.Subject = Configuration.ApplicationConfiguration.SystemEmailChangePasswordTag + titulo;
+                message.From = new MailAddress("mfs@exodusfinancas.com.br", "Exodus Finanças");
+                message.Subject = @"[Exodus Finanças - Troca de senha]" + titulo;
                 message.IsBodyHtml = true;
                 message.Body = emailBody;
 
@@ -152,9 +152,9 @@ namespace Moses.Web
             {
                 MailMessage message = new MailMessage();
                 message.To.Add(emailTo);
-                message.From = new MailAddress(Configuration.ApplicationConfiguration.SystemEmail, Configuration.ApplicationConfiguration.SystemEmailSenderName);
+                message.From = new MailAddress("system@exodusfinancas.com.br", "Exodus Finanças(beta)");
 
-                message.Subject = Configuration.ApplicationConfiguration.SystemEmailErrorTag +  exception.Message;
+                message.Subject = "[Finanças - Erro]" + exception.Message;
                 message.IsBodyHtml = true;
                 message.Body =
                              "<br>Contract Name: " + contractName +

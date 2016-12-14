@@ -65,8 +65,6 @@ namespace Moses.Web
             return entry;
         }
 
-
-
         public static void SubmitLogEntry(this MembershipContext context, MosesLogEntryOptions type)
         {
             context.SubmitLogEntry(type, "");

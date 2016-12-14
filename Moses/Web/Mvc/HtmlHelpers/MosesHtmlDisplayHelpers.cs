@@ -14,6 +14,10 @@ namespace Moses.Web.Mvc.Html
 
         public static string DisplayPercentVariation(this decimal number, decimal? pivot = null, bool progressive = true, bool showSymbol = true)
         {
+            var symbol = "";
+            if (showSymbol) symbol = "%";
+
+
             decimal variation = 0;
             string variationText = "";
             string colorClass = "";
