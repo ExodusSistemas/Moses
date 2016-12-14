@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Moses.Web.Mvc.Patterns
 {
-    public class ResponseViewModel 
+    public class ResponseViewModel
     {
         public bool success { get; set; }
         public string message { get; set; }
@@ -39,7 +39,7 @@ namespace Moses.Web.Mvc.Patterns
         public static JsonResult SaveResult(string message, dynamic model = null, object misc = null, object index = null, MosesOperation? operation = null)
         {
             object item = null;
-            if( model is MosesBaseViewModel)
+            if (model is BaseViewModel)
             {
                 if (model == null)
                     throw new Moses.MosesConfigurationException("Erro no sistema: A configuração de Operação não foi definida.");
@@ -74,10 +74,10 @@ namespace Moses.Web.Mvc.Patterns
             };
         }
 
-        public static ResponseViewModel MultiEditResult(string message, dynamic model = null,  object misc = null, object index = null, MosesOperation? operation = null)
+        public static ResponseViewModel MultiEditResult(string message, dynamic model = null, object misc = null, object index = null, MosesOperation? operation = null)
         {
             object item = null;
-            if (model is MosesBaseViewModel)
+            if (model is BaseViewModel)
             {
                 operation = model.Operation ?? ((bool)model.IsEdit) ? MosesOperation.Edit : MosesOperation.Add;
                 item = model.Item;
@@ -116,7 +116,7 @@ namespace Moses.Web.Mvc.Patterns
             };
         }
 
-        
+
 
         public static ResponseViewModel ApplySuccess(string successMessage = "Operação realizada com sucesso.", string defaultSuccessBehavior = null, object misc = null, object index = null, bool expired = false)
         {
@@ -129,7 +129,7 @@ namespace Moses.Web.Mvc.Patterns
                 expired = expired
             };
         }
-        
+
 
         public static ResponseViewModel ApplyFail(string errorMessage = "Ocorreu um erro desconhecido.", string defaultFailBehavior = null, object misc = null, object index = null, bool expired = false, Exception exception = null)
         {
@@ -137,7 +137,7 @@ namespace Moses.Web.Mvc.Patterns
             {
                 success = false,
                 message = errorMessage,
-                index = index ,
+                index = index,
                 expired = expired
             };
         }

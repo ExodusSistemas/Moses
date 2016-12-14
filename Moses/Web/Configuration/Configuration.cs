@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Moses.Extensions;
-using System.Configuration;
 using Moses.Web.Mvc.Patterns;
 using System.Web;
 using System.Net.Http.Formatting;
@@ -16,18 +15,20 @@ using System.Net.Http.Formatting;
 namespace Moses.Web
 {
     public class Configuration
+        
     {
+        public static IApplicationConfiguration ApplicationConfiguration { get; set; } = null;
+        public static ISettingsService ApplicationSettings { get; set; }
+
         static Configuration()
         {
-            HomeUrl = "~/Home/Login";
-            LoginUrl = "~/Home/Login";
-            BugTrackingMail = ConfigurationManager.AppSettings["BugTrackingMail"];
             ApplicationExceptionType = typeof(MosesApplicationException);
         }
 
-        public static void Setup(System.Net.Http.Formatting.MediaTypeFormatterCollection mediaTypeFormatterCollection, System.Web.Mvc.ValueProviderFactoryCollection valueProviderFactoryCollection, System.Web.Mvc.ModelBinderDictionary modelBinderDictionary)
+        public static void Setup<TApplicationConfiguration>(TApplicationConfiguration app,  System.Net.Http.Formatting.MediaTypeFormatterCollection mediaTypeFormatterCollection, System.Web.Mvc.ValueProviderFactoryCollection valueProviderFactoryCollection, System.Web.Mvc.ModelBinderDictionary modelBinderDictionary)
+            where TApplicationConfiguration : class, IApplicationConfiguration
         {
-
+            ApplicationConfiguration = app;
             mediaTypeFormatterCollection.RemoveAt(0);//remove o Json
             MediaTypeFormatter t = new JsonNetFormatter();
             mediaTypeFormatterCollection.Insert(0, t );
@@ -39,6 +40,14 @@ namespace Moses.Web
             modelBinderDictionary.Add(typeof(decimal?), new DecimalModelBinder());
             modelBinderDictionary.Add(typeof(DateTime?), new DateTimePtBrModelBinder());
             modelBinderDictionary.Add(typeof(DateTime), new DateTimePtBrModelBinder());
+
+            //Settings from Application Configuration
+            ApplicationSettings = app.CreateSettingsService();
+            ApplicationSettings.Initialize(app.Brand);
+            HomeUrl = ApplicationSettings.Get(nameof(HomeUrl)) ?? "~/Home/Login";
+            LoginUrl = ApplicationSettings.Get(nameof(LoginUrl)) ?? "~/Home/Login";
+
+            ApplicationConfiguration.Start(ApplicationSettings);
         }
 
 
@@ -155,5 +164,6 @@ namespace Moses.Web
         #endregion
 
         
+
     }
 }

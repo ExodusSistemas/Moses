@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Web.Security;
-using Moses.Extensions;
+using System.Security.Cryptography;
 
 namespace Moses.Web.Mvc
 {
@@ -25,13 +23,18 @@ namespace Moses.Web.Mvc
         {
             FormsAuthentication.SetAuthCookie(userName, createPersistentCookie);
         }
-            
+
         #region IFormsAuthentication Members
 
-
-        public string HashPasswordForStoringInConfigFile(string oldPassword, string p)
+        public string HashPasswordForStoringInConfigFile(string password, string passwordFormat)
         {
-            return FormsAuthentication.HashPasswordForStoringInConfigFile(oldPassword,p);
+            HashAlgorithm algorithm = HashAlgorithm.Create(passwordFormat);
+            if (algorithm == null)
+            {
+                throw new ArgumentException("Unrecognized hash name", "hashName");
+            }
+            byte[] hash = algorithm.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return BitConverter.ToString(hash);
         }
 
         #endregion

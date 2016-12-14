@@ -314,7 +314,6 @@ namespace Moses.Web.Mvc.Html
             return builder.ToString();
 
         }
- 
 
         private static void AddAttributesToRender(this StringBuilder builder, MaskTypes maskType,  bool validateInput, string validateMessage)
         {

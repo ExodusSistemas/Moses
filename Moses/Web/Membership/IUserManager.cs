@@ -5,7 +5,7 @@ using System.Text;
 using System.Web;
 using System.Web.SessionState;
 
-namespace Moses.Web
+namespace Moses.Membership
 {
     public interface IUserContext
     {

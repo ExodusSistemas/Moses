@@ -6,7 +6,7 @@ using Trirand.Web.Mvc;
 
 namespace Moses.Web.Mvc.Patterns
 {
-    public abstract class MosesBaseViewModel<T> : MosesBaseViewModel, IMosesModel, IMosesPermission
+    public abstract class MosesBaseViewModel<T> : MosesBaseViewModel, IMosesPermission
         where T : class, IdContainer<int>, new() 
     {
         T _item = null;
@@ -40,18 +40,10 @@ namespace Moses.Web.Mvc.Patterns
     }
 
 
-    public abstract class MosesBaseViewModel : IMosesModel, IMosesPermission
+    public abstract class MosesBaseViewModel : IMosesPermission
     {
         #region IMosesModel Members
 
-        public string Message
-        {
-            get;
-            set;
-        }
-
-       
-        
         public abstract bool IsEdit{ get; }
 
         //define a operação a ser realizada dentro de uma chamada de comando (Save/Delete/MultiEdit)
@@ -184,20 +176,6 @@ namespace Moses.Web.Mvc.Patterns
 
     }
 
-    public interface IdContainer<T>
-    {
-        T Id { get; set; }
-    }
-
-    public interface IMosesModel
-    {
-        bool IsEdit { get; }
-
-        string Message { get; set; }
-    }
-
-   
-   
 
     
 }
