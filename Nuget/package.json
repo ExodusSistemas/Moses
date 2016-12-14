@@ -8,11 +8,12 @@
     "gulp": "3.9.1",
     "gulp-nuget": "1.0.3",
     "gulp-param": "^1.0.3",
+    "gulp-shell": "^0.5.2",
     "request": "2.79.0",
     "xml-query": "^1.4.0",
     "xml-reader": "^2.4.3"
   },
   "devDependencies": {
-    "gulp-msbuild": "^0.4.3"
+    "gulp-dotnet": "^2.0.0"
   }
 }

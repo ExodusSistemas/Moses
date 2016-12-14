@@ -4,7 +4,7 @@
   "authors": [ "olavo" ],
   "packOptions": {
     "tags": [
-      
+
     ],
     "projectUrl": "",
     "licenseUrl": ""
@@ -60,7 +60,7 @@
       "config/Package.nuspec",
       "**/Trirand.Web.Mvc.dll"
     ],
-    "copyToOutput":[
+    "copyToOutput": [
       "config/lib/Trirand.Web.Mvc.dll"
     ]
   },
@@ -73,10 +73,11 @@
     "Release": {
       "buildOptions": {
         "define": [ "RELEASE" ],
-        "optimize": true
-      }
-
+        "optimize": true,
+        "xmlDoc": true
+      },
     }
+
   }
-  
+
 }

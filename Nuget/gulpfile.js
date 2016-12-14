@@ -7,8 +7,9 @@ var gulp = require('gulp-param')(require('gulp'), process.argv);;
 var fs = require("fs");
 var request = require("request");
 var nuget = require('gulp-nuget');
-var msbuild = require("gulp-msbuild");
+var dotnet = require("gulp-dotnet");
 var del = require("delete");
+var shell = require("gulp-shell");
 
 var options = {
     nuget: './nuget.exe', //./nuget.exe 
@@ -27,21 +28,16 @@ var options = {
     tool: true,
 };
 
+
 gulp.task('build', function () {
     EnsureFolders();
+    del("./bin/*");
     del("./lib/*")
 
-    var stream = gulp.src("../Moses.Web/Moses.Web.csproj").pipe(
-        msbuild({
-            targets: ['Clean', 'Build'],
-            properties: { WarningLevel: 1 , Configuration: 'Release'} ,
-            errorOnFail : false,
-            logCommand : true,
-            verbosity: 'normal',
-            stdout : true,
-            toolsVersion: 14.0
-        })
-    );
+    var stream = gulp.src('*.js', {read: false})
+    .pipe(shell([
+      'dotnet build ../Moses -o ./bin -f net46 -c Release',
+    ]));
 
     return stream;
 });
@@ -65,7 +61,7 @@ gulp.task('nuget-download', function () {
 
 gulp.task('nuget-pack',  function () {
     EnsureFolders();
-    var stream = nuget.pack(options);
+    var stream = PrepareFiles().pipe(nuget.pack(options));
     var projectVersion = GetProjectVersion();
     return gulp.src(options.basePath + '/Package.nuspec')
       .pipe(nuget.pack({ nuget: options.nuget, version: projectVersion }))
@@ -123,4 +119,8 @@ function EnsureFolders(){
         fs.mkdirSync("./tools", () => {});
     if (!fs.existsSync("./content"))
         fs.mkdirSync("./content", () => {});
+}
+
+function PrepareFiles(){
+    return gulp.src(["bin/Moses.dll","bin/Trirand.Web.Mvc.dll","bin/Moses.dll.config", "bin/Moses.xml"]).pipe(gulp.dest("./lib"))
 }
