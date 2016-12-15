@@ -37,6 +37,12 @@ var config = {
 
 }
 
+gulp.task("SignAssembly", function () {
+    return gulp.src("*.js", { read: false }).pipe(
+        shell(["C:/WINDOWS/Microsoft.NET/Framework/v2.0.50727/ilasm.exe Resources/Trirand.Web.Mvc/Trirand.Web.Mvc.il /dll /key=Resources/Trirand.Web.Mvc/key.snk /Out=config/lib/Trirand.Web.Mvc.dll"])
+    )
+})
+
 gulp.task('GetVars', function () {
     console.dir(config.GetWorkingDirectory());
 });

@@ -75,7 +75,7 @@
         "define": [ "RELEASE" ],
         "optimize": true,
         "xmlDoc": true
-      },
+      }
     }
 
   }
