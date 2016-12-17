@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using Trirand.Web.Mvc;
+using Moses.Web.Mvc.Controls;
 
 namespace Moses.Web.Mvc.Patterns
 {
@@ -84,7 +84,7 @@ namespace Moses.Web.Mvc.Patterns
     public interface IGrid<T>
         where T: class, new()
     {
-        JQGrid<T> GetGrid();
+        GridControl<T> GetGrid();
     }
 
     public interface IAutoComplete

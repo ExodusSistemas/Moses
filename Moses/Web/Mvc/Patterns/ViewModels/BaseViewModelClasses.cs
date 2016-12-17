@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Trirand.Web.Mvc;
+using Moses.Web.Mvc.Controls;
 
 namespace Moses.Web.Mvc.Patterns
 {
@@ -32,7 +32,7 @@ namespace Moses.Web.Mvc.Patterns
 
         public IQueryable<T> List { get; set; }
 
-        public abstract JQGrid Grid
+        public abstract GridControl Grid
         {
             get;
         }
@@ -153,7 +153,7 @@ namespace Moses.Web.Mvc.Patterns
 
         #endregion
 
-        public JQGrid SetDefaultConfigs(ref JQGrid grid, string initialSortColumn = "Id", bool readOnly = false, bool hasDetails = true, int pageSize = 50)
+        public GridControl SetDefaultConfigs(ref GridControl grid, string initialSortColumn = "Id", bool readOnly = false, bool hasDetails = true, int pageSize = 50)
         {
             grid.ID = string.Format("FnGrid_{0}" , DateTime.Now.Ticks.ToString());
             //grid.ClientSideEvents.GridInitialized = "$grid.OnCreateInstance";
@@ -161,7 +161,7 @@ namespace Moses.Web.Mvc.Patterns
             grid.ClientSideEvents.RowSelect = "$grid.GetRowEvent('OnGridRowSelect')";
             grid.MultiSelect = readOnly ? false : true;
             grid.SortSettings.InitialSortColumn = initialSortColumn;
-            grid.SortSettings.InitialSortDirection = Trirand.Web.Mvc.SortDirection.Asc;
+            grid.SortSettings.InitialSortDirection = Moses.Web.Mvc.Controls.SortDirection.Asc;
             grid.PagerSettings.PageSize = pageSize;
             grid.PagerSettings.ScrollBarPaging = false;
             grid.ToolBarSettings.ToolBarPosition = ToolBarPosition.Hidden;

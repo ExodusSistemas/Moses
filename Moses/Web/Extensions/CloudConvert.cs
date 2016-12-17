@@ -59,7 +59,7 @@ namespace Moses.Web
                 {
                     client.Headers["Content-Type"] = "application/www-x-form-urlencoded";
 
-                    ProcessURL data = new JavaScriptSerializer().Deserialize<ProcessURL>(client.DownloadString(string.Format("https://api.cloudconvert.org/process?inputformat={0}&outputformat={1}&apikey={2}",
+                    ProcessURL data = Configuration.Json.Deserialize<ProcessURL>(client.DownloadString(string.Format("https://api.cloudconvert.org/process?inputformat={0}&outputformat={1}&apikey={2}",
                                                                                                                              inputFormat,
                                                                                                                              outputFormat,
                                                                                                                              _apikey)));

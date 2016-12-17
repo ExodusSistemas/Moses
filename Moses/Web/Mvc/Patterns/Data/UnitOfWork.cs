@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Moses.Web.Mvc.Patterns;
-using Trirand.Web.Mvc;
+using Moses.Web.Mvc.Controls;
 using System.Linq.Expressions;
 using System.Web;
 using System.Data.Entity;

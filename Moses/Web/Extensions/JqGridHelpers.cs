@@ -5,7 +5,7 @@ using System.Text;
 using System.Diagnostics.CodeAnalysis;
 using System.Collections;
 using System.Web.Mvc;
-using Trirand.Web.Mvc;
+using Moses.Web.Mvc.Controls;
 using System.Data;
 
 namespace Moses.Web.Extensions
@@ -13,7 +13,7 @@ namespace Moses.Web.Extensions
     public static class JqGridDataHelper
     {
        
-        public static string JsonForJqgrid(this JQGrid grid, DataTable dt, int page = 1)
+        public static string JsonForJqgrid(this GridControl grid, DataTable dt, int page = 1)
         {
             int pageSize = grid.PagerSettings.PageSize;
             int totalRecords = dt.Rows.Count;

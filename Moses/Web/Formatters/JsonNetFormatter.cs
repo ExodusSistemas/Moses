@@ -18,17 +18,6 @@ namespace Moses.Web.Formatters
             SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("application/json"));
         }
 
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings()
-        {
-            MaxDepth = 2,
-            Formatting = Newtonsoft.Json.Formatting.None,
-            NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
-            ObjectCreationHandling = Newtonsoft.Json.ObjectCreationHandling.Replace,
-            MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore,
-            PreserveReferencesHandling = PreserveReferencesHandling.None, //by olavo
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        };
-
         public override bool CanWriteType(Type type)
         {
             // don't serialize JsonValue structure use default for that
@@ -50,15 +39,7 @@ namespace Moses.Web.Formatters
         {
             var task = Task<object>.Factory.StartNew(() =>
             {
-
-
-                var sr = new StreamReader(stream);
-                var jreader = new JsonTextReader(sr);
-
-                var ser = JsonSerializer.Create(Settings);
-                ser.Converters.Add(new IsoDateTimeConverter());
-
-                object val = ser.Deserialize(jreader, type);
+                object val = Configuration.Json.Deserialize(type, stream);
                 return val;
             });
 

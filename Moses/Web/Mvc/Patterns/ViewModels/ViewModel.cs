@@ -1,4 +1,5 @@
 ﻿using Moses.Extensions;
+using Moses.Web.Mvc.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,7 @@ namespace Moses.Web.Mvc.Patterns
 
         public IQueryable<TEntity> List { get; set; }
 
-        public JQGrid<TEntity> Grid { get; set; }
+        public GridControl<TEntity> Grid { get; set; }
     }
 
     public abstract class BaseViewModel : IModel

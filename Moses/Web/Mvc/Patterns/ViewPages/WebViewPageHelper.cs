@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.UI;
-using Trirand.Web.Mvc;
+using Moses.Web.Mvc.Controls;
 
 namespace Moses.Web.Mvc.Patterns
 {

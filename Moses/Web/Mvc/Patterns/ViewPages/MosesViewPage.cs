@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using Trirand.Web.Mvc;
+using Moses.Web.Mvc.Controls;
 
 namespace Moses.Web.Mvc.Patterns
 {
@@ -70,42 +70,7 @@ namespace Moses.Web.Mvc.Patterns
             return string.Format("~/Views/Shared/{0}.cshtml", viewName);
         }
 
-        public MvcHtmlString RenderGrid(JQGrid grid, string detailsPath = "Details", string detailsController = null)
-        {
-            //corrige a renderização padrão do JQGrid 
-            var s = new TrirandNamespace().JQGrid(grid, grid.ID).ToHtmlString();
-
-            var controllerExpression = "";
-            if (detailsController != null)
-                controllerExpression = "fn-controller=\"" + detailsController + "\" ";
-
-            //hack para transformar uma execução inline em uma execução contextualizada
-            s = s.Replace("\r", "").Replace("\n", "").Replace("<table ", "<table class=\"mosesGridInstance\"")
-                .Replace("jQuery(document).ready(function() {jQuery('#" + grid.ID + "').jqGrid(", "$context.GridDefinitions['" + grid.ID + "'] = function($grid){ return ")
-                .Replace("function jqGrid_aspnet_loadErrorHandler(xht, st, handler) {jQuery(document.body).css('font-size','100%'); jQuery(document.body).html(xht.responseText);}", "")
-                .Replace(").bindKeys();", "")
-                .Replace("});</script>", ";}</script>");
-
-
-            return new MvcHtmlString(string.Concat(s, "<div id='" + grid.ID + "_grid-rowExpanded' class=\"grid-rowExpanded\" fn-type=\"ManualLoad\" fn-action=\"" + detailsPath + "\" " + controllerExpression + " ></div>"));
-        }
-
-        public MvcHtmlString RenderChart(JQChart chart, string detailsController = null)
-        {
-            //corrige a renderização padrão do JQGrid 
-            var s = new TrirandNamespace().JQChart(chart, chart.ID).ToHtmlString();
-
-            var controllerExpression = "";
-            if (detailsController != null)
-                controllerExpression = "fn-controller=\"" + detailsController + "\" ";
-
-            //hack para transformar uma execução inline em uma execução contextualizada
-            s = s.Replace("<div ", "<div class=\"mosesChartInstance\" ")
-                .Replace("jQuery(document).ready(function() {var chart", "MosesChartModule.prototype.RenderChart = function($chart) { $chart.Current")
-                .Replace("});</script>", "}</script>");
-
-            return new MvcHtmlString(s);
-        }
+        
 
         protected virtual void OnDefineBackground(WebViewType type)
         {

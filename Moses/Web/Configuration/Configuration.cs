@@ -19,6 +19,7 @@ namespace Moses.Web
     {
         public static IApplicationConfiguration ApplicationConfiguration { get; set; } = null;
         public static ISettingsService ApplicationSettings { get; set; }
+        public static IJsonService Json { get; set; }
 
         static Configuration()
         {

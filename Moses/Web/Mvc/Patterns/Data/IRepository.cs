@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Trirand.Web.Mvc;
+using Moses.Web.Mvc.Controls;
 
 namespace Moses.Web.Mvc.Patterns
 {
