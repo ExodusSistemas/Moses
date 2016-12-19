@@ -20,14 +20,8 @@
         "System.Linq": "4.0.0",
         "System.Runtime": "4.0.20",
         "System.Threading": "4.0.10",
-        "Microsoft.AspNet.WebApi.Client": "5.2.3",
-        "Microsoft.AspNet.WebPages": "3.2.3",
-        "Microsoft.AspNet.WebApi.Core": "5.2.3",
-        "Microsoft.AspNet.WebApi.WebHost": "5.2.3",
         "EntityFramework": "6.1.3",
-        "Microsoft.AspNet.Mvc": "5.2.3",
-        "System.Linq.Dynamic": "1.0.7"
-      },
+        "Microsoft.AspNet.Mvc": "5.2.3"      },
       "frameworkAssemblies": {
         "Microsoft.CSharp": "4.0.0",
         "System.Collections": "4.0.10",
@@ -52,20 +46,17 @@
     "Microsoft.AspNet.Identity.Owin": "2.2.1",
     "Microsoft.Owin": "3.0.1",
     "Microsoft.Owin.Host.SystemWeb": "3.0.1",
-    "Newtonsoft.Json": "8.0.2"
+    "Newtonsoft.Json": "9.0.1",
+    "System.Linq.Dynamic.Core": "1.0.6.9"
   },
   "publishOptions": {
     "include": [
       "config/**",
-      "config/Package.nuspec",
-      "**/Trirand.Web.Mvc.dll"
-    ],
-    "copyToOutput": [
-      "config/lib/Trirand.Web.Mvc.dll"
+      "config/Package.nuspec"
     ]
   },
   "configurations": {
-    "Debug": {
+    "Debug": { 
       "buildOptions": {
         "define": [ "DEBUG", "TRACE" ]
       }
@@ -74,7 +65,8 @@
       "buildOptions": {
         "define": [ "RELEASE" ],
         "optimize": true,
-        "xmlDoc": true
+        "xmlDoc": true,
+        "keyFile": "key.snk"
       }
     }
 

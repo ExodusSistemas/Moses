@@ -61,7 +61,7 @@ gulp.task('nuget-download', function () {
 
 gulp.task('nuget-pack',  function () {
     EnsureFolders();
-    var stream = PrepareFiles().pipe(nuget.pack(options));
+    var stream = PrepareFiles();
     var projectVersion = GetProjectVersion();
     return gulp.src(options.basePath + '/Package.nuspec')
       .pipe(nuget.pack({ nuget: options.nuget, version: projectVersion }))

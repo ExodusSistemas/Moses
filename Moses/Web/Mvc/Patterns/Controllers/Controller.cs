@@ -47,7 +47,7 @@ namespace Moses.Web.Mvc.Patterns
         {
             TViewModel info = new TViewModel();
             info.Grid = Manager.GetGrid();
-            info.Grid.ID = "GvResultadoJq";
+            info.Grid.ID = "GridControl1";
             info.Grid.DataUrl = Url.Action("DataRequested");
             info.Grid.SortSettings.InitialSortDirection = SortDirection.Desc;
 
