@@ -1,7 +1,9 @@
 {
-  "version": "3.7.0.0",
-  "description": "Moses",
-  "authors": [ "olavo" ],
+  "copyright": "Olavo Rocha Neto",
+  "title": "Moses",
+  "version": "3.8.0.3",
+  "description": "Moses é Framework Open Source agregador de diversas ferramentas para criação do padrão de desenvolvimento da Exodus Sistemas. (The One who Guides Exodus)",
+  "authors": [ "Olavo Rocha Neto" ],
   "packOptions": {
     "tags": [
 
@@ -23,11 +25,6 @@
         "EntityFramework": "6.1.3",
         "Microsoft.AspNet.Mvc": "5.2.3"      },
       "frameworkAssemblies": {
-        "Microsoft.CSharp": "4.0.0",
-        "System.Collections": "4.0.10",
-        "System.Linq": "4.0.0",
-        "System.Runtime": "4.0.20",
-        "System.Threading": "4.0.10",
         "System.ComponentModel.DataAnnotations": "4.0.0.0",
         "System.Xml.Serialization": "4.0.0.0",
         "System.Xml.Linq": "4.0.0.0",

@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Moses")]
-[assembly: AssemblyDescription("Biblioteca Exodus Moses .")]
+[assembly: AssemblyDescription("Moses é Framework Open Source agregador de diversas ferramentas para criação do padrão de desenvolvimento da Exodus Sistemas. (The One who Guides Exodus)")]
 [assembly: AssemblyConfiguration("Release")]
-[assembly: AssemblyCompany("Exodus Sistemas")]
+[assembly: AssemblyCompany("Olavo Rocha Neto")]
 [assembly: AssemblyProduct("Moses")]
 [assembly: AssemblyCopyright("Copyright 2016 © Exodus")]
-[assembly: AssemblyTrademark("Exodus Sistemas")]
+[assembly: AssemblyTrademark("Exodus")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

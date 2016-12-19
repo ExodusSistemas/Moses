@@ -2,13 +2,11 @@
 <package >
   <metadata>
     <id>Moses</id>
-    <version>3.7.1.1</version>
+    <version>$version$</version>
     <title>Moses</title>
     <authors>Olavo Rocha Neto</authors>
-    <owners></owners>
-    <description>
-      Framework com agregador de diversas ferramentas para criação do modelo de desenvolvimento da Exodus Sistemas. Parte do Exodus Finanças. 
-    </description>
+    <owners>Olavo Rocha Neto</owners>
+    <description>Moses é Framework Open Source agregador de diversas ferramentas para criação do padrão de desenvolvimento da Exodus Sistemas. (The One who Guides Exodus)</description>
     <releaseNotes>
     </releaseNotes>
     <summary>

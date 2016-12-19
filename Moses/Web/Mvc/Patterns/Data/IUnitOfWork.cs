@@ -16,6 +16,7 @@ namespace Moses.Web.Mvc.Patterns
     {
         TDataContext DbContext { get; }
         void SubmitChanges();
+        TEntity InitializeEntity();
         void InitializeEntity(TEntity item);
         void Validate(TEntity item);
     }

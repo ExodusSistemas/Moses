@@ -11,6 +11,12 @@ var dotnet = require("gulp-dotnet");
 var del = require("delete");
 var shell = require("gulp-shell");
 
+var projectLocation = '../Moses';
+var project = require( projectLocation + '/project.json');
+project.location = projectLocation;
+
+var settings = require(projectLocation + '/Properties/launchSettings.json');
+
 var options = {
     nuget: './nuget.exe', //./nuget.exe 
     source: 'https://www.nuget.org/',
@@ -36,13 +42,14 @@ gulp.task('build', function () {
 
     var stream = gulp.src('*.js', {read: false})
     .pipe(shell([
-      'dotnet build ../Moses -o ./bin -f net46 -c Release',
+      'dotnet build '+ project.location + ' -o ./bin -f net46 -c Release',
     ]));
 
     return stream;
 });
 
 gulp.task('nuget-version', function () {
+    console.log(project.version);
     GetProjectVersion();
 });
 
@@ -97,21 +104,23 @@ gulp.task('project-version', function(){
 })
 
 function GetProjectVersion(){
-    var version = null;
-    var XmlReader = require('xml-reader');
-    var xmlQuery = require('xml-query');
-    var reader = XmlReader.create();
-    var file = "./Package.nuspec";
-    var fsync = fs.readFileSync(file,'utf8' );
-    var xml = XmlReader.parseSync(fs.readFileSync(file,'utf8'));
-    
-    //navigating through xml
-    version = xmlQuery(xml).find('version').text();
-    console.log('Version found: '  + version);
+    return project.version;
 
-    if (version == null)
-        throw Error('Version not found on Nuspec file');
-    return version;
+    // var version = null;
+    // var XmlReader = require('xml-reader');
+    // var xmlQuery = require('xml-query');
+    // var reader = XmlReader.create();
+    // var file = "./Package.nuspec";
+    // var fsync = fs.readFileSync(file,'utf8' );
+    // var xml = XmlReader.parseSync(fs.readFileSync(file,'utf8'));
+    
+    // //navigating through xml
+    // version = xmlQuery(xml).find('version').text();
+    // console.log('Version found: '  + version);
+
+    // if (version == null)
+    //     throw Error('Version not found on Nuspec file');
+    // return version;
 }
 
 function EnsureFolders(){
@@ -122,5 +131,5 @@ function EnsureFolders(){
 }
 
 function PrepareFiles(){
-    return gulp.src(["bin/Moses.dll","bin/Trirand.Web.Mvc.dll","bin/Moses.dll.config", "bin/Moses.xml"]).pipe(gulp.dest("./lib"))
+    return gulp.src(["bin/Moses.dll","bin/Moses.dll.config", "bin/Moses.xml"]).pipe(gulp.dest("./lib"))
 }

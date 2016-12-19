@@ -76,20 +76,9 @@ namespace Moses.Web.Mvc.Patterns
         /// Set default Entity values on basic abstract implementation
         /// </remarks>
         /// <returns></returns>
-        protected virtual TEntity InitializeEntity()
+        public TEntity InitializeEntity()
         {
             TEntity destino = new TEntity();
-
-            if (typeof(TEntity) is IFederated<TEntity>)
-            {
-                ((IFederated<TEntity>)destino).IdContrato = this.MembershipContext.Contract.Id.GetValueOrDefault(); ;
-            }
-
-            if (typeof(TEntity) is IDeletable<TEntity>)
-            {
-                ((IDeletable<TEntity>)destino).IsDeleted = true;
-            }
-
             this.InitializeEntity(destino);
             return destino;
         }
@@ -162,7 +151,7 @@ namespace Moses.Web.Mvc.Patterns
 
         public virtual TEntity Copy(TEntity item)
         {
-            var t = new TEntity();
+            var t = this.InitializeEntity();
             this.Bind(item, t);
             t.Id = default(TType);
             return t;
@@ -217,7 +206,15 @@ namespace Moses.Web.Mvc.Patterns
 
         public virtual void InitializeEntity(TEntity item)
         {
+            if (typeof(TEntity) is IFederated<TEntity>)
+            {
+                ((IFederated<TEntity>)item).IdContrato = this.MembershipContext.Contract.Id.GetValueOrDefault(); ;
+            }
 
+            if (typeof(TEntity) is IDeletable<TEntity>)
+            {
+                ((IDeletable<TEntity>)item).IsDeleted = false;
+            }
         }
 
         public virtual void Validate(TEntity item)

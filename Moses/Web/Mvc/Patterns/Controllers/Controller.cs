@@ -41,7 +41,7 @@ namespace Moses.Web.Mvc.Patterns
         }
 
         //
-        // GET: /T/
+        // GET: 
         [Feature(FeatureOptions.Read)]
         public virtual ActionResult List()
         {
@@ -68,6 +68,7 @@ namespace Moses.Web.Mvc.Patterns
         public virtual ActionResult Add(TViewModel info = null)
         {
             info = info ?? new TViewModel();
+            info.Item = Manager.InitializeEntity();
             return View("Form" + EntityName, info);
         }
 
@@ -79,6 +80,7 @@ namespace Moses.Web.Mvc.Patterns
             else
             {
                 var info = new TViewModel() { Item = Manager.Copy(sourceId.Value) };
+                Manager.InitializeEntity(info.Item);
                 return View("Form" + EntityName, info);
             }
         }
