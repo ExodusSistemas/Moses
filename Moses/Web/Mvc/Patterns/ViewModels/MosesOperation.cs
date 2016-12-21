@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Moses.Web.Mvc.Patterns
 {
-    public enum MosesOperation
+    public enum UserOperation
     {
         Add,
         Edit,

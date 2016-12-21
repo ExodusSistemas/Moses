@@ -80,12 +80,5 @@ namespace Moses.Web.Mvc.Patterns
         string Message { get; set; }
     }
 
-    public enum UserOperation
-    {
-        Add,
-        Edit,
-        MultiEdit,
-        Delete,
-        Reload,
-    }
+    
 }

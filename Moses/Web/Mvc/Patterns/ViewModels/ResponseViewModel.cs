@@ -20,7 +20,7 @@ namespace Moses.Web.Mvc.Patterns
         public dynamic target { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public MosesOperation operation { get; set; }
+        public UserOperation operation { get; set; }
 
         public bool expired { get; set; }
 
@@ -36,7 +36,7 @@ namespace Moses.Web.Mvc.Patterns
             return null;
         }
 
-        public static JsonResult SaveResult(string message, dynamic model = null, object misc = null, object index = null, MosesOperation? operation = null)
+        public static JsonResult SaveResult(string message, dynamic model = null, object misc = null, object index = null, UserOperation? operation = null)
         {
             object item = null;
             if (model is BaseViewModel)
@@ -67,19 +67,19 @@ namespace Moses.Web.Mvc.Patterns
                     message = message,
                     Misc = misc,
                     index = index,
-                    operation = operation ?? MosesOperation.Reload,
+                    operation = operation ?? UserOperation.Reload,
                     target = item
                 },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
 
-        public static ResponseViewModel MultiEditResult(string message, dynamic model = null, object misc = null, object index = null, MosesOperation? operation = null)
+        public static ResponseViewModel MultiEditResult(string message, dynamic model = null, object misc = null, object index = null, UserOperation? operation = null)
         {
             object item = null;
             if (model is BaseViewModel)
             {
-                operation = model.Operation ?? ((bool)model.IsEdit) ? MosesOperation.Edit : MosesOperation.Add;
+                operation = model.Operation ?? ((bool)model.IsEdit) ? UserOperation.Edit : UserOperation.Add;
                 item = model.Item;
             }
             else
@@ -93,12 +93,12 @@ namespace Moses.Web.Mvc.Patterns
                 message = message,
                 Misc = misc,
                 index = index,
-                operation = operation ?? MosesOperation.MultiEdit,
+                operation = operation ?? UserOperation.MultiEdit,
                 target = item
             };
         }
 
-        public static JsonResult DeleteResult(string message, dynamic model = null, object misc = null, object index = null, MosesOperation? operation = MosesOperation.Delete)
+        public static JsonResult DeleteResult(string message, dynamic model = null, object misc = null, object index = null, UserOperation? operation = UserOperation.Delete)
         {
 
             return new JsonNetResult()

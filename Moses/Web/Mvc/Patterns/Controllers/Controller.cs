@@ -142,7 +142,7 @@ namespace Moses.Web.Mvc.Patterns
         }
 
         [Feature(FeatureOptions.Read)]
-        public virtual string AutoComplete(TType? id)
+        public virtual string AutoComplete(string q)
         {
             var list = this.Manager.GetAll();
 

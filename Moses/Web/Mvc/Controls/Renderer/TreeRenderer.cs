@@ -29,7 +29,6 @@
 
         private string GetStartupOptions()
         {
-            new JavaScriptSerializer();
             StringBuilder builder = new StringBuilder();
             builder.AppendFormat("id: '{0}'", this._model.ID);
             builder.AppendFormat("url: '{0}'", this._model.DataUrl);

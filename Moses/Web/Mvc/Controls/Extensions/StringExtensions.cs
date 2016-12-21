@@ -8,7 +8,6 @@
     {
         internal static string RemoveQuotes(this string buffer, string expression)
         {
-            new JavaScriptSerializer();
             return buffer.Replace("\\\"" + expression + "\\\"", expression);
         }
     }

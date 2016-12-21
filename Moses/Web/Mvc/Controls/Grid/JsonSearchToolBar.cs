@@ -20,7 +20,7 @@
             {
                 this._jsonValues["searchOnEnter"] = false;
             }
-            return new JavaScriptSerializer().Serialize(this._jsonValues);
+            return Configuration.Json.Serialize(this._jsonValues);
         }
     }
 }

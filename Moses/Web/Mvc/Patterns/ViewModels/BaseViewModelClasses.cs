@@ -48,7 +48,7 @@ namespace Moses.Web.Mvc.Patterns
 
         //define a operação a ser realizada dentro de uma chamada de comando (Save/Delete/MultiEdit)
         
-        public MosesOperation Operation { get; set; }
+        public UserOperation Operation { get; set; }
 
         #endregion
 

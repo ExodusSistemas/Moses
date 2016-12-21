@@ -2,7 +2,7 @@
   "profiles": {
     "Debug": {
       "commandLineArgs": "set NODE_ENV=$(ConfigurationName)",
-      "workingDirectory": "../Nuget/bin/",
+      "workingDirectory": "/bin/Debug",
       "environmentVariables": {
         "packageTarget": "Moses/Debug/",
         "outputPath": "Moses/Debug/"

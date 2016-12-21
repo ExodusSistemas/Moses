@@ -28,7 +28,7 @@
                 Moses.Web.Mvc.Controls.JsonColModel model = new Moses.Web.Mvc.Controls.JsonColModel(grid.Columns[i], grid);
                 hashtableArray[i] = model.JsonValues;
             }
-            return Moses.Web.Mvc.Controls.JsonColModel.RemoveQuotesForJavaScriptMethods(new JavaScriptSerializer().Serialize(hashtableArray), grid);
+            return Moses.Web.Mvc.Controls.JsonColModel.RemoveQuotesForJavaScriptMethods(Configuration.Json.Serialize(hashtableArray), grid);
         }
 
         private string GetColNames(Moses.Web.Mvc.Controls.GridControl grid)
@@ -39,7 +39,7 @@
                 Moses.Web.Mvc.Controls.GridControlColumn column = grid.Columns[i];
                 strArray[i] = string.IsNullOrEmpty(column.HeaderText) ? column.DataField : column.HeaderText;
             }
-            return new JavaScriptSerializer().Serialize(strArray);
+            return Configuration.Json.Serialize(strArray);
         }
 
         private string GetJQuerySubmit(Moses.Web.Mvc.Controls.GridControl grid)
@@ -292,11 +292,11 @@
             Moses.Web.Mvc.Controls.JsonToolBar bar = new Moses.Web.Mvc.Controls.JsonToolBar(grid.ToolBarSettings);
             if (!subGrid)
             {
-                builder.AppendFormat(".navGrid('#{0}',{1},{2},{3},{4},{5} )", new object[] { grid.ID + "_pager", new JavaScriptSerializer().Serialize(bar), $"jQuery('#{grid.ID}').getGridParam('editDialogOptions')", $"jQuery('#{grid.ID}').getGridParam('addDialogOptions')", $"jQuery('#{grid.ID}').getGridParam('delDialogOptions')", $"jQuery('#{grid.ID}').getGridParam('searchDialogOptions')" });
+                builder.AppendFormat(".navGrid('#{0}',{1},{2},{3},{4},{5} )", new object[] { grid.ID + "_pager", Configuration.Json.Serialize(bar), $"jQuery('#{grid.ID}').getGridParam('editDialogOptions')", $"jQuery('#{grid.ID}').getGridParam('addDialogOptions')", $"jQuery('#{grid.ID}').getGridParam('delDialogOptions')", $"jQuery('#{grid.ID}').getGridParam('searchDialogOptions')" });
             }
             else
             {
-                builder.AppendFormat(".navGrid('#' + pager_id,{0},{1},{2},{3},{4} )", new object[] { new JavaScriptSerializer().Serialize(bar), "jQuery('#' + subgrid_table_id).getGridParam('editDialogOptions')", "jQuery('#' + subgrid_table_id).getGridParam('addDialogOptions')", "jQuery('#' + subgrid_table_id).getGridParam('delDialogOptions')", "jQuery('#' + subgrid_table_id).getGridParam('searchDialogOptions')" });
+                builder.AppendFormat(".navGrid('#' + pager_id,{0},{1},{2},{3},{4} )", new object[] { Configuration.Json.Serialize(bar), "jQuery('#' + subgrid_table_id).getGridParam('editDialogOptions')", "jQuery('#' + subgrid_table_id).getGridParam('addDialogOptions')", "jQuery('#' + subgrid_table_id).getGridParam('delDialogOptions')", "jQuery('#' + subgrid_table_id).getGridParam('searchDialogOptions')" });
             }
             foreach (Moses.Web.Mvc.Controls.JQGridToolBarButton button in grid.ToolBarSettings.CustomButtons)
             {

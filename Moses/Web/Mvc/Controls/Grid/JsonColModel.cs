@@ -171,6 +171,10 @@
             {
                 this._jsonValues["fixed"] = true;
             }
+            if (column.Formatter != null )
+            {
+                this.ApplyFormatterOptions(column);
+            }
             switch (column.GroupSummaryType)
             {
                 case Moses.Web.Mvc.Controls.GroupSummaryType.Min:
@@ -233,7 +237,6 @@
                 }
                 this._jsonValues["searchoptions"] = hashtable;
             }
-            
         }
 
         private string GetEditType(Moses.Web.Mvc.Controls.EditType type)

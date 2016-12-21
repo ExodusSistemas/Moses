@@ -213,12 +213,12 @@ namespace Moses.Web.Mvc.Patterns
                 };
             }
 
-            public JsonResult Saved(string message, dynamic model = null,  object misc = null, MosesOperation? operation = null)
+            public JsonResult Saved(string message, dynamic model = null,  object misc = null, UserOperation? operation = null)
             {
                 return ResponseViewModel.SaveResult(message, model,  misc, operation: operation);
             }
 
-            public JsonResult Deleted(string message, dynamic model,  object misc = null, MosesOperation? operation = MosesOperation.Reload)
+            public JsonResult Deleted(string message, dynamic model,  object misc = null, UserOperation? operation = UserOperation.Reload)
             {
                 return ResponseViewModel.DeleteResult(message, model,  misc, operation: operation);
             }

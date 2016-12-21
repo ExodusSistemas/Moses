@@ -10,7 +10,7 @@ namespace Moses.Web.Services
 {
     public class JsonService : IJsonService
     {
-        private object Deserialize(Type type, Stream stream)
+        public object Deserialize(Type type, Stream stream)
         {
             var sr = new StreamReader(stream);
             var jreader = new JsonTextReader(sr);
@@ -49,17 +49,11 @@ namespace Moses.Web.Services
 
         public string Serialize(object item)
         {
-            throw new NotImplementedException();
+            var ser = JsonSerializer.Create(Settings);
+            StringWriter writer = new StringWriter();
+            ser.Serialize(writer,item);
+            return writer.ToString();
         }
-
-        
-
-        object IJsonService.Deserialize(Type type, Stream stream)
-        {
-            throw new NotImplementedException();
-        }
-
-        
 
         public JsonSerializerSettings Settings { get; set; } = new JsonSerializerSettings()
         {

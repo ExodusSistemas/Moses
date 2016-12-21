@@ -3,12 +3,10 @@
     using System;
     using System.Collections;
     using System.Text;
-    using System.Web.Script.Serialization;
 
     internal class JsonCustomButton
     {
         private Moses.Web.Mvc.Controls.JQGridToolBarButton _button;
-        private JavaScriptSerializer _jsonSerializer = new JavaScriptSerializer();
         private Hashtable _jsonValues = new Hashtable();
 
         public JsonCustomButton(Moses.Web.Mvc.Controls.JQGridToolBarButton button)
@@ -32,7 +30,7 @@
             {
                 this._jsonValues["title"] = this._button.ToolTip;
             }
-            string json = this._jsonSerializer.Serialize(this._jsonValues);
+            string json = Configuration.Json.Serialize(this._jsonValues);
             StringBuilder sb = new StringBuilder();
             this.RenderClientSideEvent(json, sb, "onClickButton", this._button.OnClick);
             return json.Insert(json.Length - 1, sb.ToString());
