@@ -6,6 +6,7 @@ using Moses.Extensions;
 using Moses.Web.Mvc.Controls;
 using System.Data.Entity;
 using Moses.Security;
+using System.Linq.Dynamic.Core;
 
 namespace Moses.Web.Mvc.Patterns
 {
@@ -142,17 +143,21 @@ namespace Moses.Web.Mvc.Patterns
         }
 
         [Feature(FeatureOptions.Read)]
-        public virtual string AutoComplete(string q)
+        public virtual string AutoComplete(AutoCompleteControl<TEntity> q)
         {
-            var list = this.Manager.GetAll();
-
-            if (id != null)
-                list = list.Where(q => q.Id.Equals(id));
+            if ( string.IsNullOrEmpty(q.Term) )
+                return "";
 
             if (Manager is IAutoComplete)
             {
+                var linqExpression = $"{q.DataField}.Contains(@0)";
+                if ( q.AutoCompleteMode == Moses.Web.Mvc.Controls.AutoCompleteMode.BeginsWith)
+                {
+                    linqExpression = $"{q.DataField}.StartsWith(@0)";
+                }
+                q.DataSource = this.Manager.GetAll();
                 var autoCompleteManager = Manager as IAutoComplete;
-                var safeList = autoCompleteManager.GetSerializableList(list);
+                var safeList = autoCompleteManager.GetSerializableList(q.DataSource.Where(linqExpression, q.Term).Take(q.Max));
                 return safeList.ToJSon() as string;
             }
             else
@@ -161,6 +166,8 @@ namespace Moses.Web.Mvc.Patterns
             }
 
         }
+
+        
     }
 
 }

@@ -6,13 +6,6 @@
 
     public static class MosesNamespace
     {
-        public static MvcHtmlString AutoCompleteControl(this HtmlHelper helper, Moses.Web.Mvc.Controls.AutoCompleteControl autoComplete, string id)
-        {
-            Moses.Web.Mvc.Controls.AutoCompleteRenderer renderer = new Moses.Web.Mvc.Controls.AutoCompleteRenderer(autoComplete);
-            autoComplete.ID = id;
-            return MvcHtmlString.Create(renderer.RenderHtml());
-        }
-
         public static MvcHtmlString DatePickerControl(this HtmlHelper helper, Moses.Web.Mvc.Controls.DatePickerControl datePicker, string id)
         {
             Moses.Web.Mvc.Controls.DatePickerRenderer renderer = new Moses.Web.Mvc.Controls.DatePickerRenderer(datePicker);

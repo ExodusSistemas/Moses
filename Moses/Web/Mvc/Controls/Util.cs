@@ -10,7 +10,14 @@
     internal static class Util
     {
         // Methods
-        internal static string ConstructLinqFilterExpression(AutoCompleteControl autoComplete, SearchArguments args)
+        internal static string ConstructLinqFilterExpressionSingle<T>(AutoCompleteControl<T> autoComplete, SearchArguments args)
+        {
+            Guard.IsNotNull(autoComplete.DataField, "DataField", "must be set in order to perform search operations. If you get this error from search/export method, make sure you setup(initialize) the grid again prior to filtering/exporting.");
+            string filterExpressionCompare = "{0} {1} @0";
+            return GetLinqExpression(filterExpressionCompare, args, false, typeof(string));
+        }
+
+        internal static string ConstructLinqFilterExpression<T>(AutoCompleteControl<T> autoComplete, SearchArguments args)
         {
             Guard.IsNotNull(autoComplete.DataField, "DataField", "must be set in order to perform search operations. If you get this error from search/export method, make sure you setup(initialize) the grid again prior to filtering/exporting.");
             string filterExpressionCompare = "{0} {1} \"{2}\"";

@@ -83,7 +83,7 @@
             return table;
         }
 
-        public static DataTable ToDataTable(this IEnumerable en, Moses.Web.Mvc.Controls.AutoCompleteControl autoComplete)
+        public static DataTable ToDataTable<T>(this IEnumerable en, Moses.Web.Mvc.Controls.AutoCompleteControl<T> autoComplete)
         {
             Moses.Web.Mvc.Controls.GridControl grid = new Moses.Web.Mvc.Controls.GridControl();
             Moses.Web.Mvc.Controls.GridControlColumn item = new Moses.Web.Mvc.Controls.GridControlColumn {
@@ -108,7 +108,7 @@
             return table;
         }
 
-        public static List<string> ToListOfString(this IEnumerable en, Moses.Web.Mvc.Controls.AutoCompleteControl autoComplete)
+        public static List<string> ToListOfString<T>(this IEnumerable en, Moses.Web.Mvc.Controls.AutoCompleteControl<T> autoComplete)
         {
             DataTable table = en.ToDataTable(autoComplete);
             List<string> list = new List<string>();
