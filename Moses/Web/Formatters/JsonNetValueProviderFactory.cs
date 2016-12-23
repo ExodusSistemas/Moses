@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -40,25 +39,7 @@ namespace Moses.Web.Formatters
                 return null;
 
             // get a generic stream reader (get reader for the http stream)
-            StreamReader streamReader = new StreamReader(controllerContext.HttpContext.Request.InputStream);
-            // convert stream reader to a JSON Text Reader
-            JsonTextReader JSONReader = new JsonTextReader(streamReader);
-            // tell JSON to read
-            if (!JSONReader.Read())
-                return null;
-
-            // make a new Json serializer
-            JsonSerializer JSONSerializer = new JsonSerializer();
-            // add the dyamic object converter to our serializer
-            JSONSerializer.Converters.Add(new ExpandoObjectConverter());
-
-            // use JSON.NET to deserialize object to a dynamic (expando) object
-            Object JSONObject;
-            // if we start with a "[", treat this as an array
-            if (JSONReader.TokenType == JsonToken.StartArray)
-                JSONObject = JSONSerializer.Deserialize<List<ExpandoObject>>(JSONReader);
-            else
-                JSONObject = JSONSerializer.Deserialize<ExpandoObject>(JSONReader);
+            var JSONObject = Moses.Web.Configuration.Json.DeserializeExpandoObjectFromStream(controllerContext.HttpContext.Request.InputStream);
 
             // create a backing store to hold all properties for this deserialization
             Dictionary<string, object> backingStore = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);

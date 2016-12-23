@@ -6,8 +6,6 @@ using System.Web.Script.Serialization;
 using System.Text.RegularExpressions;
 using System.IO;
 using Moses.Web.Extensions;
-using Newtonsoft.Json;
-
 
 namespace Moses.Extensions
 {
@@ -34,17 +32,7 @@ namespace Moses.Extensions
 
         public static string SerializeToJavascript(this object target)
         {
-            return JsonConvert.SerializeObject(target, Formatting.None, new JsonSerializerSettings()
-            {
-                MaxDepth = 1,
-                Formatting = Newtonsoft.Json.Formatting.None,
-                NullValueHandling = Newtonsoft.Json.NullValueHandling.Include,
-                ObjectCreationHandling = Newtonsoft.Json.ObjectCreationHandling.Reuse,
-                MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore,
-                PreserveReferencesHandling = PreserveReferencesHandling.None, //by olavo
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                ContractResolver = new ExcludeEntityKeyContractResolver()
-            }); 
+            return Moses.Web.Configuration.Json.Serialize(target);
         }
 
         //alias
@@ -56,19 +44,19 @@ namespace Moses.Extensions
         //alias
         public static string FromJSon(this string target)
         {
-            return JsonConvert.DeserializeObject<string>(target);
+            return Moses.Web.Configuration.Json.Deserialize<string>(target);
         }
 
         public static T FromJSon<T>(this string target)
         {
-            return JsonConvert.DeserializeObject<T>(target);
+            return Moses.Web.Configuration.Json.Deserialize<T>(target);
         }
 
         public static Dictionary<string,object> JsonToDictionary(this string target)
         {
             if (string.IsNullOrEmpty(target)) return new Dictionary<string, object>();
 
-            var output = JsonConvert.DeserializeObject<Dictionary<string, object>>(target);
+            var output = Moses.Web.Configuration.Json.Deserialize<Dictionary<string, object>>(target);
 
             if (output == null) return new Dictionary<string, object>();
 

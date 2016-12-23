@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System.IO;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Net.Http.Formatting;
 using System.Net.Http;
@@ -21,7 +18,7 @@ namespace Moses.Web.Formatters
         public override bool CanWriteType(Type type)
         {
             // don't serialize JsonValue structure use default for that
-            if (type == typeof(JValue) || type == typeof(JObject) || type == typeof(JArray))
+            if (Configuration.Json.IsJsonStructure(type))
                 return false;
 
             return true;
@@ -55,8 +52,7 @@ namespace Moses.Web.Formatters
             {
 
 
-                string json = JsonConvert.SerializeObject(value, Formatting.Indented,
-                                                          new JsonConverter[1] { new IsoDateTimeConverter() });
+                string json = Configuration.Json.SerializeObject(value);
 
                 byte[] buf = System.Text.Encoding.Default.GetBytes(json);
                 stream.Write(buf, 0, buf.Length);

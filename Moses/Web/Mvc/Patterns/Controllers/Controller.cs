@@ -130,6 +130,14 @@ namespace Moses.Web.Mvc.Patterns
 
                 return Saved(EntityName + (isEdit ? "alterado" : "cadastrado") + " com sucesso", info);
             }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dex)
+            {
+                var errorMsg = dex.EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => x.ErrorMessage);
+
+                return Fail(string.Join("; ", errorMsg));
+            }
             catch (MosesApplicationException mex)
             {
                 return Fail(mex.StackTrace +  mex.Message);
@@ -145,20 +153,25 @@ namespace Moses.Web.Mvc.Patterns
         [Feature(FeatureOptions.Read)]
         public virtual string AutoComplete(AutoCompleteControl<TEntity> q)
         {
-            if ( string.IsNullOrEmpty(q.Term) )
+            if (!q.All && string.IsNullOrEmpty(q.Term) )
                 return "";
 
             if (Manager is IAutoComplete)
             {
-                var linqExpression = $"{q.DataField}.Contains(@0)";
-                if ( q.AutoCompleteMode == Moses.Web.Mvc.Controls.AutoCompleteMode.BeginsWith)
-                {
-                    linqExpression = $"{q.DataField}.StartsWith(@0)";
-                }
                 q.DataSource = this.Manager.GetAll();
-                var autoCompleteManager = Manager as IAutoComplete;
-                var safeList = autoCompleteManager.GetSerializableList(q.DataSource.Where(linqExpression, q.Term).Take(q.Max));
-                return safeList.ToJSon() as string;
+                if ( !q.All){
+                    var linqExpression = $"{q.DataField}.Contains(@0)";
+                    if ( q.AutoCompleteMode == Moses.Web.Mvc.Controls.AutoCompleteMode.BeginsWith)
+                    {
+                        linqExpression = $"{q.DataField}.StartsWith(@0)";
+                    }
+                    var autoCompleteManager = Manager as IAutoComplete;
+                    var filteredList = autoCompleteManager.GetSerializableList(q.DataSource.Where(linqExpression, q.Term).Take(q.Max));
+                    return filteredList.ToJSon();
+                }
+                else{
+                    return q.DataSource.ToJSon();
+                }
             }
             else
             {

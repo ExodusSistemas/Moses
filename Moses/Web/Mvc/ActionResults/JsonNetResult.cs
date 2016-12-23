@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
@@ -11,20 +10,8 @@ namespace Moses.Web.Mvc
     {
         public JsonNetResult()
         {
-            Settings = new JsonSerializerSettings
-            {
-                MaxDepth = 1,
-                Formatting = Newtonsoft.Json.Formatting.None,
-                NullValueHandling = Newtonsoft.Json.NullValueHandling.Include,
-                ObjectCreationHandling = Newtonsoft.Json.ObjectCreationHandling.Reuse,
-                MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore,
-                PreserveReferencesHandling = PreserveReferencesHandling.None, //by olavo
-                ReferenceLoopHandling = ReferenceLoopHandling.Error,
-                ContractResolver = new ExcludeEntityKeyContractResolver()
-            };
+            
         }
-
-        public JsonSerializerSettings Settings { get; private set; }
 
         /// <summary>
         /// este eh um x
@@ -45,13 +32,7 @@ namespace Moses.Web.Mvc
             if (this.Data == null)
                 return;
 
-            var scriptSerializer = JsonSerializer.Create(this.Settings);
-
-            using (var sw = new StringWriter())
-            {
-                scriptSerializer.Serialize(sw, this.Data);
-                response.Write(sw.ToString());
-            }
+            response.Write(Configuration.Json.Serialize(this.Data));
         }
     }
 }

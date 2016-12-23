@@ -13,6 +13,7 @@
             this.DataField = "";
             this.DataSource = null;
             this.Max = 150;
+            this.All = false;
         }
 
         public JsonResult DataBind() => 
@@ -69,6 +70,7 @@
         public string Term { get; set; }
         
         public int Max { get; set; }
+        public bool All { get; set; }
 
     }
 }

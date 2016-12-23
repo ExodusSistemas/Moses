@@ -12,6 +12,10 @@ namespace Moses.Web
         T Deserialize<T>(Stream stream);
         T Deserialize<T>(string stream);
         object Deserialize(Type type, Stream stream);
+        object GetSettings();
+        object DeserializeExpandoObjectFromStream(Stream stream);
+        bool IsJsonStructure(Type type);
+        string SerializeObject(object value);
     }
 
 

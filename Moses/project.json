@@ -1,7 +1,7 @@
 {
   "copyright": "Olavo Rocha Neto",
   "title": "Moses",
-  "version": "3.8.0.7",
+  "version": "3.8.0.9",
   "description": "Moses é Framework Open Source agregador de diversas ferramentas para criação do padrão de desenvolvimento da Exodus Sistemas. (The One who Guides Exodus)",
   "authors": [ "Olavo Rocha Neto" ],
   "packOptions": {
