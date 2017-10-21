@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Core\Data\EFExtensions\GlobalSuppressions.cs" />
+    <Compile Remove="Core\Reflection\ReflectionHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.1.3" />
+    <PackageReference Include="SgmlReader" Version="1.8.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Core\Reflection\" />
+  </ItemGroup>
+
+</Project>
