@@ -2,6 +2,7 @@
 using Xunit;
 using System;
 using Moses.Extensions;
+using System.Globalization;
 
 namespace Moses.Test
 {
@@ -143,7 +144,8 @@ namespace Moses.Test
         {
             for (int i = 0; i < 100000; i++)
             {
-                Assert.True(RandomUtils.RandomDecimal().ToString("f2").Contains(","), "Falhou em " + i.ToString());
+                CultureInfo ptBr = new CultureInfo("pt-BR");
+                Assert.True(RandomUtils.RandomDecimal().ToString("f2", ptBr).Contains(","), "Falhou em " + i.ToString());
             }
         }
 
