@@ -25,7 +25,7 @@ namespace Moses.Test
                 //poderia pegar pelos atributos customizados a partir daqui para que se delimite melhor os limites
                 
                 if (infoType.Equals(typeof(DateTime)))
-                    info.SetValue(obj, RandomUtils.RandomDateTime(DateTime.Now, new DateTime(2014, 01, 01)), null);
+                    info.SetValue(obj, RandomUtils.RandomDateTime(DateTime.Today.AddYears(-20), DateTime.Now), null);
                 else if (infoType.Equals(typeof(String)) && info.GetValue(obj,null) == null )
                     info.SetValue(obj, info.Name + " " + RandomUtils.RandomString(50, null), null);
                 else if ((infoType.Equals(typeof(long)) || infoType.Equals(typeof(Int32)) || infoType.Equals(typeof(Int64)) || infoType.Equals(typeof(int))) && !info.Name.ToLower().EndsWith("id") && !info.Name.ToLower().Equals("pk"))
@@ -36,7 +36,7 @@ namespace Moses.Test
             return obj;
         }
 
-        
+
         /// <summary>
         /// Compara as pripriedades dos objetos
         /// </summary>
@@ -45,8 +45,9 @@ namespace Moses.Test
         /// <returns></returns>
         public static bool CompareObjectAttributes(object firstObject, object secondObject)
         {
-            Type t1 = firstObject.GetType();
-            Type t2 = secondObject.GetType();
+            Type t1 = firstObject?.GetType();
+            Type t2 = secondObject?.GetType();
+            if (t1 == t2 && t1 == null) return true;
             /*the two objects must have the same type*/
             if (!t1.Equals(t2)) return false;
 
