@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Moses.Management;
 
 namespace Moses
 {
@@ -36,7 +35,7 @@ namespace Moses
         }
 
         public MosesDataProviderException(string message, string sqlCommand,System.Exception innerException) :
-            base(String.Format("{0}\n Comando Sql:{1} \n Driver: {2}",message,sqlCommand,innerException.Message))
+            base(String.Format("{0}\n Sql Command:{1} \n Driver: {2}",message,sqlCommand,innerException.Message))
         {
             
         }
@@ -87,10 +86,5 @@ namespace Moses
 
     }
 
-    public enum MosesErrorProviderOptions
-    {
-        Email,
-        XmlLogFile,
-        Both
-    }
+    
 }

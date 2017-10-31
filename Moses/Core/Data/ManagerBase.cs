@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Moses.Data
 {
@@ -10,7 +10,7 @@ namespace Moses.Data
     /// <summary>
     /// Classe Básica de representação da estrutura de acesso a dados no Moses 3.0
     /// </summary>
-    public abstract class ManagerBase<T> where T : DataContext
+    public abstract class ManagerBase<T> where T : DbContext
     {
         T _db;
 
@@ -35,7 +35,7 @@ namespace Moses.Data
         /// </summary>
         public void SubmitChanges()
         {
-            this.Context.SubmitChanges();
+            this.Context.SaveChanges();
         }
 
         /// <summary>

@@ -40,9 +40,7 @@ namespace Moses.Extensions
                 return "";
             else if (input.Value > 0)
                 return input.Value.ToString(formatString);
-            else if (input.Value < 0)
-                return input.Value.ToString(formatString);
-            else
+            else 
                 throw new FormatException("A Formatação é inválida");
         }
 

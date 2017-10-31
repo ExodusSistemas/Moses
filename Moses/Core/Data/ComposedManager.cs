@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Moses.Data
 {
@@ -15,7 +15,7 @@ namespace Moses.Data
     /// <typeparam name="L">DataContext</typeparam>
     public abstract class ComposedManager<T, K, L> : Manager<T,L> 
         where T : IComposedItemContainer<K> 
-        where L : DataContext
+        where L : DbContext
     {
         /// <summary>
         /// Implementação do Método Attach que usa O AttachBase o parâmetro K

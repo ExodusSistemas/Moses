@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Data.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Moses.Data
 {
-
-
     /// <summary>
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="K"></typeparam>
-    public abstract class Manager<T, K> : ManagerBase<K> where K : DataContext
+    public abstract class Manager<T, K> : ManagerBase<K> where K : DbContext
     {
         /// <summary>
         /// Construtor padrão da classe. Cria um novo DataContext e retorna a referência do Manager

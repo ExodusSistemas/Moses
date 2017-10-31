@@ -13,7 +13,7 @@ namespace Moses.Extensions
 
         #region Phone
 
-        static Regex phoneFormat = new Regex(@"^((\+\d?\d)?\([1-9][0-9]\))?[1-9]{1}?[1-9]{1}\d{3}\-\d{4}$", RegexOptions.Compiled);
+        static Regex phoneFormat = new Regex(@"^((\+\d?\d)?\([1-9][0-9]\))?([1-9]{1})?[1-9]{1}\d{3}\-\d{4}$", RegexOptions.Compiled);
 
         public static bool IsPhoneFormat(this string phone)
         {
