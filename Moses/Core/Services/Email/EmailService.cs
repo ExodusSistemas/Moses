@@ -14,15 +14,20 @@ namespace Moses.Services
 {
     public class EmailService : IEmailService
     {
-        private readonly MosesServiceOptions options;
+        private readonly MosesServiceOptions _options;
         private readonly ILogger _log;
+
+        public EmailService( MosesServiceOptions options)
+        {
+            _options = options;
+            _log = Moses.Services.LogService.Log;
+        }
 
         public async Task SendAsync(MailMessage message)
         {
-            
-            if (options.MailClientSetup != null)
+            if (_options.MailClientSetup != null)
             {
-                SmtpClient mailClient = options.MailClientSetup();
+                SmtpClient mailClient = _options.MailClientSetup();
                 _log.LogInformation($"Sending e-mail to: {message.To}");
                 await mailClient.SendMailAsync(message);
             }
@@ -59,15 +64,15 @@ namespace Moses.Services
                 MailMessage message = new MailMessage();
                 message.To.Add(to);
 
-                message.From = new MailAddress(options.AppConfiguration.Emails.SystemEmail.Address, options.AppConfiguration.Emails.SystemEmail.DisplayName);
-                message.Subject = options.AppConfiguration.Emails.SystemEmail.SubjectTag + titulo;
+                message.From = new MailAddress(_options.AppConfiguration.Emails.SystemEmail.Address, _options.AppConfiguration.Emails.SystemEmail.DisplayName);
+                message.Subject = _options.AppConfiguration.Emails.SystemEmail.SubjectTag + titulo;
                 message.IsBodyHtml = true;
                 message.Body = emailBody;
 
                 if (replyTo != null)
                 {
                     message.ReplyToList.Add(new MailAddress(replyTo));
-                    message.ReplyToList.Add(new MailAddress(options.AppConfiguration.Emails.SupportEmail.Address));
+                    message.ReplyToList.Add(new MailAddress(_options.AppConfiguration.Emails.SupportEmail.Address));
                 }
 
                 return message;
@@ -83,8 +88,8 @@ namespace Moses.Services
                 MailMessage message = new MailMessage();
                 message.To.Add(to);
 
-                message.From = new MailAddress(options.AppConfiguration.Emails.ChangePasswordEmail.Address, options.AppConfiguration.Emails.ChangePasswordEmail.DisplayName);
-                message.Subject = options.AppConfiguration.Emails.ChangePasswordEmail.SubjectTag + title;
+                message.From = new MailAddress(_options.AppConfiguration.Emails.ChangePasswordEmail.Address, _options.AppConfiguration.Emails.ChangePasswordEmail.DisplayName);
+                message.Subject = _options.AppConfiguration.Emails.ChangePasswordEmail.SubjectTag + title;
                 message.IsBodyHtml = true;
                 message.Body = emailBody;
 
@@ -98,14 +103,14 @@ namespace Moses.Services
 
         public MailMessage CreateErrorMail(string contextUrl, Exception exception, string userName, string contractName, string referer = "")
         {
-            string emailTo = options.AppConfiguration.Emails.BugTrackEmail.Address;
+            string emailTo = _options.AppConfiguration.Emails.BugTrackEmail.Address;
             try
             {
                 MailMessage message = new MailMessage();
                 message.To.Add(emailTo);
-                message.From = new MailAddress(options.AppConfiguration.Emails.ErrorEmail.Address, options.AppConfiguration.Emails.ErrorEmail.DisplayName);
+                message.From = new MailAddress(_options.AppConfiguration.Emails.ErrorEmail.Address, _options.AppConfiguration.Emails.ErrorEmail.DisplayName);
 
-                message.Subject = options.AppConfiguration.Emails.ErrorEmail.SubjectTag + exception.Message;
+                message.Subject = _options.AppConfiguration.Emails.ErrorEmail.SubjectTag + exception.Message;
                 message.IsBodyHtml = true;
                 message.Body =
                              "<br>Contract Name: " + contractName +

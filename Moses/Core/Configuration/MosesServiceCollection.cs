@@ -19,7 +19,7 @@ namespace Moses
 
             // Register email service 
             services.AddSingleton(options);
-            services.AddSingleton<IEmailService>(emailService ?? new EmailService());
+            services.AddSingleton<IEmailService, EmailService>();
 
             
         }
