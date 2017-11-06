@@ -12,11 +12,11 @@ namespace Moses.Extensions
         #region CPF
 
         /// <summary>
-        /// Prepara a sequência de entrada para ser armazenada no datasource.
+        /// Prepares a CPF entry to be set into the DataSource
         /// </summary>
         /// <remarks>Assume-se que a sequência de entrada é valida</remarks>
         /// <param name="s"></param>
-        public static decimal? ParseCPF(this string s)
+        public static ulong? ParseCPF(this string s)
         {
             if (s == null) return null;
 
@@ -24,11 +24,11 @@ namespace Moses.Extensions
 
             if (cpfNumber.Length == 11)
             {
-                return decimal.Parse(cpfNumber);
+                return ulong.Parse(cpfNumber);
             }
             else
             {
-                throw new System.Exception("Entrada Inválida");
+                throw new MosesFormatException($"Invalid CPF Entry: {s}");
             }
 
         }
@@ -38,7 +38,7 @@ namespace Moses.Extensions
         /// </summary>
         /// <remarks>Assume-se que a sequência de entrada é valida</remarks>
         /// <param name="s"></param>
-        public static decimal? ParseCPF(this object s)
+        public static ulong? ParseCPF(this object s)
         {
             string j = s as string;
             if (j == null) return null;
@@ -207,10 +207,7 @@ namespace Moses.Extensions
 
         #endregion
 
-        #region retiraraporradosacentoscaralho
-        //nao funciona essa merda, da erro "a porra do metodo nao pode ser usado com sql"!!!!
-
-        //http://ninjadevspace.com/c-dicas-e-utilidades-consulta-insensitivaignorar-acentuacao-letras-maiusculas-e-minusculas/
+        #region Remove Accents
 
         public static bool Vazia(this String strCorrente)
         {
