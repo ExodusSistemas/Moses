@@ -4,7 +4,7 @@ Tools Framework for Web Development using ASP.NET C#
 This framework consist in a set of tools and patterns for building SaaS applications for web using designs from Exodus Sistemas. This framework aggregates libraries needed 
 to run Exodus projects and are open for general purpose usage.
 
-This is version 4.0 and it's package can be downloaded from Nuget using.
+This is version 5.0 and it's package can be downloaded from Nuget using.
 
 `dotnet add package Moses`
 
