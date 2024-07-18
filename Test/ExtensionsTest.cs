@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
-using System.Linq;
-using Xunit;
 using Moses.Extensions;
 using Moses.Data;
 using Newtonsoft.Json;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Moses.Test
 {
     /// <summary>
     /// Summary description for UnitTest1
     /// </summary>
+    [TestClass]
     public class ExtensionsTest
     {
         public ExtensionsTest()
@@ -43,16 +42,18 @@ namespace Moses.Test
         //
         #endregion
 
-        [Fact]
+        [TestMethod]
         public void JsonToDictionarySuccessTest()
         {
             var now = DateTime.Today;
-            var result = new Dictionary<string, object>(5);
-            result.Add("Teste1","Vari1");
-            result.Add("Teste2","Vari2");
-            result.Add("Teste3","Vari3");
-            result.Add("Teste4", now);
-            result.Add("Teste5", (decimal)12.52);
+            Dictionary<string, object> result = new(5)
+            {
+                { "Teste1", "Vari1" },
+                { "Teste2", "Vari2" },
+                { "Teste3", "Vari3" },
+                { "Teste4", now },
+                { "Teste5", (decimal)12.52 }
+            };
 
             var input =
                 new
@@ -66,10 +67,10 @@ namespace Moses.Test
 
             Dictionary<string, object> output = input.JsonToDictionary();
 
-            Assert.Equal( output.ToJSon(), result.ToJSon());
+            Assert.AreEqual( output.ToJSon(), result.ToJSon());
         }
 
-        [Fact]
+        [TestMethod]
         public void SerializeToFromJsonTest()
         {
             var input = new
@@ -91,25 +92,24 @@ namespace Moses.Test
 
             foreach (var t in testCases)
             {
-                Assert.Equal(t.result, t.test.ToJSon());
-                Assert.Equal(t.test, t.test.ToJSon().FromJSon());
+                Assert.AreEqual(t.result, t.test.ToJSon());
+                Assert.AreEqual(t.test, t.test.ToJSon().FromJSon());
             }
 
-            Assert.Equal(input.ToJSon(), input.ToJSon().FromJSon<object>().ToJSon());
+            Assert.AreEqual(input.ToJSon(), input.ToJSon().FromJSon<object>().ToJSon());
 
         }
 
 
 
-        [Fact]
+        [TestMethod]
         public void PropertyValueHolderTest()
         {
-            SampleTestHolderClass model = new SampleTestHolderClass();
-            Assert.Null(model.Property1);
-            Assert.Equal(model.Date, DateTime.MinValue);
-            Assert.Equal(model.Val, 0);
-            Assert.Equal(model.Money, 0);
-
+            SampleTestHolderClass model = new();
+            Assert.IsNull(model.Property1);
+            Assert.AreEqual(model.Date, DateTime.MinValue);
+            Assert.AreEqual(0, model.Val);
+            Assert.AreEqual(0, model.Money);
 
             model.Property1 = "Teste";
             model.Val = 19922;
@@ -117,36 +117,34 @@ namespace Moses.Test
             model.Date = date;
             model.Money = (decimal) -222.21;
 
-            Assert.Equal(model.Date, date);
-            Assert.Equal(model.Val, 19922);
-            Assert.Equal(model.Money, (decimal) -222.21);
+            Assert.AreEqual(date, model.Date);
+            Assert.AreEqual(19922, model.Val);
+            Assert.AreEqual((decimal) -222.21, model.Money);
  
             //simula submit changes
 
             string sql = model.PropertyValuesString;
 
-            Assert.NotNull(sql);
-            Assert.Contains( "Teste",sql);
-            Assert.Contains("19922", sql);
-            Assert.Contains("222", sql);
+            Assert.IsNotNull(sql);
+            StringAssert.Contains( "Teste",sql);
+            StringAssert.Contains("19922", sql);
+            StringAssert.Contains("222", sql);
 
             SampleTestHolderClass model2 = SampleTestHolderClass.Create(sql);
-            Assert.Equal(model.Property1, model2.Property1);
-            Assert.Equal(model.Val, model2.Val);
-            Assert.Equal(model.Money, model2.Money);
-            Assert.Equal(model.Date.Day, model2.Date.Day);
-            Assert.Equal(model.Date.Year, model2.Date.Year);
-            Assert.Equal(model.Date.Minute, model2.Date.Minute);
-            Assert.Equal(model.Date.Millisecond, model2.Date.Millisecond);
-            //Assert.Equal(model.Date.Ticks, model2.Date.Ticks);  --problema: não está batendo os ticks
-            
-
+            Assert.AreEqual(model.Property1, model2.Property1);
+            Assert.AreEqual(model.Val, model2.Val);
+            Assert.AreEqual(model.Money, model2.Money);
+            Assert.AreEqual(model.Date.Day, model2.Date.Day);
+            Assert.AreEqual(model.Date.Year, model2.Date.Year);
+            Assert.AreEqual(model.Date.Minute, model2.Date.Minute);
+            Assert.AreEqual(model.Date.Millisecond, model2.Date.Millisecond);
+            //Assert.AreEqual(model.Date.Ticks, model2.Date.Ticks);  --problema: não está batendo os ticks
         }
 
-        [Fact]
+        [TestMethod]
         public void ParseSearchTest()
         {
-            var q = new Dictionary<string, string>();
+            Dictionary<string, string> q = [];
             q.Add("chaveBusca", "chavebusca");
             q.Add("àlDaro", "aldaro");
             q.Add("carrão", "carrao");
@@ -159,7 +157,7 @@ namespace Moses.Test
 
 
            foreach ( var v in q){
-                Assert.Equal(v.Value , v.Key.ParseSearch() );
+                Assert.AreEqual(v.Value , v.Key.ParseSearch() );
            }
         }
 
@@ -231,7 +229,7 @@ namespace Moses.Test
             }
         }
 
-        Dictionary<string, object> _propertyDictionary = new Dictionary<string, object>();
+        Dictionary<string, object> _propertyDictionary = [];
         [JsonIgnore]
         public Dictionary<string, object> PropertyDictionary {
             get
@@ -246,14 +244,11 @@ namespace Moses.Test
 
         private void Set(string key, object value)
         {
-            if (_propertyDictionary.ContainsKey(key))
+            if (!_propertyDictionary.TryAdd(key, value))
             {
                 _propertyDictionary[key] = value;
             }
-            else
-            {
-                _propertyDictionary.Add(key, value);
-            }
+
             Sync(this);
         }
 
@@ -261,9 +256,9 @@ namespace Moses.Test
         {
             object result = null;
 
-            if (_propertyDictionary.ContainsKey(key))
+            if (_propertyDictionary.TryGetValue(key, out object value))
             {
-                result = _propertyDictionary[key];
+                result = value;
             }
 
             return result;

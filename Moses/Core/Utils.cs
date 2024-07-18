@@ -22,20 +22,19 @@ namespace Moses
         {
             if (string.IsNullOrEmpty(sequence)) return false;
 
-            using (StringReader reader = new StringReader(sequence))
+            using StringReader reader = new(sequence);
+
+            int i = 0;
+
+            while ((i = reader.Read()) != -1)
             {
-                int i = 0;
-
-                while ((i = reader.Read()) != -1)
-                {
-                    if (!char.IsNumber((char)i))
-                        return false;
-                }
-
-                return true;
+                if (!char.IsNumber((char)i))
+                    return false;
             }
 
-            
+            return true;
+
+
         }
 
         public static bool IsNullOrEmpty(this string sequence)
@@ -52,8 +51,7 @@ namespace Moses
         {
             if (string.IsNullOrEmpty(sequence)) return false;
 
-            decimal d;
-            return decimal.TryParse(sequence,out d);
+            return decimal.TryParse(sequence, out decimal _);
 
             //StringReader reader = new StringReader(sequence);
 
@@ -94,8 +92,8 @@ namespace Moses
         {
             if (string.IsNullOrEmpty(sequence)) return sequence;
 
-            StringBuilder builder = new StringBuilder();
-            using (StringReader reader = new StringReader(sequence))
+            StringBuilder builder = new();
+            using (StringReader reader = new(sequence))
             {
 
                 int intChar;
@@ -114,7 +112,7 @@ namespace Moses
         public static DataTable CsvToDataTable(string csvString, bool isRowOneHeader)
         {
 
-            DataTable csvDataTable = new DataTable();
+            DataTable csvDataTable = new();
 
             try
             {
@@ -171,10 +169,10 @@ namespace Moses
                     csvDataTable.Rows.Add(row);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 csvDataTable.Dispose();
-                throw e;
+                throw;
             }
 
             //return the CSV DataTable
@@ -185,7 +183,7 @@ namespace Moses
 
         public static DataTable CsvToDataTable(string csvString, bool isRowOneHeader, char separator)
         {
-            DataTable csvDataTable = new DataTable();
+            DataTable csvDataTable = new();
 
             try
             {
@@ -241,10 +239,10 @@ namespace Moses
                     csvDataTable.Rows.Add(row);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 csvDataTable.Dispose();
-                throw e;
+                throw;
             }
 
             //return the CSV DataTable
@@ -861,17 +859,12 @@ namespace Moses
 
         public static string GetSexo(string indSexo)
         {
-            switch (indSexo)
+            return indSexo switch
             {
-                case "M":
-                    return "Masculino";
-                    
-                case "F":
-                    return "Feminino";
-
-                default:
-                    return "";
-            }
+                "M" => "Masculino",
+                "F" => "Feminino",
+                _ => "",
+            };
         }
 
         public static DateTime? Latest(DateTime? dateTime1, DateTime? dateTime2)

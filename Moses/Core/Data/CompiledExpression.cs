@@ -25,8 +25,8 @@ namespace Moses.Data
     /// <typeparam name="TProperty">Return type of the expression.</typeparam>
     public sealed class CompiledExpression<T, TResult> : CompiledExpression
     {
-        private Expression<Func<T, TResult>> expression;
-        private Func<T, TResult> function;
+        private readonly Expression<Func<T, TResult>> expression;
+        private readonly Func<T, TResult> function;
 
         public CompiledExpression()
         {
@@ -74,7 +74,7 @@ namespace Moses.Data
 
         public class IncompletePropertyTranslation<TResult>
         {
-            private Expression<Func<T, TResult>> property;
+            private readonly Expression<Func<T, TResult>> property;
 
             internal IncompletePropertyTranslation(Expression<Func<T, TResult>> property)
             {
@@ -93,7 +93,7 @@ namespace Moses.Data
     /// </summary>
     public class TranslationMap : Dictionary<MemberInfo, CompiledExpression>
     {
-        internal static TranslationMap defaultMap = new TranslationMap();
+        internal static TranslationMap defaultMap = [];
 
         public CompiledExpression<T, TResult> Get<T, TResult>(MethodBase method)
         {
@@ -159,7 +159,7 @@ namespace Moses.Data
         /// </summary>
         private class TranslatingVisitor : ExpressionVisitor
         {
-            private readonly Stack<KeyValuePair<ParameterExpression, Expression>> bindings = new Stack<KeyValuePair<ParameterExpression, Expression>>();
+            private readonly Stack<KeyValuePair<ParameterExpression, Expression>> bindings = new();
             private readonly TranslationMap map;
 
             internal TranslatingVisitor(TranslationMap map)
@@ -171,8 +171,7 @@ namespace Moses.Data
             {
                 EnsureTypeInitialized(node.Member.DeclaringType);
 
-                CompiledExpression cp;
-                if (map.TryGetValue(node.Member, out cp))
+                if (map.TryGetValue(node.Member, out CompiledExpression cp))
                 {
                     return VisitCompiledExpression(cp, node.Expression);
                 }

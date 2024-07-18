@@ -19,8 +19,7 @@ namespace Moses
         {
             get
             {
-                if (_current == null)
-                    _current = new TimeProvider();
+                _current ??= new TimeProvider();
                 return _current;
             }
         }

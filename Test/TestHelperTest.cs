@@ -1,14 +1,13 @@
 ﻿using Moses.Test;
-using Xunit;
 using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Moses.Test
 {
-    
-    
     /// <summary>
     ///This is a test class for TestHelperTest and is intended
     ///to contain all TestHelperTest Unit Tests
     ///</summary>
+    [TestClass]
     public class TestHelperTest
     {
 
@@ -46,20 +45,20 @@ namespace Moses.Test
         /// <summary>
         ///A test for FillAttributesWithRandomValues
         ///</summary>
-        [Fact]
+        [TestMethod]
         public void FillAttributesWithRandomValuesTest()
         {
             var a = new TestSampleClass();
 
             a.FillAttributesWithRandomValues();
 
-            Assert.Equal(0, a.Id); //id não se preenche
-            Assert.NotNull( a.Name);
-            Assert.NotNull(a.Fone);
-            Assert.NotNull(a.FullName);
-            Assert.NotEqual(String.Empty, a.Name);
-            Assert.NotEqual(String.Empty, a.Fone);
-            Assert.NotEqual(String.Empty, a.FullName);
+            Assert.AreEqual(0, a.Id); //id não se preenche
+            Assert.IsNotNull( a.Name);
+            Assert.IsNotNull(a.Fone);
+            Assert.IsNotNull(a.FullName);
+            Assert.AreNotEqual(String.Empty, a.Name);
+            Assert.AreNotEqual(String.Empty, a.Fone);
+            Assert.AreNotEqual(String.Empty, a.FullName);
         }
 
         public class TestSampleClass
@@ -74,7 +73,7 @@ namespace Moses.Test
         /// <summary>
         ///A test for CompareObjectAttributes
         ///</summary>
-        [Fact]
+        [TestMethod]
         public void CompareObjectAttributesTest()
         {
             object firstObject = null; // TODO: Initialize to an appropriate value
@@ -82,8 +81,8 @@ namespace Moses.Test
             bool expected = true; // TODO: Initialize to an appropriate value
             bool actual;
             actual = TestHelper.CompareObjectAttributes(firstObject, secondObject);
-            Assert.Equal(expected, actual);
-            //Assert.False(true, "Verify the correctness of this test method.");
+            Assert.AreEqual(expected, actual);
+            //Assert.IsFalse(true, "Verify the correctness of this test method.");
         }
     }
 }

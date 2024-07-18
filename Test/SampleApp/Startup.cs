@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Moses.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +15,7 @@ namespace Moses.Test.SampleApp
 
     public class ProgramTest
     {
-        public static void MainTest(string[] args)
+        public static void MainTest()
         {
            
         }
@@ -27,26 +26,20 @@ namespace Moses.Test.SampleApp
                 .Build();
     }
 
-    public class Startup
+    public class Startup(IConfiguration configuration)
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; } = configuration;
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddMoses(Configuration);
 
             //factory.AddFile("logFileFromHelper.log"); //serilog file extension
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -57,8 +50,6 @@ namespace Moses.Test.SampleApp
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseMoses(loggerFactory);
-            
             app.UseStaticFiles();
 
             app.UseMvc(routes =>

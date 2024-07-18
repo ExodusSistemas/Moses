@@ -3,13 +3,15 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Moses.Extensions;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 namespace Moses.Test
 {
+    [TestClass]
     public class ParserTest
     {
-        [Fact]
+        [TestMethod]
         public void TestCypherDecypher()
         {
             var actuals = new [] { 
@@ -20,9 +22,9 @@ namespace Moses.Test
 
             foreach (var actual in actuals ){
                 
-                Assert.Equal(actual.Cypher().Decypher(), actual);
-                Assert.False(actual.Cypher().Contains(':'), "\"" +actual +"|=>|"+ actual.Cypher() + "\" Contem dois pontos");
-                Assert.False(actual.Cypher().Contains(';'), "Contem ponto e virgula");
+                Assert.AreEqual(actual.Cypher().Decypher(), actual);
+                Assert.IsFalse(actual.Cypher().Contains(':'), "\"" +actual +"|=>|"+ actual.Cypher() + "\" Contem dois pontos");
+                Assert.IsFalse(actual.Cypher().Contains(';'), "Contem ponto e virgula");
             }
             
         }

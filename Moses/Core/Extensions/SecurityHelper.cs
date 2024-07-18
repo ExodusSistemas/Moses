@@ -33,51 +33,15 @@ namespace Moses.Extensions
     public static class SecurityHelper
     {
 
-        public static string GetMd5String(byte[] data)
+        public static string Encrypt(this string data, bool legacy = false)
         {
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] result = md5.ComputeHash(data);
-            ASCIIEncoding ByteConverter = new ASCIIEncoding();
-            return ByteConverter.GetString(result);
-        }
-
-        public static string GetMd5String(this string data)
-        {
-            ASCIIEncoding ByteConverter = new ASCIIEncoding();
-            return GetMd5String(ByteConverter.GetBytes(data));
-        }
-
-        public static string GetMd5Hex(this byte[] data)
-        {
-            StringBuilder sText = new StringBuilder();
-            using (MD5 md5 = new MD5CryptoServiceProvider())
-            {
-                byte[] result = md5.ComputeHash(data);
-
-                for (int i = 0; i < result.Length; i++)
-                {
-                    sText.Append(String.Format("{0,2:x}", result[i]).Replace(" ", "0"));
-                }
-            }
-            
-            return sText.ToString();
-        }
-
-        public static string GetMd5Hex(this string data)
-        {
-            ASCIIEncoding ByteConverter = new ASCIIEncoding();
-            return GetMd5Hex(ByteConverter.GetBytes(data));
-        }
-
-        public static string Encrypt(this string data)
-        {
-            Crypt c = new Crypt();
+            Crypt c = new(legacy);
             return c.Encrypt(data);
         }
 
-        public static string Decrypt(this string data)
+        public static string Decrypt(this string data, bool legacy = false)
         {
-            Crypt c = new Crypt();
+            Crypt c = new(legacy);
             return c.Decrypt(data);
         }
 
@@ -88,19 +52,15 @@ namespace Moses.Extensions
         {
             #region Private members
             private string _key = string.Empty;
-            private CryptProvider _cryptProvider;
-            private SymmetricAlgorithm _algorithm;
+            private readonly CryptProvider _cryptProvider;
+            private readonly Aes _algorithm;
             private void SetIV()
             {
-                switch (_cryptProvider)
+                _algorithm.IV = _cryptProvider switch
                 {
-                    case CryptProvider.Rijndael:
-                        _algorithm.IV = new byte[] { 0xf, 0x6f, 0x13, 0x2e, 0x35, 0xc2, 0xcd, 0xf9, 0x5, 0x46, 0x9c, 0xea, 0xa8, 0x4b, 0x73, 0xcc };
-                        break;
-                    default:
-                        _algorithm.IV = new byte[] { 0xf, 0x6f, 0x13, 0x2e, 0x35, 0xc2, 0xcd, 0xf9 };
-                        break;
-                }
+                    CryptProvider.Rijndael => [0xf, 0x6f, 0x13, 0x2e, 0x35, 0xc2, 0xcd, 0xf9, 0x5, 0x46, 0x9c, 0xea, 0xa8, 0x4b, 0x73, 0xcc],
+                    _ => [0xf, 0x6f, 0x13, 0x2e, 0x35, 0xc2, 0xcd, 0xf9],
+                };
             }
             #endregion
 
@@ -119,40 +79,22 @@ namespace Moses.Extensions
             /// <summary>
             /// Contrutor padrão da classe, é setado um tipo de criptografia padrão.
             /// </summary>
-            public Crypt()
+            public Crypt(bool legacy = false)
             {
-                _algorithm = new RijndaelManaged();
-                _algorithm.Mode = CipherMode.CBC;
-                _cryptProvider = CryptProvider.Rijndael;
-            }
-            /// <summary>
-            /// Construtor com o tipo de criptografia a ser usada.
-            /// </summary>
-            /// <param name="cryptProvider">Tipo de criptografia.</param>
-            public Crypt(CryptProvider cryptProvider)
-            {
-                // Seleciona algoritmo simétrico
-                switch (cryptProvider)
+                if (legacy)
                 {
-                    case CryptProvider.Rijndael:
-                        _algorithm = new RijndaelManaged();
-                        _cryptProvider = CryptProvider.Rijndael;
-                        break;
-                    case CryptProvider.RC2:
-                        _algorithm = new RC2CryptoServiceProvider();
-                        _cryptProvider = CryptProvider.RC2;
-                        break;
-                    case CryptProvider.DES:
-                        _algorithm = new DESCryptoServiceProvider();
-                        _cryptProvider = CryptProvider.DES;
-                        break;
-                    case CryptProvider.TripleDES:
-                        _algorithm = new TripleDESCryptoServiceProvider();
-                        _cryptProvider = CryptProvider.TripleDES;
-                        break;
+                    _algorithm = Aes.Create();
+                    _algorithm.Mode = CipherMode.CBC;
+                    _cryptProvider = CryptProvider.TripleDES;
                 }
-                _algorithm.Mode = CipherMode.CBC;
+                else
+                {
+                    
+                    _algorithm.Mode = CipherMode.CBC;
+                    _cryptProvider = CryptProvider.Rijndael;
+                }
             }
+            
             #endregion
 
             #region Public methods
@@ -176,7 +118,7 @@ namespace Moses.Extensions
                     if (keySize > maxSize)
                     {
                         // Busca o valor máximo da chave
-                        _key = _key.Substring(0, maxSize / 8);
+                        _key = _key[..(maxSize / 8)];
                     }
                     else if (keySize < maxSize)
                     {
@@ -189,7 +131,7 @@ namespace Moses.Extensions
                         }
                     }
                 }
-                PasswordDeriveBytes key = new PasswordDeriveBytes(_key, ASCIIEncoding.ASCII.GetBytes(salt));
+                PasswordDeriveBytes key = new(_key, ASCIIEncoding.ASCII.GetBytes(salt));
                 return key.GetBytes(_key.Length);
             }
             /// <summary>
@@ -235,16 +177,12 @@ namespace Moses.Extensions
                 }
                 finally
                 {
-                    if (_cryptoStream != null)
-                        _cryptoStream.Close();
+                    _cryptoStream?.Close();
 
-                    if (_memoryStream != null)
-                        _memoryStream.Dispose();
+                    _memoryStream?.Dispose();
                 }
-                
-
-                
             }
+
             /// <summary>
             /// Desencripta o dado solicitado.
             /// </summary>
@@ -272,7 +210,7 @@ namespace Moses.Extensions
                     _cryptoStream = new CryptoStream(_memoryStream, cryptoTransform, CryptoStreamMode.Read);
 
                     // Busca resultado do CryptoStream
-                    StreamReader _streamReader = new StreamReader(_cryptoStream);
+                    StreamReader _streamReader = new(_cryptoStream);
                     return _streamReader.ReadToEnd();
                 }
                 catch
@@ -283,10 +221,10 @@ namespace Moses.Extensions
                 {
                     _cryptoStream.Close();
 
-                    if (_memoryStream != null)
-                        _memoryStream.Dispose();
+                    _memoryStream?.Dispose();
                 }
             }
+
             #endregion
         }
     }

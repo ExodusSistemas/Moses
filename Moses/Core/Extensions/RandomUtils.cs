@@ -8,7 +8,7 @@ namespace Moses
 {
     public static class RandomUtils
     {
-        private static Random randomSeed = new Random();
+        private static readonly Random randomSeed = new();
 
         public static string RandomText()
         {
@@ -20,12 +20,12 @@ namespace Moses
             if (!maxSize.HasValue)
                 maxSize = Convert.ToInt32( 255 * randomSeed.NextDouble() );
 
-            StringBuilder RandStr = new StringBuilder(maxSize.Value);
+            StringBuilder RandStr = new(maxSize.Value);
 
             for (int i = 0; i < maxSize; i++)
             {
                 RandStr.Append(RandomString(Convert.ToInt32(20 * randomSeed.NextDouble()), null));
-                RandStr.Append(" ");
+                RandStr.Append(' ');
             }
 
             return RandStr.ToString(0,RandStr.Length-1);
@@ -52,7 +52,7 @@ namespace Moses
             /* StringBuilder is faster than using strings (+=)*/
             if (!size.HasValue)
                 size = RandomNumber() % 20;
-            StringBuilder RandStr = new StringBuilder(size.Value);
+            StringBuilder RandStr = new(size.Value);
 
             /* Ascii start position (65 = A / 97 = a)*/
             int start = (lowerCase.GetValueOrDefault()) ? 97 : 65;
@@ -66,21 +66,21 @@ namespace Moses
             return RandStr.ToString();
         }
 
-        public static string RandomPassword(int PasswordLength)
+        public static string RandomPassword(int passwordLength)
         {
-            String _allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ23456789";
-            Byte[] randomBytes = new Byte[PasswordLength];
-            char[] chars = new char[PasswordLength];
+            const string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ23456789";
+            byte[] randomBytes = new byte[passwordLength];
+            char[] chars = new char[passwordLength];
 
-            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(randomBytes);
-                
-                int allowedCharCount = _allowedChars.Length;
 
-                for (int i = 0; i < PasswordLength; i++)
+                int allowedCharCount = allowedChars.Length;
+
+                for (int i = 0; i < passwordLength; i++)
                 {
-                    chars[i] = _allowedChars[(int)randomBytes[i] % allowedCharCount];
+                    chars[i] = allowedChars[randomBytes[i] % allowedCharCount];
                 }
             }
 

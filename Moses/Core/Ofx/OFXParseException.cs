@@ -18,11 +18,5 @@ namespace Moses.Ofx
         {
         }
 
-        protected OFXParseException(
-            SerializationInfo info,
-            StreamingContext context)
-            : base(info, context)
-        {
-        }
     }
 }
