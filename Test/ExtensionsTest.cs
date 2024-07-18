@@ -126,9 +126,9 @@ namespace Moses.Test
             string sql = model.PropertyValuesString;
 
             Assert.IsNotNull(sql);
-            StringAssert.Contains( "Teste",sql);
-            StringAssert.Contains("19922", sql);
-            StringAssert.Contains("222", sql);
+            StringAssert.Contains(sql, "Teste"  );
+            StringAssert.Contains(sql, "19922"  );
+            StringAssert.Contains(sql, "222"    );
 
             SampleTestHolderClass model2 = SampleTestHolderClass.Create(sql);
             Assert.AreEqual(model.Property1, model2.Property1);
