@@ -93,7 +93,7 @@ namespace Moses.Extensions
         public static string Cypher(this string s)
         {
             if (s == null) return null;
-            string cyphered = Convert.ToBase64String( ASCIIEncoding.Default.GetBytes( s ) );
+            string cyphered = Convert.ToBase64String( UTF8Encoding.Default.GetBytes( s ) );
 
             return cyphered;
         }
@@ -101,7 +101,7 @@ namespace Moses.Extensions
         public static string Decypher(this string s)
         {
             if (s == null) return null;
-            string decyphered = ASCIIEncoding.Default.GetString( Convert.FromBase64String(s) );
+            string decyphered = UTF8Encoding.Default.GetString( Convert.FromBase64String(s) );
             return decyphered;
         }
 

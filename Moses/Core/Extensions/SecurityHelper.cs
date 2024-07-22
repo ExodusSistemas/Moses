@@ -32,6 +32,41 @@ namespace Moses.Extensions
 
     public static class SecurityHelper
     {
+        public static string GetMd5String(byte[] data)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] result = md5.ComputeHash(data);
+            ASCIIEncoding ByteConverter = new ASCIIEncoding();
+            return ByteConverter.GetString(result);
+        }
+
+        public static string GetMd5String(this string data)
+        {
+            ASCIIEncoding ByteConverter = new ASCIIEncoding();
+            return GetMd5String(ByteConverter.GetBytes(data));
+        }
+
+        public static string GetMd5Hex(this byte[] data)
+        {
+            StringBuilder sText = new StringBuilder();
+            using (MD5 md5 = new MD5CryptoServiceProvider())
+            {
+                byte[] result = md5.ComputeHash(data);
+
+                for (int i = 0; i < result.Length; i++)
+                {
+                    sText.Append(String.Format("{0,2:x}", result[i]).Replace(" ", "0"));
+                }
+            }
+
+            return sText.ToString();
+        }
+
+        public static string GetMd5Hex(this string data)
+        {
+            ASCIIEncoding ByteConverter = new ASCIIEncoding();
+            return GetMd5Hex(ByteConverter.GetBytes(data));
+        }
 
         public static string Encrypt(this string data, bool legacy = false)
         {
@@ -53,13 +88,13 @@ namespace Moses.Extensions
             #region Private members
             private string _key = string.Empty;
             private readonly CryptProvider _cryptProvider;
-            private readonly Aes _algorithm;
+            private readonly SymmetricAlgorithm _algorithm;
             private void SetIV()
             {
                 _algorithm.IV = _cryptProvider switch
                 {
                     CryptProvider.Rijndael => [0xf, 0x6f, 0x13, 0x2e, 0x35, 0xc2, 0xcd, 0xf9, 0x5, 0x46, 0x9c, 0xea, 0xa8, 0x4b, 0x73, 0xcc],
-                    _ => [0xf, 0x6f, 0x13, 0x2e, 0x35, 0xc2, 0xcd, 0xf9],
+                    _ => [0xf, 0x6f, 0x13, 0x2e, 0x35, 0xc2, 0xcd, 0xf9, 0xf, 0x6f, 0x13, 0x2e, 0x35, 0xc2, 0xcd, 0xf9],
                 };
             }
             #endregion
@@ -81,7 +116,7 @@ namespace Moses.Extensions
             /// </summary>
             public Crypt(bool legacy = false)
             {
-                if (legacy)
+                if (!legacy)
                 {
                     _algorithm = Aes.Create();
                     _algorithm.Mode = CipherMode.CBC;
@@ -89,7 +124,7 @@ namespace Moses.Extensions
                 }
                 else
                 {
-                    
+                    _algorithm = new RijndaelManaged();
                     _algorithm.Mode = CipherMode.CBC;
                     _cryptProvider = CryptProvider.Rijndael;
                 }
@@ -141,7 +176,7 @@ namespace Moses.Extensions
             /// <returns>Texto criptografado.</returns>
             public virtual string Encrypt(string plainText)
             {
-                byte[] plainByte = ASCIIEncoding.ASCII.GetBytes(plainText);
+                byte[] plainByte = ASCIIEncoding.UTF8.GetBytes(plainText);
                 byte[] keyByte = GetKey();
 
                 // Seta a chave privada

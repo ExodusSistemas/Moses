@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
-		<Version>5.0.2</Version>
+		<Version>5.0.3</Version>
 		<Description>Moses is a framework suported by Exodus for development of Web based Services and Web API.</Description>
 		<Copyright>MIT</Copyright>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>

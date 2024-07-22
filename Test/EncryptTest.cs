@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Moses.Test
 {
     [TestClass]
-    public class ParserTest
+    public class EncryptTest
     {
         [TestMethod]
         public void TestCypherDecypher()
@@ -22,11 +22,17 @@ namespace Moses.Test
 
             foreach (var actual in actuals ){
                 
-                Assert.AreEqual( actual, actual.Cypher().Decypher());
-                Assert.IsFalse(actual.Cypher().Contains(':'), "\"" +actual +"|=>|"+ actual.Cypher() + "\" Contem dois pontos");
-                Assert.IsFalse(actual.Cypher().Contains(';'), "Contem ponto e virgula");
+                Assert.AreEqual(actual.Encrypt().Decrypt(), actual);
+                Assert.AreEqual(actual.Encrypt().Decrypt(), actual);
+                Assert.AreNotEqual(actual + " ".Encrypt().Decrypt(), actual);
+                Assert.AreEqual(actual.Encrypt(true).Decrypt(true), actual);
             }
-            
+        }
+
+        [TestMethod]
+        public void TestMd5()
+        {
+            Assert.AreEqual("3FF2CACF51AC0C4E4E7BC2D865C7F09F", "CeuDeDuiamiouasdi2321".GetMd5Hex().ToUpper());
         }
     }
 }
