@@ -41,11 +41,17 @@ jobs:
       - name: Pack NuGet package
         run: dotnet pack --configuration Release --no-build --output ./nupkgs
 
-      - name: Push to NuGet (Trusted Publishing)
-        run: >
-          dotnet nuget push ./nupkgs/*.nupkg
-          --source https://api.nuget.org/v3/index.json
-          --api-key dummy
-
+      # Get a short-lived NuGet API key
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@v1
+        id: moses-bot
+        with:
+          user: OlavoNeto
+    
+      # Push the package
+      - name: NuGet push
+        run: dotnet nuget push artifacts/my-sdk.nupkg --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json 
+    
+    
 
       
