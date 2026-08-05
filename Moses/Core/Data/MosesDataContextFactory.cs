@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
 
 namespace Moses.Data
 {
-    public class DataContextFactory<T> where T : DbContext , new()
+    public class DataContextFactory<T> where T : new()
     {
         public static DataContextFactory<T> _factory = null;
-        private T _dataContext = null;
+        private T _dataContext = default;
 
         public static T GetDataContext()
         {

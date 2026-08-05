@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.EntityFrameworkCore;
 
 namespace Moses.Data
 {
@@ -10,7 +9,7 @@ namespace Moses.Data
     /// <summary>
     /// Classe Básica de representação da estrutura de acesso a dados no Moses 3.0
     /// </summary>
-    public abstract class ManagerBase<T> where T : DbContext
+    public abstract class ManagerBase<T>
     {
         T _db;
 
@@ -31,12 +30,10 @@ namespace Moses.Data
         }
 
         /// <summary>
-        /// Executa o SubmitChanges do DataContext controlado pelo manager
+        /// Executa o SubmitChanges do DataContext controlado pelo manager.
+        /// Deve ser implementado pela classe concreta de acordo com o provider de dados utilizado.
         /// </summary>
-        public void SubmitChanges()
-        {
-            this.Context.SaveChanges();
-        }
+        public abstract void SubmitChanges();
 
         /// <summary>
         /// Referência para o DataContext
@@ -51,7 +48,7 @@ namespace Moses.Data
         }
 
         /// <summary>
-        /// Deve retornar o DataContext para ser uDsado internamente na Criação do DataContext dentro do construtor
+        /// Deve retornar o DataContext para ser usado internamente na Criação do DataContext dentro do construtor
         /// da classe
         /// </summary>
         /// <returns></returns>

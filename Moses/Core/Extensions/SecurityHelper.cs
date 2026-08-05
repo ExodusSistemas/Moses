@@ -34,22 +34,21 @@ namespace Moses.Extensions
     {
         public static string GetMd5String(byte[] data)
         {
-            MD5 md5 = new MD5CryptoServiceProvider();
+            using var md5 = MD5.Create();
             byte[] result = md5.ComputeHash(data);
-            ASCIIEncoding ByteConverter = new ASCIIEncoding();
-            return ByteConverter.GetString(result);
+            return Encoding.ASCII.GetString(result);
         }
 
         public static string GetMd5String(this string data)
         {
-            ASCIIEncoding ByteConverter = new ASCIIEncoding();
+            Encoding ByteConverter = Encoding.ASCII;
             return GetMd5String(ByteConverter.GetBytes(data));
         }
 
         public static string GetMd5Hex(this byte[] data)
         {
             StringBuilder sText = new StringBuilder();
-            using (MD5 md5 = new MD5CryptoServiceProvider())
+            using (var md5 = MD5.Create())
             {
                 byte[] result = md5.ComputeHash(data);
 
@@ -124,7 +123,7 @@ namespace Moses.Extensions
                 }
                 else
                 {
-                    _algorithm = new RijndaelManaged();
+                    _algorithm = Aes.Create();
                     _algorithm.Mode = CipherMode.CBC;
                     _cryptProvider = CryptProvider.Rijndael;
                 }
@@ -166,8 +165,7 @@ namespace Moses.Extensions
                         }
                     }
                 }
-                PasswordDeriveBytes key = new(_key, ASCIIEncoding.ASCII.GetBytes(salt));
-                return key.GetBytes(_key.Length);
+                return Rfc2898DeriveBytes.Pbkdf2(_key, Encoding.ASCII.GetBytes(salt), 100_000, HashAlgorithmName.SHA1, _key.Length);
             }
             /// <summary>
             /// Encripta o dado solicitado.
