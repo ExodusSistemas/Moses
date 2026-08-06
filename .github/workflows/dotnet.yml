@@ -50,7 +50,7 @@ jobs:
     
       # Push the package
       - name: NuGet push
-        run: dotnet nuget push artifacts/my-sdk.nupkg --api-key ${{steps.moses-bot.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json 
+        run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{steps.moses-bot.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json 
     
     
 
