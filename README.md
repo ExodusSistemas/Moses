@@ -1,14 +1,61 @@
-# Moses [![Build status](https://ci.appveyor.com/api/projects/status/7t1alxxjoy9ujtwq?svg=true)](https://ci.appveyor.com/project/ExodusSistemas/moses)
-Tools Framework for Web Development using ASP.NET C#
+# Moses
 
-This framework consist in a set of tools and patterns for building SaaS applications for web using designs from Exodus Sistemas. This framework aggregates libraries needed 
-to run Exodus projects and are open for general purpose usage.
+[![Build status](https://ci.appveyor.com/api/projects/status/7t1alxxjoy9ujtwq?svg=true)](https://ci.appveyor.com/project/ExodusSistemas/moses)
 
-This is version 5.0 and it's package can be downloaded from Nuget using.
+**Moses** is a framework by [Exodus Sistemas](https://github.com/ExodusSistemas) for building SaaS web services and Web APIs using ASP.NET Core.
 
-`dotnet add package Moses`
+## Installation
 
-This is a stripped version of the framework since it's the first version using EF7. (Previous versions used Linq to Sql). So a lot of functionality will
-steal be re-written in order to reconstruct state of the art patterns for web api usage.
+```bash
+dotnet add package Moses
+```
 
-The version will advance in suporting Owin and Authentication for JSON REST api protocols and security. We will use MVC patterns for routing and MS WebApi.
+## Features
+
+- **Data Access** — Generic `Manager<T, K>` / `ManagerBase<T>` base classes for data access patterns, database-provider agnostic.
+- **Cryptography** — `SecurityHelper` with AES encryption, MD5 hashing, and PBKDF2 key derivation.
+- **Extensions** — Parsing, formatting, validation, date utilities, enum helpers, OFX support, and more.
+- **Serialization** — JSON-based property serialization via `IPropertyValueHolder`.
+- **Exceptions** — Domain-specific exception hierarchy (`MosesException`, `MosesSecurityException`, `MosesRuntimeException`, etc.).
+- **Networking** — HTTP and OFX client helpers.
+- **Reflection** — Runtime type utilities.
+
+## Quick Start
+
+```csharp
+using Moses.Extensions;
+
+// Encrypt / Decrypt
+string encrypted = "my-secret".Encrypt();
+string decrypted = encrypted.Decrypt();
+
+// MD5 hashing
+string hash = "hello".GetMd5Hex();
+
+// Validation
+bool valid = "test@email.com".IsValidEmail();
+```
+
+### Custom Data Manager
+
+```csharp
+using Moses.Data;
+
+public class MyManager : Manager<MyEntity, MyDbContext>
+{
+    public override IQueryable<MyEntity> GetAll() => Context.Set<MyEntity>();
+    public override MyEntity Get(int id) => Context.Set<MyEntity>().Find(id);
+    public override MyEntity Create(MyEntity item) => Context.Set<MyEntity>().Add(item).Entity;
+    public override void AttachBase(MyEntity item, bool asModified) { /* ... */ }
+    public override void DeleteBase(MyEntity item) => Context.Set<MyEntity>().Remove(item);
+    public override void SubmitChanges() => Context.SaveChanges();
+}
+```
+
+## Target Framework
+
+- **.NET 10.0**
+
+## License
+
+MIT
