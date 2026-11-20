@@ -1,28 +1,20 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Moses.Test.SampleApp
 {
-
     public class ProgramTest
     {
         public static void MainTest()
         {
-           
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
+        public static IHost BuildWebHost(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
                 .Build();
     }
 
@@ -34,8 +26,6 @@ namespace Moses.Test.SampleApp
         public static void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
-            //factory.AddFile("logFileFromHelper.log"); //serilog file extension
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

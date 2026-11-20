@@ -120,8 +120,7 @@ namespace Moses.Test
             }
             catch (ArgumentOutOfRangeException)
             {
-                //"Erro processado com sucesso"
-                Assert.IsTrue(true);
+                // Erro processado com sucesso.
             }
             catch
             {

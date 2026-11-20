@@ -22,24 +22,27 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x' # Specify your .NET version
+          dotnet-version: '10.0.404'
+
+      - name: Show .NET version
+        run: dotnet --version
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore Moses.sln
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build Moses.sln --configuration Release --no-restore
 
       - name: Run tests
-        run: dotnet test --configuration Release --no-restore --verbosity normal
+        run: dotnet test Moses.sln --configuration Release --no-build --no-restore --verbosity normal
 
       - name: Pack NuGet package
-        run: dotnet pack --configuration Release --no-build --output ./nupkgs
+        run: dotnet pack Moses/Moses.csproj --configuration Release --no-build --output ./nupkgs
 
       # Get a short-lived NuGet API key
       - name: NuGet login (OIDC → temp API key)
@@ -50,8 +53,8 @@ jobs:
     
       # Push the package
       - name: NuGet push
-        run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{steps.moses-bot.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json 
-    
-    
+        run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{steps.moses-bot.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
 
-      
+
+
+

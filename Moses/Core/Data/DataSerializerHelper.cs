@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Moses.Extensions
 {
@@ -46,26 +47,13 @@ namespace Moses.Extensions
         {
             if (string.IsNullOrEmpty(target)) return new Dictionary<string, object>();
 
-            var output = target.FromJSon<Dictionary<string, object>>();
+            var settings = new JsonSerializerSettings
+            {
+                FloatParseHandling = FloatParseHandling.Decimal
+            };
 
-            if (output == null) return new Dictionary<string, object>();
-
-            //correção de um bug do ASP.NET (a hora está sendo reconvertida em UTC, e isso gera uma diferença em horas 
-            //var j = output.Count;
-            //for (int i = 0; i < j; i++)
-            //{
-            //    var el = output.At(i);
-            //    if (el.Value is DateTime)
-            //    {
-            //        var date = (DateTime)el.Value;
-
-            //        DateTime utc = DateTime.UtcNow;
-            //        output[el.Key] = (object)(date).AddTicks(utc.ToLocalTime().Ticks - utc.Ticks);
-            //    }
-            //}
-
-
-            return output;
+            return JsonConvert.DeserializeObject<Dictionary<string, object>>(target, settings)
+                ?? new Dictionary<string, object>();
         }
 
         public static string JsonToCsv(this string target)

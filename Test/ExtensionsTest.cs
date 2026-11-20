@@ -52,7 +52,7 @@ namespace Moses.Test
                 { "Teste2", "Vari2" },
                 { "Teste3", "Vari3" },
                 { "Teste4", now },
-                { "Teste5", (decimal)12.52 }
+                { "Teste5", 12.52m }
             };
 
             var input =
@@ -62,12 +62,21 @@ namespace Moses.Test
                     Teste2 = "Vari2",
                     Teste3 = "Vari3",
                     Teste4 = now,
-                    Teste5 = 12.52
+                    Teste5 = 12.52m
                 }.ToJSon();
 
             Dictionary<string, object> output = input.JsonToDictionary();
 
-            Assert.AreEqual( output.ToJSon(), result.ToJSon());
+            Assert.AreEqual(12.52m, output["Teste5"]);
+            Assert.IsInstanceOfType<decimal>(output["Teste5"]);
+            Assert.AreEqual(result.ToJSon(), output.ToJSon());
+        }
+
+        [TestMethod]
+        public void JsonToDictionaryEmptyInputTest()
+        {
+            Assert.AreEqual(0, string.Empty.JsonToDictionary().Count);
+            Assert.AreEqual(0, ((string)null).JsonToDictionary().Count);
         }
 
         [TestMethod]

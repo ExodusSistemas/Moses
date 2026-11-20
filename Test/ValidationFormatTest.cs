@@ -138,7 +138,7 @@ namespace Moses.Test
             {
                 b = -10000000;
                 b.FormatCpf();
-                Assert.IsTrue(false);
+                Assert.Fail("Era esperada uma FormatException.");
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace Moses.Test
             {
                 b = -10000000;
                 b.FormatCnpj();
-                Assert.IsTrue(false);
+                Assert.Fail("Era esperada uma FormatException.");
             }
             catch (Exception e)
             {
@@ -261,7 +261,7 @@ namespace Moses.Test
             {
                 b = -100000;
                 b.FormatCep();
-                Assert.IsTrue(false);
+                Assert.Fail("Era esperada uma FormatException.");
             }
             catch (Exception e)
             {

@@ -20,11 +20,12 @@ namespace Moses.Test
                 "jsadska:saiosd;hasiduhsa;sjdsaijds",
                 "á^sâod$as*72o000iod--92j==;iil{ ][[´[[´da    saooç0__))((*U(&&*&¨%¨$##!@!#'' ~.~d ã~dãs~x~b~ev-0287977524&(()(*)*¨¨%%$#$#@!@" };
 
-            foreach (var actual in actuals ){
+            foreach (var expected in actuals ){
                 
-                Assert.AreEqual( actual, actual.Cypher().Decypher());
-                Assert.IsFalse(actual.Cypher().Contains(':'), "\"" +actual +"|=>|"+ actual.Cypher() + "\" Contem dois pontos");
-                Assert.IsFalse(actual.Cypher().Contains(';'), "Contem ponto e virgula");
+                var actual = expected.Cypher().Decypher();
+                Assert.AreEqual(expected, actual);
+                Assert.IsFalse(expected.Cypher().Contains(':'), "\"" +expected +"|=>|"+ expected.Cypher() + "\" Contem dois pontos");
+                Assert.IsFalse(expected.Cypher().Contains(';'), "Contem ponto e virgula");
             }
             
         }
